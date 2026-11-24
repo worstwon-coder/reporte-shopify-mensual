@@ -1,0 +1,1471 @@
+<!doctype html>
+<html lang="es" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reporte Ejecutivo Shopify · BRANDBROS</title>
+<style>
+:root{
+  --c-yaoca:#C9A227;
+  --c-wonu:#F26B21;
+  --c-creanatomy:#D7263D;
+  --c-hybrix5:#1E88E5;
+  --c-gud:#2E9D5B;
+  --c-nuba:#8E6BD1;
+
+  --accent:#3b82f6;
+  --accent-2:#8b5cf6;
+  --up:#10b981;
+  --down:#ef4444;
+
+  /* Light Theme */
+  --bg:#eef2f7;
+  --bg-grad-1:rgba(59,130,246,.16);
+  --bg-grad-2:rgba(142,107,209,.15);
+  --bg-grad-3:rgba(242,107,33,.12);
+  --glass:rgba(255,255,255,.68);
+  --glass-strong:rgba(255,255,255,.84);
+  --glass-border:rgba(255,255,255,.45);
+  --glass-line:rgba(15,23,42,.08);
+  --glass-shadow:0 10px 32px rgba(15,23,42,.07), inset 0 1px 0 rgba(255,255,255,.85);
+  --fg:#0f172a;
+  --muted:#475569;
+  --grid:rgba(15,23,42,.07);
+  --bar-prev:rgba(100,116,139,.28);
+  --chip-bg:rgba(255,255,255,.72);
+  --chip-active-bg:#0f172a;
+  --chip-active-fg:#ffffff;
+  --row-hover:rgba(59,130,246,.05);
+  --badge-up-bg:rgba(16,185,129,.14);
+  --badge-up-fg:#047857;
+  --badge-down-bg:rgba(239,68,68,.13);
+  --badge-down-fg:#b91c1c;
+  --badge-neu-bg:rgba(100,116,139,.14);
+  --badge-neu-fg:#475569;
+  --tip-bg:rgba(255,255,255,.94);
+}
+
+:root[data-theme="dark"]{
+  --bg:#090b11;
+  --bg-grad-1:rgba(59,130,246,.22);
+  --bg-grad-2:rgba(142,107,209,.20);
+  --bg-grad-3:rgba(242,107,33,.14);
+  --glass:rgba(19,22,31,.62);
+  --glass-strong:rgba(22,26,38,.82);
+  --glass-border:rgba(255,255,255,.11);
+  --glass-line:rgba(255,255,255,.08);
+  --glass-shadow:0 14px 40px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.08);
+  --fg:#f1f5f9;
+  --muted:#94a3b8;
+  --grid:rgba(255,255,255,.07);
+  --bar-prev:rgba(148,163,184,.28);
+  --chip-bg:rgba(255,255,255,.06);
+  --chip-active-bg:#f8fafc;
+  --chip-active-fg:#0f172a;
+  --row-hover:rgba(255,255,255,.04);
+  --badge-up-bg:rgba(16,185,129,.18);
+  --badge-up-fg:#34d399;
+  --badge-down-bg:rgba(239,68,68,.18);
+  --badge-down-fg:#f87171;
+  --badge-neu-bg:rgba(148,163,184,.16);
+  --badge-neu-fg:#cbd5e1;
+  --tip-bg:rgba(15,18,28,.95);
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--fg);
+  font-family:"Inter","Segoe UI",system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif;
+  line-height:1.48;
+  -webkit-font-smoothing:antialiased;
+  min-height:100vh;
+  position:relative;
+  overflow-x:hidden;
+}
+
+/* Ambient gradient backdrop */
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:-1;
+  pointer-events:none;
+  background:
+    radial-gradient(640px 520px at 10% 8%, var(--bg-grad-1), transparent 65%),
+    radial-gradient(720px 580px at 88% 12%, var(--bg-grad-2), transparent 65%),
+    radial-gradient(620px 520px at 52% 92%, var(--bg-grad-3), transparent 70%);
+}
+
+.wrap{
+  max-width:1680px;
+  margin:0 auto;
+  padding:20px clamp(14px,2.4vw,38px) 72px;
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+}
+
+.num{font-variant-numeric:tabular-nums}
+
+/* Glass surface */
+.glass{
+  background:var(--glass);
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+  border:1px solid var(--glass-border);
+  border-radius:18px;
+  box-shadow:var(--glass-shadow);
+}
+
+/* Sticky Top Bar */
+.topbar{
+  position:sticky;
+  top:12px;
+  z-index:40;
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding:10px 14px;
+  background:var(--glass-strong);
+  backdrop-filter:blur(22px);
+  -webkit-backdrop-filter:blur(22px);
+  border:1px solid var(--glass-border);
+  border-radius:18px;
+  box-shadow:var(--glass-shadow);
+}
+.filters{display:flex;flex-wrap:wrap;gap:7px;align-items:center}
+.filters .lbl{
+  font-size:11px;
+  font-weight:600;
+  color:var(--muted);
+  text-transform:uppercase;
+  letter-spacing:.1em;
+  margin-right:4px;
+}
+.actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+
+.chip,.btn{
+  font:inherit;
+  font-size:12.5px;
+  font-weight:500;
+  border:1px solid var(--glass-border);
+  background:var(--chip-bg);
+  color:var(--fg);
+  padding:6px 13px;
+  border-radius:999px;
+  cursor:pointer;
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  transition:transform .18s ease, background .18s ease, border-color .18s ease, box-shadow .18s ease;
+}
+.chip:hover,.btn:hover{transform:translateY(-1px);border-color:color-mix(in srgb,var(--fg) 28%,transparent)}
+.chip[aria-pressed="true"]{
+  background:var(--chip-active-bg);
+  color:var(--chip-active-fg);
+  border-color:transparent;
+  font-weight:600;
+  box-shadow:0 4px 14px rgba(0,0,0,.18);
+}
+.btn-primary{
+  background:linear-gradient(135deg,#2563eb,#7c3aed);
+  color:#fff;
+  border-color:transparent;
+  font-weight:600;
+}
+.btn-primary:hover{filter:brightness(1.08);border-color:transparent}
+.dot{width:8.5px;height:8.5px;border-radius:50%;display:inline-block;flex:none}
+
+/* Hero */
+.hero{
+  position:relative;
+  overflow:hidden;
+  padding:30px 28px;
+  background:
+    linear-gradient(135deg, rgba(15,23,42,.92) 0%, rgba(24,29,48,.88) 60%, rgba(30,27,54,.9) 100%);
+  color:#f8fafc;
+  border:1px solid rgba(255,255,255,.14);
+  border-radius:20px;
+  box-shadow:0 18px 48px rgba(0,0,0,.28);
+}
+.hero::before,.hero::after{
+  content:"";
+  position:absolute;
+  border-radius:50%;
+  filter:blur(70px);
+  opacity:.45;
+  pointer-events:none;
+}
+.hero::before{width:340px;height:340px;background:var(--c-hybrix5);top:-150px;right:-60px}
+.hero::after{width:280px;height:280px;background:var(--c-nuba);bottom:-150px;left:18%}
+.hero>*{position:relative;z-index:1}
+.eyebrow{
+  font-size:11.5px;
+  font-weight:600;
+  letter-spacing:.13em;
+  text-transform:uppercase;
+  color:#cbd5e1;
+}
+.hero h1{
+  font-weight:750;
+  letter-spacing:-.03em;
+  font-size:clamp(26px,4vw,42px);
+  margin:8px 0 10px;
+  line-height:1.1;
+}
+.hero p{margin:0;max-width:78ch;color:#e2e8f0;font-size:14.5px}
+.hero p b{color:#fde68a;font-weight:600}
+.hero .brands{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.hero .brands span{
+  font-size:11.5px;
+  font-weight:600;
+  padding:4px 11px;
+  border-radius:999px;
+  background:rgba(255,255,255,.1);
+  border:1px solid rgba(255,255,255,.18);
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+}
+
+/* KPI Tiles */
+.tiles{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));
+  gap:14px;
+}
+.tile{
+  padding:20px 22px;
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+  position:relative;
+  overflow:hidden;
+  transition:transform .22s ease, border-color .22s ease;
+}
+.tile:hover{transform:translateY(-3px)}
+.tile .k-row{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.tile .k{font-size:12.5px;font-weight:600;color:var(--muted);letter-spacing:.01em}
+.tile .v{font-size:clamp(26px,2.4vw,33px);font-weight:750;letter-spacing:-.025em;line-height:1.15;font-variant-numeric:tabular-nums}
+.tile .s{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+.tile .meter{height:4px;border-radius:999px;background:var(--grid);margin-top:6px;overflow:hidden}
+.tile .meter i{display:block;height:100%;width:0;border-radius:999px;transition:width 1s cubic-bezier(.2,.8,.2,1)}
+
+.badge{
+  display:inline-flex;
+  align-items:center;
+  gap:3px;
+  font-size:11px;
+  font-weight:700;
+  padding:3px 8px;
+  border-radius:999px;
+  font-variant-numeric:tabular-nums;
+  white-space:nowrap;
+}
+.badge.up{background:var(--badge-up-bg);color:var(--badge-up-fg)}
+.badge.down{background:var(--badge-down-bg);color:var(--badge-down-fg)}
+.badge.neu{background:var(--badge-neu-bg);color:var(--badge-neu-fg)}
+
+/* Grids & Cards */
+.grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,480px),1fr));gap:16px}
+.grid-asymm{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.45fr);gap:16px}
+@media (max-width:1024px){.grid-asymm{grid-template-columns:1fr}}
+
+.card{
+  padding:20px 22px;
+  min-width:0;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+.card-head{display:flex;flex-wrap:wrap;align-items:flex-start;justify-content:space-between;gap:10px}
+.card h2{font-size:16.5px;font-weight:700;margin:0;letter-spacing:-.01em}
+.note{color:var(--muted);font-size:12.5px;margin:2px 0 0}
+.legend{display:flex;flex-wrap:wrap;gap:12px;font-size:12px;color:var(--muted)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.swatch{width:12px;height:4px;border-radius:2px;display:inline-block}
+
+.chart{position:relative;min-height:285px}
+.chart.compact{min-height:245px}
+.chart svg{display:block;width:100%;height:auto;overflow:visible}
+
+.tip{
+  position:absolute;
+  pointer-events:none;
+  background:var(--tip-bg);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+  border:1px solid var(--glass-border);
+  border-radius:12px;
+  box-shadow:0 12px 32px rgba(0,0,0,.25);
+  padding:9px 13px;
+  font-size:12px;
+  white-space:nowrap;
+  z-index:20;
+  opacity:0;
+  transform:translateY(4px);
+  transition:opacity .14s ease, transform .14s ease;
+}
+.tip.on{opacity:1;transform:none}
+.tip .h{color:var(--muted);font-weight:600;margin-bottom:5px;border-bottom:1px solid var(--glass-line);padding-bottom:4px}
+.tip .r{display:flex;align-items:center;gap:7px;font-variant-numeric:tabular-nums;margin-top:2px}
+.tip .r b{margin-left:auto;padding-left:16px}
+
+/* Section Divider */
+.sec{
+  font-size:12px;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:.14em;
+  color:var(--muted);
+  margin:8px 0 -8px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.sec::after{content:"";flex:1;height:1px;background:var(--glass-line)}
+
+/* Tables */
+.tablewrap{overflow:auto;max-height:540px;border-radius:12px}
+table{border-collapse:collapse;width:100%;font-size:12.8px;font-variant-numeric:tabular-nums}
+th,td{padding:9px 10px;border-bottom:1px solid var(--glass-line);text-align:right;white-space:nowrap}
+th:first-child,td:first-child,.tl{text-align:left}
+th{
+  position:sticky;
+  top:0;
+  background:var(--glass-strong);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+  color:var(--muted);
+  font-weight:600;
+  font-size:11.8px;
+  z-index:2;
+}
+th button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer;display:inline-flex;align-items:center;gap:4px}
+th[aria-sort="descending"] button::after{content:" ↓";color:var(--accent)}
+th[aria-sort="ascending"] button::after{content:" ↑";color:var(--accent)}
+td.prod{white-space:normal;min-width:14rem;max-width:25rem;text-align:left}
+td.mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:11.8px;color:var(--muted);text-align:left}
+td.tot{font-weight:700}
+tr.row-total td{font-weight:700;border-top:2px solid var(--glass-border);background:color-mix(in srgb,var(--fg) 4%,transparent)}
+tbody tr{transition:background .15s ease}
+tbody tr:hover{background:var(--row-hover)}
+.rank{color:var(--muted);width:2.2em}
+.up{color:var(--badge-up-fg);font-weight:700}
+.down{color:var(--badge-down-fg);font-weight:700}
+
+#tbl-cat th:nth-child(-n+3),
+#tbl-mes th:nth-child(-n+3),
+#tbl-top26 th:nth-child(-n+4),
+#tbl-top25 th:nth-child(-n+4){text-align:left}
+
+.bar .bw{display:flex;align-items:center;gap:10px;justify-content:flex-end}
+.bar .tr{flex:1;min-width:56px;height:6px;border-radius:999px;background:var(--grid);overflow:hidden}
+.bar .tr i{display:block;height:100%;width:0;border-radius:999px;transition:width .85s cubic-bezier(.2,.8,.2,1)}
+.bar span{min-width:4.4em;text-align:right;font-weight:600}
+
+.search{
+  font:inherit;
+  font-size:13px;
+  padding:8px 14px;
+  border:1px solid var(--glass-border);
+  border-radius:12px;
+  background:var(--chip-bg);
+  color:var(--fg);
+  width:min(100%,20rem);
+  transition:border-color .2s, box-shadow .2s;
+}
+.search:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(59,130,246,.18)}
+
+/* Insights list */
+.insights{
+  margin:4px 0 0;
+  padding:0;
+  list-style:none;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+.insights li{
+  padding:11px 14px;
+  border-radius:12px;
+  background:color-mix(in srgb,var(--fg) 4%,transparent);
+  border-left:3px solid var(--accent);
+  font-size:13.5px;
+  line-height:1.45;
+}
+.insights li b{color:var(--fg)}
+
+/* Reveal */
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease, transform .6s cubic-bezier(.2,.8,.2,1)}
+.reveal.show{opacity:1;transform:none}
+
+/* Print / Export PDF */
+@media print{
+  @page{size:landscape;margin:10mm}
+  body{background:#fff!important;color:#0f172a!important}
+  body::before,.topbar,.search{display:none!important}
+  .wrap{max-width:none;padding:0;gap:14px}
+  .glass,.card,.tile{
+    background:#fff!important;
+    backdrop-filter:none!important;
+    -webkit-backdrop-filter:none!important;
+    border:1px solid #cbd5e1!important;
+    box-shadow:none!important;
+    break-inside:avoid;
+  }
+  .hero{
+    background:#0f172a!important;
+    color:#fff!important;
+    -webkit-print-color-adjust:exact;
+    print-color-adjust:exact;
+    break-inside:avoid;
+  }
+  .tablewrap{max-height:none!important;overflow:visible!important}
+  th{position:static!important;background:#f1f5f9!important;color:#334155!important}
+  .reveal{opacity:1!important;transform:none!important}
+  .badge,.dot,.bar .tr i,.tile .meter i{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- Sticky Top Bar -->
+  <nav class="topbar" aria-label="Filtros y controles">
+    <div class="filters" id="filtros"><span class="lbl">Marca</span></div>
+    <div class="actions">
+      <button class="btn" id="btn-theme" type="button" title="Cambiar tema claro/oscuro">☀ Claro</button>
+      <button class="btn btn-primary" id="btn-pdf" type="button">Exportar PDF</button>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <header class="hero reveal">
+    <div class="eyebrow" id="eyebrow">Reporte Ejecutivo Shopify</div>
+    <h1 id="hero-title">Ventas BRANDBROS</h1>
+    <p id="takeaway">&nbsp;</p>
+    <div class="brands" id="brands"></div>
+  </header>
+
+  <!-- 4 Main KPI Cards -->
+  <section class="tiles reveal">
+    <div class="tile glass">
+      <div class="k-row"><span class="k">Venta Bruta Total</span><span class="badge neu" id="b0">—</span></div>
+      <div class="v" id="k0">$0</div>
+      <div class="s" id="s0"></div>
+      <div class="meter"><i id="m0" style="background:linear-gradient(90deg,#3b82f6,#8b5cf6)"></i></div>
+    </div>
+    <div class="tile glass">
+      <div class="k-row"><span class="k">Pedidos Totales</span><span class="badge neu" id="b1">—</span></div>
+      <div class="v" id="k1">0</div>
+      <div class="s" id="s1"></div>
+      <div class="meter"><i id="m1" style="background:var(--c-hybrix5)"></i></div>
+    </div>
+    <div class="tile glass">
+      <div class="k-row"><span class="k">Ticket Promedio (AOV)</span><span class="badge neu" id="b2">—</span></div>
+      <div class="v" id="k2">$0</div>
+      <div class="s" id="s2"></div>
+      <div class="meter"><i id="m2" style="background:var(--c-gud)"></i></div>
+    </div>
+    <div class="tile glass">
+      <div class="k-row"><span class="k">Recompra y Descuentos</span><span class="badge neu" id="b3">—</span></div>
+      <div class="v" id="k3">0.0%</div>
+      <div class="s" id="s3"></div>
+      <div class="meter"><i id="m3" style="background:var(--c-nuba)"></i></div>
+    </div>
+  </section>
+
+  <!-- 2 Main Charts -->
+  <div class="grid-2">
+    <section class="card glass reveal">
+      <div class="card-head">
+        <div>
+          <h2 id="h-yoy">Comparativo 2025 vs 2026 mes a mes</h2>
+          <p class="note">Venta bruta mensual (Ene–Dic) con comparativo directo año contra año.</p>
+        </div>
+        <div class="legend" id="leg-yoy"></div>
+      </div>
+      <div class="chart" id="ch-yoy"></div>
+    </section>
+
+    <section class="card glass reveal">
+      <div class="card-head">
+        <div>
+          <h2 id="h-marca">Venta mensual por marca (2026)</h2>
+          <p class="note">Evolución mensual por marca con área degradada.</p>
+        </div>
+        <div class="legend" id="leg-marca"></div>
+      </div>
+      <div class="chart" id="ch-marca"></div>
+    </section>
+  </div>
+
+  <!-- Executive Brand Summary -->
+  <section class="card glass reveal">
+    <div class="card-head">
+      <div>
+        <h2 id="h-resumen">Resumen Ejecutivo por Marca (2026 vs 2025)</h2>
+        <p class="note" id="note-resumen">Comparativo contra el mismo periodo del año anterior.</p>
+      </div>
+    </div>
+    <div class="tablewrap">
+      <table id="tbl-resumen">
+        <thead>
+          <tr>
+            <th>Marca</th>
+            <th id="th-ped-cur">Pedidos 2026</th>
+            <th>Unidades</th>
+            <th>AOV</th>
+            <th>Recompra %</th>
+            <th>Descuentos</th>
+            <th id="th-v-prev">Venta 2025 (mismo periodo)</th>
+            <th id="th-v-cur">Venta 2026</th>
+            <th>Crecimiento YoY %</th>
+            <th>Participación</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Day of Week + Monthly Performance -->
+  <div class="grid-asymm">
+    <section class="card glass reveal">
+      <div class="card-head">
+        <div>
+          <h2 id="h-dow">Ventas por Día de la Semana (2026)</h2>
+          <p class="note">Detecta los días con mayor volumen de venta y pedidos promedio.</p>
+        </div>
+      </div>
+      <div class="chart compact" id="ch-dow"></div>
+    </section>
+
+    <section class="card glass reveal">
+      <div class="card-head">
+        <div>
+          <h2 id="h-mensual">Desempeño Mensual 2026</h2>
+          <p class="note">Evolución completa de pedidos, unidades, AOV, descuentos y variación YoY.</p>
+        </div>
+      </div>
+      <div class="tablewrap">
+        <table id="tbl-mensual">
+          <thead>
+            <tr>
+              <th>Mes</th>
+              <th>Pedidos</th>
+              <th>Unidades</th>
+              <th>AOV</th>
+              <th>Descuentos</th>
+              <th id="th-m-cur">Venta 2026</th>
+              <th id="th-m-prev">Venta 2025</th>
+              <th>Var. YoY %</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+
+  <!-- Product Tables -->
+  <div class="sec">Análisis de Productos</div>
+
+  <section class="card glass reveal">
+    <div class="card-head">
+      <div>
+        <h2 id="h-top26">Top 10 Productos 2026</h2>
+        <p class="note" id="note-top26">Respeta el filtro de marca activo.</p>
+      </div>
+    </div>
+    <div class="tablewrap">
+      <table id="tbl-top26">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Producto</th>
+            <th>SKU</th>
+            <th>Marca</th>
+            <th>Unidades</th>
+            <th>Venta</th>
+            <th>% del total</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="card glass reveal">
+    <div class="card-head">
+      <div>
+        <h2>Catálogo completo ordenable</h2>
+        <p class="note">Toca cualquier encabezado para ordenar. Respeta filtro de marca y búsqueda.</p>
+      </div>
+      <input class="search" id="buscar" type="search" placeholder="Buscar producto o SKU..." aria-label="Buscar producto o SKU">
+    </div>
+    <div class="tablewrap">
+      <table id="tbl-cat">
+        <thead>
+          <tr>
+            <th><button data-k="producto">Producto</button></th>
+            <th><button data-k="sku">SKU</button></th>
+            <th><button data-k="marca">Marca</button></th>
+            <th><button data-k="uds">Unidades</button></th>
+            <th aria-sort="descending"><button data-k="vCur" id="btn-cat-cur">Venta 2026</button></th>
+            <th><button data-k="vPrev" id="btn-cat-prev">Venta 2025</button></th>
+            <th><button data-k="yoy">Var. YoY %</button></th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="card glass reveal">
+    <div class="card-head">
+      <div>
+        <h2 id="h-prodmes">Productos por mes 2026</h2>
+        <p class="note">Venta bruta mensual (Ene–Dic). Respeta filtro de marca y búsqueda.</p>
+      </div>
+    </div>
+    <div class="tablewrap">
+      <table id="tbl-mes">
+        <thead>
+          <tr>
+            <th>Producto</th>
+            <th>SKU</th>
+            <th>Marca</th>
+            <th>Ene</th><th>Feb</th><th>Mar</th><th>Abr</th><th>May</th><th>Jun</th>
+            <th>Jul</th><th>Ago</th><th>Sep</th><th>Oct</th><th>Nov</th><th>Dic</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Historical Comparison 2025 vs 2026 -->
+  <div class="sec" id="sec-hist">Comparativo Histórico 2025 vs 2026</div>
+
+  <div class="grid-asymm">
+    <section class="card glass reveal">
+      <div class="card-head">
+        <div>
+          <h2>Lectura Automática</h2>
+          <p class="note">Insights calculados en tiempo real con los datos consolidados.</p>
+        </div>
+      </div>
+      <ul class="insights" id="insights"></ul>
+    </section>
+
+    <section class="card glass reveal">
+      <div class="card-head">
+        <div>
+          <h2 id="h-top25">Top 10 Productos 2025</h2>
+          <p class="note">Contraste de los productos que lideraron el año anterior.</p>
+        </div>
+      </div>
+      <div class="tablewrap">
+        <table id="tbl-top25">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Producto</th>
+              <th>SKU</th>
+              <th>Marca</th>
+              <th>Unidades</th>
+              <th>Venta</th>
+              <th>% del total</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+
+</div>
+
+<script>
+const RAW = {"meta":{"fecha_corte":"2026-11-24","mes_actual":11,"anio_actual":2026},"p":{"14604647629053":["Creatina 1kg","YAOCA","14604647629053"],"14609486512381":["Creatina 200g","YAOCA","14609486512381"],"14609486545149":["Proteína Whey Bebible Chocolate Rtd 12 Pzas 330ml","YAOCA","14609486545149"],"14621854859517":["Creatina 1kg","YAOCA","14621854859517"],"14624350175485":["Shaker rojo 700 ml","YAOCA","14624350175485"],"14624350208253":["Shaker negro 700 ml","YAOCA","14624350208253"],"14629439078653":["Creatina 1kg","YAOCA","14629439078653"],"14633497002237":["Proteína Whey Sabor Chocolate 500g","YAOCA","14633497002237"],"14633821176061":["Creatina 400g","YAOCA","14633821176061"],"14633896870141":["Creatina 1kg","YAOCA","14633896870141"],"14633980887293":["Shaker rojo 700 ml","YAOCA","14633980887293"],"14637776797949":["Creatina 1kg","YAOCA","14637776797949"],"14638220247293":["Shaker rojo 700 ml","YAOCA","14638220247293"],"14638220280061":["Proteína Isolate Sabor Chocolate 500g","YAOCA","14638220280061"],"14638220312829":["Electrolitos en polvo sabor fresa/Limón","YAOCA","14638220312829"],"14638220345597":["Creatina 400g","YAOCA","14638220345597"],"14640382181629":["Electrolitos en polvo sabor fresa/Limón","YAOCA","14640382181629"],"14640382214397":["Shaker negro 700 ml","YAOCA","14640382214397"],"14640382247165":["Creatina 1kg","YAOCA","14640382247165"],"14644719583485":["Shaker rojo 700 ml","YAOCA","14644719583485"],"14644719616253":["Creatina 1kg","YAOCA","14644719616253"],"14647308976381":["Proteína Whey Sabor Chocolate 4.5 Lb (2.04kg)","YAOCA","14647308976381"],"14649903644925":["Creatina 1kg","YAOCA","14649903644925"],"14649903677693":["Proteína Whey Sabor Chocolate 4.5 Lb (2.04kg)","YAOCA","14649903677693"],"14652296364285":["Proteína Isolate Sabor Chocolate 1 Kg","YAOCA","14652296364285"],"14652296397053":["Proteína Whey Sabor Chocolate 4.5 Lb (2.04kg)","YAOCA","14652296397053"],"14652296429821":["Ganador de peso sabor chocolate 6 lbs","YAOCA","14652296429821"],"14653334978813":["Shaker rojo 700 ml","YAOCA","14653334978813"],"14653335011581":["Proteína Whey Sabor Chocolate 1 Kg","YAOCA","14653335011581"],"14653335044349":["Creatina 400g","YAOCA","14653335044349"],"14656077037821":["Proteína Whey Sabor Chocolate 1 Kg","YAOCA","14656077037821"],"14657194688765":["Proteína Whey Sabor Chocolate 4.5 Lb (2.04kg)","YAOCA","14657194688765"],"14657194721533":["Creatina 1kg","YAOCA","14657194721533"],"14658058420477":["Proteína Whey Sabor Chocolate 3 Lb (1.36kg)","YAOCA","14658058420477"],"14658058453245":["Creatina 200g","YAOCA","14658058453245"],"14658674262269":["Electrolitos en polvo sabor fresa/Limón","YAOCA","14658674262269"],"14658674295037":["Creatina 1kg","YAOCA","14658674295037"],"14658674327805":["Creatina 500g creapure","YAOCA","14658674327805"],"14660163338493":["Creatina 400g","YAOCA","14660163338493"],"14660163371261":["Proteína Whey Sabor Chocolate 1 Kg","YAOCA","14660163371261"],"14660216389885":["Creatina 400g","YAOCA","14660216389885"],"14660280516861":["Shaker negro 700 ml","YAOCA","14660280516861"],"14660280549629":["Proteína Whey Sabor Chocolate 4.5 Lb (2.04kg)","YAOCA","14660280549629"],"14661040832765":["Creatina 500g creapure","YAOCA","14661040832765"],"14661106663677":["Creatina 500g creapure","YAOCA","14661106663677"],"14662824132861":["Creatina 1kg","YAOCA","14662824132861"],"14663947190525":["Proteína Isolate Sabor Chocolate 1 Kg","YAOCA","14663947190525"],"14664155529469":["Proteína Whey Sabor Chocolate 4.5 Lb (2.04kg)","YAOCA","14664155529469"],"14665493807357":["Creatina 500g creapure","YAOCA","14665493807357"],"14665493840125":["Proteína Whey Sabor Chocolate 4.5 Lb (2.04kg)","YAOCA","14665493840125"],"14666013311229":["Proteína Isolate Sabor Chocolate 1 Kg","YAOCA","14666013311229"],"14668249727229":["Electrolitos en polvo sabor Lima/Limón","YAOCA","14668249727229"],"14668249759997":["Proteína Whey Sabor Chocolate 4.5 Lb (2.04kg)","YAOCA","14668249759997"],"14668249792765":["Electrolitos en polvo sabor fresa/Limón","YAOCA","14668249792765"],"14670189428989":["Shaker negro 700 ml","YAOCA","14670189428989"],"14670189461757":["Creatina 1kg","YAOCA","14670189461757"],"14670204928253":["Shaker rojo 700 ml","YAOCA","14670204928253"],"14670204961021":["Ganador de peso sabor chocolate 6 lbs","YAOCA","14670204961021"],"14670474903805":["Proteína Whey Sabor Chocolate 4.5 Lb (2.04kg)","YAOCA","14670474903805"],"14671428583677":["Creatina 1kg","YAOCA","14671428583677"],"14671428616445":["Proteína Isolate Sabor Chocolate 1 Kg","YAOCA","14671428616445"],"14671521054973":["Creatina 500g creapure","YAOCA","14671521054973"],"14671553298685":["Creatina 1kg","YAOCA","14671553298685"],"14673442734333":["Shaker negro 700 ml","YAOCA","14673442734333"],"14673442767101":["Creatina 1kg","YAOCA","14673442767101"],"14673596219645":["Creatina 500g creapure","YAOCA","14673596219645"],"14673596252413":["Shaker negro 700 ml","YAOCA","14673596252413"],"14675946733821":["Proteína Whey Sabor Chocolate 1 Kg","YAOCA","14675946733821"],"14676147110141":["Proteína Whey Sabor Chocolate 1 Kg","YAOCA","14676147110141"],"14676147142909":["Creatina 1kg","YAOCA","14676147142909"],"14676542619901":["Ganador de peso sabor chocolate 6 lbs","YAOCA","14676542619901"],"14679403462909":["BCAA'S","YAOCA","14679403462909"],"14679403495677":["Creatina 1kg","YAOCA","14679403495677"],"14679985258749":["Proteína Whey Sabor Chocolate 4.5 Lb (2.04kg)","YAOCA","14679985258749"],"14679985291517":["Creatina 400g","YAOCA","14679985291517"],"14680069472509":["Shaker negro 700 ml","YAOCA","14680069472509"],"14680069505277":["Creatina 1kg","YAOCA","14680069505277"],"14680126292221":["Shaker negro 700 ml","YAOCA","14680126292221"],"14680126324989":["Shaker rojo 700 ml","YAOCA","14680126324989"],"14680126357757":["Agua Purificada 1L  - 12 pack","YAOCA","14680126357757"],"14681138856189":["Proteína Whey Sabor Chocolate 4.5 Lb (2.04kg)","YAOCA","14681138856189"],"14681227428093":["Creatina 1kg","YAOCA","14681227428093"],"14681227460861":["Proteína Whey Sabor Chocolate 4.5 Lb (2.04kg)","YAOCA","14681227460861"],"14681733202173":["Creatina 500g creapure","YAOCA","14681733202173"],"14684105081085":["Creatina 1kg","YAOCA","14684105081085"],"14685607821565":["Creatina 1kg","YAOCA","14685607821565"],"14691959013629":["Electrolitos en polvo sabor fresa/Limón","YAOCA","14691959013629"],"14691959046397":["Proteína Whey Sabor Chocolate 4.5 Lb (2.04kg)","YAOCA","14691959046397"],"14692055875837":["Ganador de peso sabor chocolate 6 lbs","YAOCA","14692055875837"],"14695151075581":["Creatina 500g creapure","YAOCA","14695151075581"],"14710201516285":["Creatina 1kg","YAOCA","14710201516285"],"14711911514365":["Shaker negro 700 ml","YAOCA","14711911514365"],"14711911547133":["Creatina 1kg","YAOCA","14711911547133"],"14715152072957":["Agua Purificada 1L  - 12 pack","YAOCA","14715152072957"],"14715152105725":["Creatina 200g","YAOCA","14715152105725"],"14715603550461":["Creatina 500g creapure","YAOCA","14715603550461"],"14715603583229":["Proteína Isolate Sabor Chocolate 1 Kg","YAOCA","14715603583229"],"14720326205693":["Proteína Isolate Sabor Chocolate 1 Kg","YAOCA","14720326205693"],"14725218238717":["Proteína Isolate Sabor Chocolate 1 Kg","YAOCA","14725218238717"],"14726208258301":["Shaker negro 700 ml","YAOCA","14726208258301"],"14726208291069":["Proteína Isolate Sabor Chocolate 500g","YAOCA","14726208291069"],"14726502613245":["Creatina 1kg","YAOCA","14726502613245"],"14727886078205":["Creatina 400g","YAOCA","14727886078205"],"14727886110973":["Proteína Whey Sabor Chocolate 1 Kg","YAOCA","14727886110973"],"14752831209725":["Proteína Whey Sabor Chocolate 4.5 Lb (2.04kg)","YAOCA","14752831209725"],"14752901726461":["Proteína Whey Sabor Chocolate 4.5 Lb (2.04kg)","YAOCA","14752901726461"],"14754856272125":["Proteína Whey Sabor Chocolate 4.5 Lb (2.04kg)","YAOCA","14754856272125"],"14756490281213":["Creatina 500g creapure","YAOCA","14756490281213"],"14757649187069":["Proteína Whey Sabor Chocolate 4.5 Lb (2.04kg)","YAOCA","14757649187069"],"14758058164477":["Creatina 500g creapure","YAOCA","14758058164477"],"14758897221885":["Proteína Whey Sabor Chocolate 4.5 Lb (2.04kg)","YAOCA","14758897221885"],"14759445758205":["Proteína Whey Sabor Chocolate 4.5 Lb (2.04kg)","YAOCA","14759445758205"],"14759949664509":["Proteína Whey Sabor Chocolate 4.5 Lb (2.04kg)","YAOCA","14759949664509"],"14762371088637":["Proteína Isolate Sabor Chocolate 1 Kg","YAOCA","14762371088637"],"14763358191869":["Shaker negro 700 ml","YAOCA","14763358191869"],"14763358224637":["Creatina 1kg","YAOCA","14763358224637"],"14764114772221":["Creatina 1kg","YAOCA","14764114772221"],"14767008776445":["Creatina 1kg","YAOCA","14767008776445"],"14767008809213":["Shaker negro 700 ml","YAOCA","14767008809213"],"14767008841981":["Proteína Whey Sabor Chocolate 4.5 Lb (2.04kg)","YAOCA","14767008841981"],"14767163310333":["Proteína Whey Sabor Chocolate 4.5 Lb (2.04kg)","YAOCA","14767163310333"],"14767266267389":["Proteína Whey Sabor Chocolate 4.5 Lb (2.04kg)","YAOCA","14767266267389"],"14778436255997":["Preworkout","YAOCA","14778436255997"],"14808611913981":["Creatina 500g creapure","YAOCA","14808611913981"],"14809484722429":["Creatina 1kg","YAOCA","14809484722429"],"14811347812605":["Creatina 500g creapure","YAOCA","14811347812605"],"14811347845373":["Shaker negro 700 ml","YAOCA","14811347845373"],"14811347878141":["Electrolitos en polvo sabor Mora/Limón","YAOCA","14811347878141"],"14811347910909":["Electrolitos en polvo sabor Lima/Limón","YAOCA","14811347910909"],"14811638989053":["Shaker negro 700 ml","YAOCA","14811638989053"],"14811639021821":["Creatina 1kg","YAOCA","14811639021821"],"14816902054141":["Creatina 1kg","YAOCA","14816902054141"],"14817087193341":["Creatina 1kg","YAOCA","14817087193341"],"14819749462269":["Creatina 400g","YAOCA","14819749462269"],"14822412452093":["Shaker rojo 700 ml","YAOCA","14822412452093"],"14822412484861":["Proteína Whey Sabor Chocolate 1 Kg","YAOCA","14822412484861"],"14823572472061":["Creatina 1kg","YAOCA","14823572472061"],"14831244345597":["Proteína Whey Sabor Chocolate 4.5 Lb (2.04kg)","YAOCA","14831244345597"],"14832686366973":["Creatina 500g creapure","YAOCA","14832686366973"],"14833211932925":["Shaker rojo 700 ml","YAOCA","14833211932925"],"14833211965693":["Proteína Whey Sabor Chocolate 4.5 Lb (2.04kg)","YAOCA","14833211965693"],"14833510351101":["Creatina 1kg","YAOCA","14833510351101"],"14834044862717":["Shaker negro 700 ml","YAOCA","14834044862717"],"14834044895485":["Preworkout","YAOCA","14834044895485"],"14834044928253":["Proteína Isolate Sabor Chocolate 1 Kg","YAOCA","14834044928253"],"14834044961021":["Creatina 1kg","YAOCA","14834044961021"],"14836054720765":["Creatina 500g creapure","YAOCA","14836054720765"],"14837018689789":["Proteína Whey Sabor Chocolate 4.5 Lb (2.04kg)","YAOCA","14837018689789"],"14837154054397":["Creatina 1kg","YAOCA","14837154054397"],"14837154087165":["Proteína Whey Sabor Chocolate 4.5 Lb (2.04kg)","YAOCA","14837154087165"],"14839236231421":["Electrolitos en polvo sabor fresa/Limón","YAOCA","14839236231421"],"14839236264189":["Creatina 400g","YAOCA","14839236264189"],"14841972130045":["Creatina 1kg","YAOCA","14841972130045"],"14842820165885":["Proteína Whey Sabor Chocolate 4.5 Lb (2.04kg)","YAOCA","14842820165885"],"14842844512509":["Proteína Whey Sabor Chocolate 4.5 Lb (2.04kg)","YAOCA","14842844512509"],"14842879639805":["Proteína Whey Sabor Chocolate 4.5 Lb (2.04kg)","YAOCA","14842879639805"],"14843059929341":["Creatina 500g creapure","YAOCA","14843059929341"],"14843059962109":["Shaker rojo 700 ml","YAOCA","14843059962109"],"14843059994877":["Proteína Whey Sabor Chocolate 4.5 Lb (2.04kg)","YAOCA","14843059994877"],"14845212131581":["Creatina 1kg","YAOCA","14845212131581"],"14846142284029":["Shaker rojo 700 ml","YAOCA","14846142284029"],"14846142316797":["Shaker negro 700 ml","YAOCA","14846142316797"],"14846142349565":["Proteína Whey Sabor Chocolate 500g","YAOCA","14846142349565"],"14846142382333":["Preworkout","YAOCA","14846142382333"],"14850059403517":["Shaker rojo 700 ml","YAOCA","14850059403517"],"14850059436285":["Creatina 1kg","YAOCA","14850059436285"],"14850409300221":["Ganador de peso sabor chocolate 6 lbs","YAOCA","14850409300221"],"14852721508605":["BCAA'S","YAOCA","14852721508605"],"14852721541373":["Creatina 1kg","YAOCA","14852721541373"],"14852887904509":["Creatina 1kg","YAOCA","14852887904509"],"14854346113277":["Proteína Isolate Sabor Chocolate 1 Kg","YAOCA","14854346113277"],"14855075070205":["Shaker rojo 700 ml","YAOCA","14855075070205"],"14855075102973":["Creatina 1kg","YAOCA","14855075102973"],"14856815411453":["Creatina 1kg","YAOCA","14856815411453"],"14857280520445":["Creatina 1kg","YAOCA","14857280520445"],"14857280553213":["Preworkout","YAOCA","14857280553213"],"14859709808893":["Preworkout","YAOCA","14859709808893"],"14860537037053":["Ganador de peso sabor chocolate 6 lbs","YAOCA","14860537037053"],"14865588257021":["Electrolitos en polvo sabor Lima/Limón","YAOCA","14865588257021"],"14865588289789":["Electrolitos en polvo sabor fresa/Limón","YAOCA","14865588289789"],"14865588322557":["Electrolitos en polvo sabor Mora/Limón","YAOCA","14865588322557"],"14872397152509":["Proteína Isolate Sabor Chocolate 1 Kg","YAOCA","14872397152509"],"14875262288125":["Proteina Whey, Yaoca, 250g, 23g de Proteina, Sabor Chocolate","YAOCA","14875262288125"],"14875262320893":["Creatina 400g","YAOCA","14875262320893"],"14875262353661":["Proteína Isolate Sabor Chocolate 500g","YAOCA","14875262353661"],"14875262386429":["Shaker rojo 700 ml","YAOCA","14875262386429"],"14875655241981":["Shaker rojo 700 ml","YAOCA","14875655241981"],"14875655274749":["Creatina 400g","YAOCA","14875655274749"],"14875655307517":["Proteina Whey, Yaoca, 250g, 23g de Proteina, Sabor Chocolate","YAOCA","14875655307517"],"14875655340285":["Proteína Isolate Sabor Chocolate 500g","YAOCA","14875655340285"],"14875671724285":["Shaker rojo 700 ml","YAOCA","14875671724285"],"14875671757053":["Proteina Whey, Yaoca, 250g, 23g de Proteina, Sabor Chocolate","YAOCA","14875671757053"],"14875671789821":["Proteína Isolate Sabor Chocolate 500g","YAOCA","14875671789821"],"14875671822589":["Creatina 400g","YAOCA","14875671822589"],"14875692728573":["Proteina Whey, Yaoca, 250g, 23g de Proteina, Sabor Chocolate","YAOCA","14875692728573"],"14875692761341":["Proteína Isolate Sabor Chocolate 500g","YAOCA","14875692761341"],"14875692794109":["Creatina 400g","YAOCA","14875692794109"],"14875692826877":["Shaker rojo 700 ml","YAOCA","14875692826877"],"14875714519293":["Shaker rojo 700 ml","YAOCA","14875714519293"],"14875714552061":["Creatina 400g","YAOCA","14875714552061"],"14875714584829":["Proteína Isolate Sabor Chocolate 500g","YAOCA","14875714584829"],"14875714617597":["Proteina Whey, Yaoca, 250g, 23g de Proteina, Sabor Chocolate","YAOCA","14875714617597"],"14876126544125":["Creatina 1kg","YAOCA","14876126544125"],"14879749374205":["Shaker rojo 700 ml","YAOCA","14879749374205"],"14879749406973":["Electrolitos en polvo sabor Lima/Limón","YAOCA","14879749406973"],"14879797444861":["Shaker rojo 700 ml","YAOCA","14879797444861"],"14883284549885":["Creatina 1kg","YAOCA","14883284549885"],"14886162465021":["Creatina 500g creapure","YAOCA","14886162465021"],"14887433142525":["Shaker negro 700 ml","YAOCA","14887433142525"],"14887433175293":["Creatina 500g creapure","YAOCA","14887433175293"],"14887541604605":["Electrolitos en polvo sabor Mora/Limón","YAOCA","14887541604605"],"14887781269757":["Creatina 1kg","YAOCA","14887781269757"],"14892416303357":["Electrolitos en polvo sabor Mora/Limón","YAOCA","14892416303357"],"14892416336125":["Electrolitos en polvo sabor fresa/Limón","YAOCA","14892416336125"],"14893122027773":["Ganador de peso sabor chocolate 6 lbs","YAOCA","14893122027773"],"14894089699581":["Creatina 500g creapure","YAOCA","14894089699581"],"14897049108733":["Creatina 500g creapure","YAOCA","14897049108733"],"14897352704253":["Creatina 1kg","YAOCA","14897352704253"],"14899514409213":["Creatina 1kg","YAOCA","14899514409213"],"14902091809021":["Creatina 1kg","YAOCA","14902091809021"],"14908600254717":["Ganador de peso sabor chocolate 6 lbs","YAOCA","14908600254717"],"14913080951037":["Ganador de peso sabor chocolate 6 lbs","YAOCA","14913080951037"],"14928514220285":["Proteína Isolate Sabor Chocolate 1 Kg","YAOCA","14928514220285"],"14963491766525":["Creatina 500g creapure","YAOCA","14963491766525"],"14978534670589":["Proteína Isolate Sabor Chocolate 1 Kg","YAOCA","14978534670589"],"14985679503613":["Creatina 500g creapure","YAOCA","14985679503613"],"14986362126589":["Creatina 1kg","YAOCA","14986362126589"],"14989769736445":["Electrolitos en polvo sabor Lima/Limón","YAOCA","14989769736445"],"14989769769213":["Electrolitos en polvo sabor Mora/Limón","YAOCA","14989769769213"],"14990525792509":["Creatina 500g creapure","YAOCA","14990525792509"],"14992910582013":["Proteína Whey Bebible Chocolate Rtd 12 Pzas 330ml","YAOCA","14992910582013"],"14993071833341":["Shaker negro 700 ml","YAOCA","14993071833341"],"14993071866109":["BCAA'S","YAOCA","14993071866109"],"14993071898877":["Preworkout","YAOCA","14993071898877"],"14993218797821":["Creatina 1kg","YAOCA","14993218797821"],"14995599261949":["Electrolitos en polvo sabor Lima/Limón","YAOCA","14995599261949"],"14995599294717":["Electrolitos en polvo sabor fresa/Limón","YAOCA","14995599294717"],"14999610032381":["Proteína Isolate Sabor Chocolate 1 Kg","YAOCA","14999610032381"],"15000450203901":["Creatina 1kg","YAOCA","15000450203901"],"15000450236669":["Ganador de peso sabor chocolate 6 lbs","YAOCA","15000450236669"],"15003117879549":["Creatina 1kg","YAOCA","15003117879549"],"15011685073149":["BCAA'S","YAOCA","15011685073149"],"15011685105917":["Creatina 400g","YAOCA","15011685105917"],"15011685138685":["Preworkout","YAOCA","15011685138685"],"15015968702717":["Shaker rojo 700 ml","YAOCA","15015968702717"],"15015968735485":["Creatina 1kg","YAOCA","15015968735485"],"15016293761277":["Creatina 1kg","YAOCA","15016293761277"],"15017924591869":["Electrolitos en polvo sabor fresa/Limón","YAOCA","15017924591869"],"15023976415485":["Preworkout","YAOCA","15023976415485"],"15026515083517":["Proteína Whey Bebible Chocolate Rtd 12 Pzas 330ml","YAOCA","15026515083517"],"15026876481789":["Proteína Isolate Sabor Chocolate 1 Kg","YAOCA","15026876481789"],"15030376726781":["Creatina 1kg","YAOCA","15030376726781"],"15036489761021":["Proteina Isolate, Yaoca, 250g, 23g de Proteina, Sabor Chocolate","YAOCA","15036489761021"],"15036489793789":["Shaker rojo 700 ml","YAOCA","15036489793789"],"15036519186685":["Agua Purificada 1L  - 12 pack","YAOCA","15036519186685"],"15036519219453":["Proteína Isolate Sabor Chocolate 1 Kg","YAOCA","15036519219453"],"15036519252221":["Shaker rojo 700 ml","YAOCA","15036519252221"],"15037348643069":["Shaker negro 700 ml","YAOCA","15037348643069"],"15037348675837":["Creatina 1kg","YAOCA","15037348675837"],"15038855414013":["Electrolitos en polvo sabor fresa/Limón","YAOCA","15038855414013"],"15038855446781":["Electrolitos en polvo sabor Mora/Limón","YAOCA","15038855446781"],"15038894768381":["Proteína Isolate Sabor Chocolate 1 Kg","YAOCA","15038894768381"],"15039214944509":["Shaker rojo 700 ml","YAOCA","15039214944509"],"15048553890045":["Shaker rojo 700 ml","YAOCA","15048553890045"],"46133188591869":["Creatina Monohidratada - Energía, Recuperación y Rendimiento en Cada Entrenamiento (1kg)","YAOCA","46133188591869"],"15051048157437":["Shaker rojo 700 ml","YAOCA","15051048157437"],"15051048190205":["Proteína Whey Sabor Chocolate 4.5 Lb (2.04kg)","YAOCA","15051048190205"],"15051933679869":["Proteína Isolate Sabor Chocolate 1 Kg","YAOCA","15051933679869"],"15052153716989":["Proteína Whey Sabor Chocolate 4.5 Lb (2.04kg)","YAOCA","15052153716989"],"15058827182333":["Agua Purificada 1L  - 12 pack","YAOCA","15058827182333"],"15058827215101":["Shaker rojo 700 ml","YAOCA","15058827215101"],"15058827247869":["Electrolitos en polvo sabor Lima/Limón","YAOCA","15058827247869"],"15058827280637":["Electrolitos en polvo sabor Mora/Limón","YAOCA","15058827280637"],"15058827313405":["Electrolitos en polvo sabor fresa/Limón","YAOCA","15058827313405"],"7503045518163":["Creatina Creapure® – La Creatina Más Pura del Mundo para Potenciar Tu Rendimiento (500g)","YAOCA","7503045518163"],"7503045518446":["Proteína Whey Bebible Yaoca – 20g de proteína lista para tomar, práctica y deliciosa (18-pack)","YAOCA","7503045518446"],"15058827411709":["BCAA'S","YAOCA","15058827411709"],"7503031994995":["Proteína Isoalte Sabor Chocolate 3Lb Enriquecida con colageno y probioticos.","YAOCA","7503031994995"],"15066402193661":["Electrolitos en polvo sabor Lima/Limón","YAOCA","15066402193661"],"7503036171001":["Proteína Isoalte Sabor Vainilla 3Lb Enriquecida con colageno y probioticos.","YAOCA","7503036171001"],"15069255434493":["Creatina 1kg","YAOCA","15069255434493"],"15077400969469":["Proteína Whey Sabor Chocolate 4.5 Lb (2.04kg)","YAOCA","15077400969469"],"15077597380861":["Ganador de peso sabor chocolate 6 lbs","YAOCA","15077597380861"],"15078065930493":["Creatina 200g","YAOCA","15078065930493"],"15078167478525":["Shaker rojo 700 ml","YAOCA","15078167478525"],"15078167511293":["Creatina 1kg","YAOCA","15078167511293"],"15082088595709":["Creatina 500g creapure","YAOCA","15082088595709"],"15083423301885":["Creatina 200g","YAOCA","15083423301885"],"15083423334653":["Proteina Isolate, Yaoca, 250g, 23g de Proteina, Sabor Chocolate","YAOCA","15083423334653"],"15085643694333":["Electrolitos en polvo sabor Mora/Limón","YAOCA","15085643694333"],"15091984433405":["Shaker rojo 700 ml","YAOCA","15091984433405"],"15091984466173":["Creatina 500g creapure","YAOCA","15091984466173"],"15104894533885":["Creatina 1kg","YAOCA","15104894533885"],"15111172063485":["Electrolitos en polvo sabor Lima/Limón","YAOCA","15111172063485"],"15111172096253":["Electrolitos en polvo sabor fresa/Limón","YAOCA","15111172096253"],"15111218102525":["Proteína Whey Sabor Chocolate 4.5 Lb (2.04kg)","YAOCA","15111218102525"],"15130790330621":["Creatina 1kg","YAOCA","15130790330621"],"15131287355645":["Creatina 1kg","YAOCA","15131287355645"],"15131348369661":["Electrolitos en polvo sabor fresa/Limón","YAOCA","15131348369661"],"15131348402429":["Electrolitos en polvo sabor Lima/Limón","YAOCA","15131348402429"],"15131348435197":["Electrolitos en polvo sabor Mora/Limón","YAOCA","15131348435197"],"15131553857789":["Proteína Whey Bebible Chocolate Rtd 12 Pzas 330ml","YAOCA","15131553857789"],"15131553890557":["Proteína Whey Sabor Chocolate 500g","YAOCA","15131553890557"],"15131790803197":["Shaker rojo 700 ml","YAOCA","15131790803197"],"15138664120573":["Proteína Whey Bebible Chocolate Rtd 12 Pzas 330ml","YAOCA","15138664120573"],"15145312977149":["Agua Purificada 1L  - 12 pack","YAOCA","15145312977149"],"15145679061245":["Creatina 1kg","YAOCA","15145679061245"],"15145867772157":["Proteína Whey Sabor Chocolate 4.5 Lb (2.04kg)","YAOCA","15145867772157"],"15146773971197":["Electrolitos en polvo sabor fresa/Limón","YAOCA","15146773971197"],"15146832593149":["Proteína Whey Sabor Chocolate 4.5 Lb (2.04kg)","YAOCA","15146832593149"],"15147165286653":["Proteína Isolate Sabor Chocolate 1 Kg","YAOCA","15147165286653"],"15147165319421":["Proteína Isolate Sabor Chocolate 500g","YAOCA","15147165319421"],"15147302158589":["Creatina 1kg","YAOCA","15147302158589"],"15151925035261":["Electrolitos en polvo sabor Mora/Limón","YAOCA","15151925035261"],"15151925068029":["Electrolitos en polvo sabor fresa/Limón","YAOCA","15151925068029"],"15151925100797":["Proteína Whey Bebible Chocolate Rtd 12 Pzas 330ml","YAOCA","15151925100797"],"15152127410429":["Creatina 1kg","YAOCA","15152127410429"],"15152127443197":["Proteína Whey Sabor Chocolate 500g","YAOCA","15152127443197"],"15154321817853":["Creatina 1kg","YAOCA","15154321817853"],"15154766184701":["Ganador de peso sabor chocolate 6 lbs","YAOCA","15154766184701"],"15162326909181":["Proteína Whey Bebible Chocolate Rtd 12 Pzas 330ml","YAOCA","15162326909181"],"15163064189181":["Shaker rojo 700 ml","YAOCA","15163064189181"],"15163064221949":["Proteína Isolate Sabor Chocolate 1 Kg","YAOCA","15163064221949"],"15163591229693":["Electrolitos en polvo sabor Lima/Limón","YAOCA","15163591229693"],"15163698839805":["Creatina 1kg","YAOCA","15163698839805"],"15165776920829":["Electrolitos en polvo sabor Lima/Limón","YAOCA","15165776920829"],"15165776953597":["Electrolitos en polvo sabor fresa/Limón","YAOCA","15165776953597"],"15165890822397":["Electrolitos en polvo sabor Mora/Limón","YAOCA","15165890822397"],"15166361108733":["Proteína Isolate Sabor Chocolate 500g","YAOCA","15166361108733"],"15167701025021":["Creatina 1kg","YAOCA","15167701025021"],"15168745275645":["Shaker rojo 700 ml","YAOCA","15168745275645"],"15168866910461":["Proteína Whey Bebible Chocolate Rtd 12 Pzas 330ml","YAOCA","15168866910461"],"15169441890557":["Proteína Whey Sabor Chocolate 4.5 Lb (2.04kg)","YAOCA","15169441890557"],"15170385740029":["Proteína Whey Sabor Chocolate 4.5 Lb (2.04kg)","YAOCA","15170385740029"],"15174372589821":["Creatina 200g","YAOCA","15174372589821"],"7503036171278":["Proteína Mass – 26g de Proteína con Creatina y Vitaminas para Mayor Energía y Recuperación","YAOCA","7503036171278"],"15174372655357":["Proteína Whey Sabor Chocolate 4.5 Lb (2.04kg)","YAOCA","15174372655357"],"15174591643901":["Agua Purificada 1L  - 12 pack","YAOCA","15174591643901"],"15175673020669":["Creatina 1kg","YAOCA","15175673020669"],"7503045518033":["Proteína Whey - Fórmula exclusiva ligera con Creatina y Magnesio, 23g de proteína","YAOCA","7503045518033"],"15177156002045":["Proteína Whey Sabor Chocolate 4.5 Lb (2.04kg)","YAOCA","15177156002045"],"7503036171544":["Proteína Isolate - 23g de proteína, con Creatina y Magnesio para potenciar tu recuperación","YAOCA","7503036171544"],"15179197087997":["Proteína Whey Sabor Chocolate 4.5 Lb (2.04kg)","YAOCA","15179197087997"],"15179954782461":["Creatina 500g creapure","YAOCA","15179954782461"],"15181050544381":["Creatina 1kg","YAOCA","15181050544381"],"15181764722941":["Proteína Isolate Sabor Chocolate 1 Kg","YAOCA","15181764722941"],"15182152171773":["Electrolitos en polvo sabor fresa/Limón","YAOCA","15182152171773"],"15183447621885":["Agua Purificada 1L  - 12 pack","YAOCA","15183447621885"],"15184631300349":["Electrolitos en polvo sabor Lima/Limón","YAOCA","15184631300349"],"15184677044477":["Proteína Whey Bebible Chocolate Rtd 12 Pzas 330ml","YAOCA","15184677044477"],"15185222861053":["Proteína Isolate Sabor Chocolate 500g","YAOCA","15185222861053"],"15185229709565":["Proteína Whey Sabor Chocolate 4.5 Lb (2.04kg)","YAOCA","15185229709565"],"7503031994919":["Proteína Whey Bebible Yaoca – 20g de proteína lista para tomar, práctica y deliciosa (12 o 18-pack)","YAOCA","7503031994919"],"15185975345405":["Proteina Isolate, Yaoca, 250g, 23g de Proteina, Sabor Chocolate","YAOCA","15185975345405"],"15185975378173":["Proteína Isolate Sabor Chocolate 500g","YAOCA","15185975378173"],"15185975410941":["Proteina Whey, Yaoca, 250g, 23g de Proteina, Sabor Chocolate","YAOCA","15185975410941"],"15185975443709":["Proteína Whey Sabor Chocolate 500g","YAOCA","15185975443709"],"15186630803709":["Creatina 200g","YAOCA","15186630803709"],"15186764431613":["Electrolitos en polvo sabor fresa/Limón","YAOCA","15186764431613"],"15186820530429":["Proteína Whey Bebible Chocolate Rtd 12 Pzas 330ml","YAOCA","15186820530429"],"15186919915773":["Creatina 1kg","YAOCA","15186919915773"],"15187471368445":["Proteína Whey Sabor Chocolate 4.5 Lb (2.04kg)","YAOCA","15187471368445"],"15187471433981":["Shaker rojo 700 ml","YAOCA","15187471433981"],"15187914981629":["Electrolitos en polvo sabor Mora/Limón","YAOCA","15187914981629"],"15187915014397":["Electrolitos en polvo sabor fresa/Limón","YAOCA","15187915014397"],"15188836319485":["Proteína Whey Sabor Chocolate 4.5 Lb (2.04kg)","YAOCA","15188836319485"],"15189307064573":["Proteína Isolate Sabor Chocolate 1 Kg","YAOCA","15189307064573"],"15189360345341":["Proteína Whey Sabor Chocolate 4.5 Lb (2.04kg)","YAOCA","15189360345341"],"15189544796413":["Proteína Whey Sabor Chocolate 4.5 Lb (2.04kg)","YAOCA","15189544796413"],"15189544829181":["Shaker rojo 700 ml","YAOCA","15189544829181"],"15190524788989":["Proteína Isolate Sabor Chocolate 500g","YAOCA","15190524788989"],"15190524821757":["Creatina 400g","YAOCA","15190524821757"],"15191822827773":["Proteína Whey Sabor Chocolate 4.5 Lb (2.04kg)","YAOCA","15191822827773"],"15196120056061":["Electrolitos en polvo sabor Mora/Limón","YAOCA","15196120056061"],"15196120088829":["Electrolitos en polvo sabor fresa/Limón","YAOCA","15196120088829"],"15197903061245":["Electrolitos en polvo sabor Mora/Limón","YAOCA","15197903061245"],"70140":["Creatina Monohidratada - Energía, Recuperación y Rendimiento en Cada Entrenamiento (1kg)","YAOCA","70140"],"70102":["Proteína Whey - Fórmula exclusiva ligera con Creatina y Magnesio, 23g de proteína","YAOCA","70102"],"70149":["Electrolitos en Polvo Yaoca – Hidratación Instantánea con Vitaminas y Minerales (30 sobres)","YAOCA","70149"],"70151":["Electrolitos en Polvo Yaoca – Hidratación Instantánea con Vitaminas y Minerales (30 sobres)","YAOCA","70151"],"70116":["Proteína Isolate Performance - 30g de proteína adicionada con Colágeno y Probióticos","YAOCA","70116"],"70144":["Creatina Creapure® – La Creatina Más Pura del Mundo para Potenciar Tu Rendimiento (500g)","YAOCA","70144"],"70117":["Proteína Isolate Performance - 30g de proteína adicionada con Colágeno y Probióticos","YAOCA","70117"],"70120":["BCAA’s Yaoca – Aminoácidos que Favorecen la Recuperación y el Rendimiento (30 porciones)","YAOCA","70120"],"70121":["Pre-Workout Yaoca – Favorece tu Rendimiento con Beta-Alanina, Creatina y Vitaminas (60 porciones)","YAOCA","70121"],"70129":["Proteína Mass – 26g de Proteína con Creatina y Vitaminas para Mayor Energía y Recuperación","YAOCA","70129"],"70150":["Electrolitos en Polvo Yaoca – Hidratación Instantánea con Vitaminas y Minerales (30 sobres)","YAOCA","70150"],"70211":["Proteína Whey Bebible Yaoca – 20g de proteína lista para tomar, práctica y deliciosa (12 o 18-pack)","YAOCA","70211"],"70208":["Proteína Whey Bebible Yaoca – 20g de proteína lista para tomar, práctica y deliciosa (12 o 18-pack)","YAOCA","70208"],"46472499429629":["Citrato de Magnesio 600mg con Calcio y Colágeno – Apoyo diario para músculos y huesos","YAOCA","46472499429629"],"7503045518002":["Creatina Monohidratada - Energía, Recuperación y Rendimiento en Cada Entrenamiento","YAOCA","7503045518002"],"7503036171582":["Creatina Monohidratada - Energía, Recuperación y Rendimiento en Cada Entrenamiento","YAOCA","7503036171582"],"70405":["Citrato de Magnesio 600mg con Calcio y Colágeno – Apoyo diario para músculos y huesos","YAOCA","70405"],"46629103272189":["Creatina Monohidratada Yaoca 200g","YAOCA","46629103272189"],"46635007574269":["ENVÍO EXPRESS GRATIS","YAOCA","46635007574269"],"7503053821323":["Multi M Yaoca – Belleza y energía diaria, con colágeno hidrolizado y vitaminas","YAOCA","7503053821323"],"7503053821293":["Men’s Testo Yaoca – Fuerza y energía, con creatina, tribulus y zinc (60 cápsulas)","YAOCA","7503053821293"],"7503053821316":["Multi H Yaoca - Energía y vitalidad diaria, apoyo óseo con calcio y aminoácidos","YAOCA","7503053821316"],"7503053821330":["Glucosamina + Condroitina + MSM Yaoca - Soporte articular y movilidad, con colágeno y vitaminas","YAOCA","7503053821330"],"1119":["Proteína Whey 4.5Lb - Máxima pureza con Creatina y Magnesio, 23g de proteína","YAOCA","1119"],"47507671744765":["Vaso shaker Yaoca 700 ML - color Negro con esfera mezcladora","YAOCA","47507671744765"],"17503031994916":["Proteína Whey Bebible , 12 pack, 20g de proteína lista para tomar","YAOCA","17503031994916"],"7503045518101":["Electrolitos en Polvo , 30 sobres, Hidratación instantánea con vitaminas y minerales","YAOCA","7503045518101"],"7503045518194":["Electrolitos en Polvo , 30 sobres, Hidratación instantánea con vitaminas y minerales","YAOCA","7503045518194"],"7503053821309":["Citrato de Magnesio con Calcio y Colágeno Yaoca, 60 Cáps, Apoyo diario para músculos y huesos","YAOCA","7503053821309"],"7503039685536":["Creatina Monohidratada , 200g, Incrementa fuerza, potencia y rendimiento muscular","YAOCA","7503039685536"],"101":["Vaso Shaker Negro, 700ml, A prueba de fugas, libre de BPA con esfera mezcladora","YAOCA","101"],"7503045518705":["Proteína Mass Sabor Chocolate , 12 lb, 26g de proteína con creatina y magnesio","YAOCA","7503045518705"],"7503036171605":["Proteína Isolate Bebible Sabor Chocolate, 12 pack, 30g de proteína práctica y lista para tomar","YAOCA","7503036171605"],"7503045518293":["Electrolitos en Polvo , 30 sobres, Hidratación instantánea con vitaminas y minerales","YAOCA","7503045518293"],"7503036171551":["Proteína Whey , 1kg, 23g de proteína de máxima pureza con creatina y magnesio","YAOCA","7503036171551"],"7503053821859":["Vaso Shaker Negro, 700ml, A prueba de fugas, libre de BPA con esfera mezcladora","YAOCA","7503053821859"],"7503036171032":["BCAAs , 420 g , Favorece la recuperación y el rendimiento","YAOCA","7503036171032"],"17503036171602":["Proteína Isolate Bebible Sabor Chocolate, 12 pack, 30g de proteína práctica y lista para tomar","YAOCA","17503036171602"],"7503053821620":["Creatina Monohidratada , 1kg, Energía, recuperación y rendimiento en cada entrenamiento","YAOCA","7503053821620"],"7503053821651":["Proteína Whey , 3 lb, 23g de proteína enriquecida con creatina y magnesio","YAOCA","7503053821651"],"27503045518105":["Electrolitos en Polvo , 30 sobres, Hidratación instantánea con vitaminas y minerales","YAOCA","27503045518105"],"7503031994308":["Colágeno Hidrolizado Natural 600g","WONU","7503031994308"],"7503028029761":["Colágeno Hidrolizado Fresa-Arándano 345g","WONU","7503028029761"],"7503028029747":["Colágeno Hidrolizado Natural 345g","WONU","7503028029747"],"42984151580808":["Colágeno + electrolitos sabor limón frutos rojos","WONU","42984151580808"],"7503031994315":["Colágeno Hidrolizado Fresa-Arándano 600g","WONU","7503031994315"],"7503031994872":["Cápsulas a base de flor de rosa adicionado con colágeno, biotina y vitaminas","WONU","7503031994872"],"7503031994018":["Shaker-Vaso mezclador 700 ml","WONU","7503031994018"],"750304551846.3":["Colágeno + electrolitos sabor frutos rojos","WONU","750304551846.3"],"14005546254472":["Colágeno + electrolitos sabor limón jengibre","WONU","14005546254472"],"14101183758472":["Colágeno + electrolitos sabor limón jengibre","WONU","14101183758472"],"14169114378376":["Colágeno + electrolitos sabor limón jengibre","WONU","14169114378376"],"14206073569416":["Colágeno + electrolitos sabor limón jengibre","WONU","14206073569416"],"14235809906824":["Colágeno + electrolitos sabor limón jengibre","WONU","14235809906824"],"7503031994316":["Colágeno Hidrolizado Fresa Arándano- 9g de Colágeno, Ácido Hialurónico y Vitamina C","WONU","7503031994316"],"7503031994309":["Colágeno Hidrolizado Natural - 10g de Colágeno con Ácido Hialurónico y Vitamina C","WONU","7503031994309"],"750304551846.4":["Colágeno + Electrolitos 30 Sticks - 5g de Colágeno Sin de Azúcar (30 sobres)","WONU","750304551846.4"],"7503045518620":["Colágeno PRO 3 en 1 Wonu – 12.5 g de péptidos por porción, sin azúcar y con vitamina C","WONU","7503045518620"],"7503053821286":["Inositol Wonu 742 mg - Equilibrio y energía diaria, con arándano y minerales","WONU","7503053821286"],"7503053821347":["Berberina + Cúrcuma Wonu","WONU","7503053821347"],"7503045518453":["Colágeno+Electrolitos Limón Jengibre","WONU","7503045518453"],"7503053821255":["Berberina + Cúrcuma 60 Cápsulas","WONU","7503053821255"],"7503045518729":["Colágeno PRO 3 en 1 Sin Sabor","WONU","7503045518729"],"7503053821095":["Myo-Inositol 60 Cápsulas","WONU","7503053821095"],"7503045518606":["Colágeno PRO 3 en 1 Sin Sabor","WONU","7503045518606"],"7503053821217":["Creatina + Inositol Sin Sabor","WONU","7503053821217"],"7503053821644":["Colágeno Hidrolizado Fresa - Arándano","WONU","7503053821644"],"7503045518460":["Colágeno + Electrolitos Frutos Rojos","WONU","7503045518460"],"7503053821214":["Creatina + Inositol Sin Sabor (30 sticks)","WONU","7503053821214"],"7503053821781":["Creatina Monohidratada Micronizada + L-Glicina 780 g Bolsa (60 Porciones)","CREANATOMY","7503053821781"],"7503039685673":["Proteína Vegetal Líquida - Chocolate 330ml (12 pack)","GUD","7503039685673"],"7503039685802":["Proteína Vegetal en Polvo - Vainilla 3lb","GUD","7503039685802"],"7503039685796":["Proteína Vegetal en Polvo - Chocolate 3lb","GUD","7503039685796"],"7503039685659":["Proteína Vegetal Líquida - Vainilla 330ml (12 pack)","GUD","7503039685659"],"7503039685666":["Proteína Vegetal Líquida - Chocolate 330ml (12 pack)","GUD","7503039685666"],"7503039685642":["Proteína Vegetal Líquida - Vainilla 330ml (12 pack)","GUD","7503039685642"],"7503039685710":["Proteína Vegetal en Polvo Vainilla – 450 g | 22 g, Sin Azúcar","GUD","7503039685710"],"47551834816824":["2 x Nuba Proteína Sabor Vainilla Chai con Colágeno Hidrolizado, Ácido Hialurónico y Vitaminas Sin Azúcar Añadida En Polvo Pre, Post e Intra Entrenamiento 1 kg - 36 porciones","NUBA","47551834816824"],"7503028029655":["Nuba Proteína Sabor Vainilla Chai con Colágeno Hidrolizado, Ácido Hialurónico y Vitaminas Sin Azúcar Añadida En Polvo Pre, Post e Intra Entrenamiento 1 kg - 36 porciones","NUBA","7503028029655"],"7503028029457":["Pure Life Suplemento Gym Pre Entreno, Proteína Isolate 4.5 Libras (2.04 Kg) Con Vitamina C, Vitamina B Sabor Chocolate - 54 Porciones","NUBA","7503028029457"],"49339829879096":["Proteina de Suero de Leche, 1KG, 36 Servicios, 18g Por Servicio, Sabor Chocolate","NUBA","49339829879096"],"49339697365304":["Proteina de Suero de Leche, 500g, 18 Servicios, 18g Por Servicio, Sabor Chai Vainilla","NUBA","49339697365304"],"7503028029464":["Pure Life Suplemento Gym Pre Entreno, Proteína Isolate 4.5 Libras (2.04 Kg) Con Vitamina C, Vitamina B Sabor Vainilla - 54 Porciones","NUBA","7503028029464"],"49339729674552":["Proteina de Suero de Leche, 250g, 9 Servicios, 18g Por Servicio, Sabor Chai Vainilla","NUBA","49339729674552"],"7503028029648":["Proteína de Suero de Leche 1KG  Sabor Chocolate","NUBA","7503028029648"],"7503039685628":["Proteína NUBA CHOCOLATE 250 GR","NUBA","7503039685628"],"52297231827256":["2 x Proteina  Nuba 1KG Sabor Chocolate","NUBA","52297231827256"],"7503028029310":["Pure Life Proteína Isolate Rtd, 12 Piezas 330 ml c/u. Sabor Vainilla","NUBA","7503028029310"],"75030280296552":["2 x Proteína Nuba Sabor Vainilla Chai 1 kg","NUBA","75030280296552"],"75030280296482":["2 x Proteina  Nuba 1KG Sabor Chocolate","NUBA","75030280296482"],"7503039685611":["Proteína NUBA CHOCOLATE 500 GR","NUBA","7503039685611"],"7503039685772":["Nuba Proteína Bebida  12 Pack Sabor Chocolate","NUBA","7503039685772"],"7503039685819":["Nuba Proteína Bebida  12 Pack Sabor Vainilla","NUBA","7503039685819"],"7503028029129":["Proteína NUBA Chai Vainilla 500g","NUBA","7503028029129"]},"r":[[2025,1,"14604647629053",780.0,1],[2025,1,"14609486512381",349.0,1],[2025,1,"14609486545149",645.0,1],[2025,1,"14621854859517",1248.0,2],[2025,1,"14624350175485",178.8,2],[2025,1,"14624350208253",89.4,1],[2025,1,"14629439078653",624.0,1],[2025,1,"14633497002237",1683.0,4],[2025,1,"14633821176061",399.0,1],[2025,1,"14633896870141",1248.0,2],[2025,1,"14633980887293",268.2,3],[2025,1,"14637776797949",624.0,1],[2025,1,"14638220247293",89.4,1],[2025,1,"14638220280061",466.65,1],[2025,1,"14638220312829",280.0,1],[2025,1,"14638220345597",399.0,1],[2025,1,"14640382181629",280.0,1],[2025,1,"14640382214397",89.4,1],[2025,1,"14640382247165",624.0,1],[2025,1,"14644719583485",89.4,1],[2025,1,"14644719616253",624.0,1],[2025,1,"14647308976381",1000.0,1],[2025,1,"14649903644925",624.0,1],[2025,1,"14649903677693",1000.0,1],[2025,1,"14652296364285",891.0,1],[2025,1,"14652296397053",1000.0,1],[2025,1,"14652296429821",810.0,1],[2025,1,"14653334978813",89.4,1],[2025,1,"14653335011581",799.0,1],[2025,1,"14653335044349",399.0,1],[2025,1,"14656077037821",799.0,1],[2025,1,"14657194688765",2000.0,2],[2025,1,"14657194721533",1248.0,2],[2025,1,"14658058420477",934.15,1],[2025,1,"14658058453245",279.0,1],[2025,1,"14658674262269",280.0,1],[2025,1,"14658674295037",624.0,1],[2025,1,"14658674327805",1100.0,2],[2025,1,"14660163338493",399.0,1],[2025,1,"14660163371261",799.0,1],[2025,1,"14660216389885",399.0,1],[2025,1,"14660280516861",89.4,1],[2025,1,"14660280549629",1000.0,1],[2025,1,"14661040832765",550.0,1],[2025,1,"14661106663677",1100.0,2],[2025,1,"14662824132861",1248.0,2],[2025,1,"14663947190525",891.0,1],[2025,1,"14664155529469",1000.0,1],[2025,1,"14665493807357",550.0,1],[2025,1,"14665493840125",2000.0,2],[2025,1,"14666013311229",891.0,1],[2025,1,"14668249727229",280.0,1],[2025,1,"14668249759997",1000.0,1],[2025,1,"14668249792765",280.0,1],[2025,1,"14670189428989",89.4,1],[2025,1,"14670189461757",624.0,1],[2025,1,"14670204928253",89.4,1],[2025,1,"14670204961021",810.0,1],[2025,1,"14670474903805",1000.0,1],[2025,1,"14671428583677",624.0,1],[2025,1,"14671428616445",891.0,1],[2025,1,"14671521054973",1100.0,2],[2025,1,"14671553298685",624.0,1],[2025,1,"14673442734333",89.4,1],[2025,1,"14673442767101",624.0,1],[2025,1,"14673596219645",550.0,1],[2025,1,"14673596252413",178.8,2],[2025,1,"14675946733821",799.0,1],[2025,1,"14676147110141",1598.0,2],[2025,1,"14676147142909",624.0,1],[2025,1,"14676542619901",810.0,1],[2025,1,"14679403462909",572.0,1],[2025,1,"14679403495677",624.0,1],[2025,1,"14679985258749",1000.0,1],[2025,1,"14679985291517",399.0,1],[2025,1,"14680069472509",89.4,1],[2025,1,"14680069505277",624.0,1],[2025,1,"14680126292221",89.4,1],[2025,1,"14680126324989",178.8,2],[2025,1,"14680126357757",204.0,1],[2025,1,"14681138856189",1000.0,1],[2025,1,"14681227428093",624.0,1],[2025,1,"14681227460861",800.0,1],[2025,1,"14681733202173",1100.0,2],[2025,1,"14684105081085",624.0,1],[2025,1,"14685607821565",624.0,1],[2025,1,"14691959013629",280.0,1],[2025,1,"14691959046397",800.0,1],[2025,1,"14692055875837",810.0,1],[2025,1,"14695151075581",1100.0,2],[2025,1,"42984151580808",500.0,1],[2025,1,"47551834816824",1300.0,1],[2025,1,"7503028029747",2495.0,5],[2025,1,"7503028029761",1996.0,4],[2025,1,"7503031994308",6900.0,10],[2025,2,"14710201516285",624.0,1],[2025,2,"14711911514365",89.4,1],[2025,2,"14711911547133",624.0,1],[2025,2,"14715152072957",204.0,1],[2025,2,"14715152105725",279.0,1],[2025,2,"14715603550461",1650.0,3],[2025,2,"14715603583229",891.0,1],[2025,2,"14720326205693",891.0,1],[2025,2,"14725218238717",891.0,1],[2025,2,"14726208258301",89.4,1],[2025,2,"14726208291069",466.65,1],[2025,2,"14726502613245",624.0,1],[2025,2,"14727886078205",399.0,1],[2025,2,"14727886110973",799.0,1],[2025,2,"14752831209725",800.0,1],[2025,2,"14752901726461",800.0,1],[2025,2,"14754856272125",800.0,1],[2025,2,"14756490281213",550.0,1],[2025,2,"14757649187069",800.0,1],[2025,2,"14758058164477",1100.0,2],[2025,2,"14758897221885",800.0,1],[2025,2,"14759445758205",800.0,1],[2025,2,"14759949664509",800.0,1],[2025,2,"14762371088637",891.0,1],[2025,2,"14763358191869",89.4,1],[2025,2,"14763358224637",624.0,1],[2025,2,"14764114772221",1248.0,2],[2025,2,"14767008776445",624.0,1],[2025,2,"14767008809213",89.4,1],[2025,2,"14767008841981",800.0,1],[2025,2,"14767163310333",800.0,1],[2025,2,"14767266267389",800.0,1],[2025,2,"14778436255997",799.2,1],[2025,2,"14808611913981",550.0,1],[2025,2,"14809484722429",624.0,1],[2025,2,"14811347812605",550.0,1],[2025,2,"14811347845373",89.4,1],[2025,2,"14811347878141",280.0,1],[2025,2,"14811347910909",280.0,1],[2025,2,"14811638989053",89.4,1],[2025,2,"14811639021821",624.0,1],[2025,2,"14816902054141",780.0,1],[2025,2,"14817087193341",780.0,1],[2025,2,"14819749462269",499.0,1],[2025,2,"14822412452093",99.0,1],[2025,2,"14822412484861",799.0,1],[2025,2,"14823572472061",780.0,1],[2025,2,"14831244345597",999.0,1],[2025,2,"14832686366973",699.0,1],[2025,2,"14833211932925",99.0,1],[2025,2,"14833211965693",999.0,1],[2025,2,"14833510351101",780.0,1],[2025,2,"14834044862717",149.0,1],[2025,2,"14834044895485",999.0,1],[2025,2,"14834044928253",891.0,1],[2025,2,"14834044961021",780.0,1],[2025,2,"14836054720765",699.0,1],[2025,2,"14837018689789",999.0,1],[2025,2,"14837154054397",780.0,1],[2025,2,"14837154087165",999.0,1],[2025,2,"14839236231421",350.0,1],[2025,2,"14839236264189",499.0,1],[2025,2,"14841972130045",780.0,1],[2025,2,"14842820165885",999.0,1],[2025,2,"14842844512509",999.0,1],[2025,2,"14842879639805",999.0,1],[2025,2,"14843059929341",1398.0,2],[2025,2,"14843059962109",198.0,2],[2025,2,"14843059994877",2997.0,3],[2025,2,"14845212131581",780.0,1],[2025,2,"14846142284029",99.0,1],[2025,2,"14846142316797",149.0,1],[2025,2,"14846142349565",495.0,1],[2025,2,"14846142382333",999.0,1],[2025,2,"14850059403517",99.0,1],[2025,2,"14850059436285",690.0,1],[2025,2,"14850409300221",1620.0,2],[2025,2,"14852721508605",679.0,1],[2025,2,"14852721541373",690.0,1],[2025,2,"14852887904509",690.0,1],[2025,2,"49339829879096",690.0,1],[2025,2,"7503028029457",5000.0,4],[2025,2,"7503028029655",1380.0,2],[2025,2,"7503028029747",1996.0,4],[2025,2,"7503028029761",1497.0,3],[2025,2,"7503031994308",4140.0,6],[2025,2,"7503031994315",3450.0,5],[2025,3,"14854346113277",891.0,1],[2025,3,"14855075070205",99.0,1],[2025,3,"14855075102973",690.0,1],[2025,3,"14856815411453",690.0,1],[2025,3,"14857280520445",690.0,1],[2025,3,"14857280553213",999.0,1],[2025,3,"14859709808893",999.0,1],[2025,3,"14860537037053",1620.0,2],[2025,3,"14865588257021",350.0,1],[2025,3,"14865588289789",700.0,2],[2025,3,"14865588322557",700.0,2],[2025,3,"14872397152509",891.0,1],[2025,3,"14875262288125",250.0,1],[2025,3,"14875262320893",499.0,1],[2025,3,"14875262353661",549.0,1],[2025,3,"14875262386429",99.0,1],[2025,3,"14875655241981",99.0,1],[2025,3,"14875655274749",499.0,1],[2025,3,"14875655307517",250.0,1],[2025,3,"14875655340285",549.0,1],[2025,3,"14875671724285",99.0,1],[2025,3,"14875671757053",250.0,1],[2025,3,"14875671789821",549.0,1],[2025,3,"14875671822589",499.0,1],[2025,3,"14875692728573",250.0,1],[2025,3,"14875692761341",549.0,1],[2025,3,"14875692794109",499.0,1],[2025,3,"14875692826877",99.0,1],[2025,3,"14875714519293",99.0,1],[2025,3,"14875714552061",499.0,1],[2025,3,"14875714584829",549.0,1],[2025,3,"14875714617597",250.0,1],[2025,3,"14876126544125",690.0,1],[2025,3,"14879749374205",99.0,1],[2025,3,"14879749406973",350.0,1],[2025,3,"14879797444861",198.0,2],[2025,3,"14883284549885",690.0,1],[2025,3,"14886162465021",1398.0,2],[2025,3,"14887433142525",149.0,1],[2025,3,"14887433175293",699.0,1],[2025,3,"14887541604605",700.0,2],[2025,3,"14887781269757",690.0,1],[2025,3,"14892416303357",350.0,1],[2025,3,"14892416336125",350.0,1],[2025,3,"14893122027773",810.0,1],[2025,3,"14894089699581",699.0,1],[2025,3,"14897049108733",699.0,1],[2025,3,"14897352704253",690.0,1],[2025,3,"14899514409213",690.0,1],[2025,3,"14902091809021",690.0,1],[2025,3,"14908600254717",810.0,1],[2025,3,"14913080951037",810.0,1],[2025,3,"14928514220285",891.0,1],[2025,3,"14963491766525",699.0,1],[2025,3,"14978534670589",891.0,1],[2025,3,"14985679503613",699.0,1],[2025,3,"14986362126589",690.0,1],[2025,3,"42984151580808",500.0,1],[2025,3,"47551834816824",1300.0,1],[2025,3,"49339697365304",310.0,1],[2025,3,"7503028029457",2997.0,3],[2025,3,"7503028029464",1399.0,1],[2025,3,"7503028029655",1380.0,2],[2025,3,"7503031994308",4830.0,7],[2025,3,"7503031994315",2760.0,4],[2025,3,"7503031994872",316.0,1],[2025,4,"14005546254472",500.0,1],[2025,4,"14989769736445",350.0,1],[2025,4,"14989769769213",350.0,1],[2025,4,"14990525792509",699.0,1],[2025,4,"14992910582013",1290.0,2],[2025,4,"14993071833341",596.0,4],[2025,4,"14993071866109",679.0,1],[2025,4,"14993071898877",999.0,1],[2025,4,"14993218797821",690.0,1],[2025,4,"14995599261949",350.0,1],[2025,4,"14995599294717",350.0,1],[2025,4,"14999610032381",891.0,1],[2025,4,"15000450203901",690.0,1],[2025,4,"15000450236669",810.0,1],[2025,4,"15003117879549",690.0,1],[2025,4,"15011685073149",679.0,1],[2025,4,"15011685105917",499.0,1],[2025,4,"15011685138685",1998.0,2],[2025,4,"15015968702717",99.0,1],[2025,4,"15015968735485",690.0,1],[2025,4,"15016293761277",690.0,1],[2025,4,"15017924591869",350.0,1],[2025,4,"15023976415485",1998.0,2],[2025,4,"15026515083517",2580.0,4],[2025,4,"15026876481789",891.0,1],[2025,4,"15030376726781",1380.0,2],[2025,4,"15036489761021",530.0,2],[2025,4,"15036489793789",99.0,1],[2025,4,"15036519186685",240.0,1],[2025,4,"15036519219453",891.0,1],[2025,4,"15036519252221",99.0,1],[2025,4,"15037348643069",149.0,1],[2025,4,"15037348675837",1380.0,2],[2025,4,"15038855414013",350.0,1],[2025,4,"15038855446781",350.0,1],[2025,4,"15038894768381",891.0,1],[2025,4,"15039214944509",99.0,1],[2025,4,"15048553890045",99.0,1],[2025,4,"15051048157437",99.0,1],[2025,4,"15051048190205",1199.0,1],[2025,4,"15051933679869",891.0,1],[2025,4,"15052153716989",1199.0,1],[2025,4,"15058827182333",240.0,1],[2025,4,"15058827215101",99.0,1],[2025,4,"15058827247869",350.0,1],[2025,4,"15058827280637",350.0,1],[2025,4,"15058827313405",350.0,1],[2025,4,"15058827411709",679.0,1],[2025,4,"15066402193661",350.0,1],[2025,4,"15069255434493",699.0,1],[2025,4,"15077400969469",1199.0,1],[2025,4,"15077597380861",810.0,1],[2025,4,"15078065930493",279.0,1],[2025,4,"15078167478525",99.0,1],[2025,4,"15078167511293",699.0,1],[2025,4,"15082088595709",699.0,1],[2025,4,"15083423301885",279.0,1],[2025,4,"15083423334653",265.0,1],[2025,4,"15085643694333",350.0,1],[2025,4,"15091984433405",99.0,1],[2025,4,"15091984466173",699.0,1],[2025,4,"46133188591869",699.0,1],[2025,4,"7503028029655",2097.0,3],[2025,4,"7503028029747",1597.0,3],[2025,4,"7503028029761",499.0,1],[2025,4,"7503031994018",104.3,1],[2025,4,"7503031994308",10431.0,15],[2025,4,"7503031994315",4149.0,6],[2025,4,"7503031994872",632.0,2],[2025,4,"7503031994995",2398.0,2],[2025,4,"7503036171001",3597.0,3],[2025,4,"7503045518163",699.0,1],[2025,4,"7503045518446",699.0,1],[2025,4,"750304551846.3",1500.0,3],[2025,5,"14101183758472",500.0,1],[2025,5,"15104894533885",699.0,1],[2025,5,"15111172063485",350.0,1],[2025,5,"15111172096253",350.0,1],[2025,5,"15111218102525",1199.0,1],[2025,5,"15130790330621",699.0,1],[2025,5,"15131287355645",699.0,1],[2025,5,"15131348369661",350.0,1],[2025,5,"15131348402429",350.0,1],[2025,5,"15131348435197",350.0,1],[2025,5,"15131553857789",549.0,1],[2025,5,"15131553890557",469.0,1],[2025,5,"15131790803197",198.0,2],[2025,5,"15138664120573",549.0,1],[2025,5,"15145312977149",657.0,3],[2025,5,"15145679061245",699.0,1],[2025,5,"15145867772157",1199.0,1],[2025,5,"15146773971197",350.0,1],[2025,5,"15146832593149",1199.0,1],[2025,5,"15147165286653",1029.0,1],[2025,5,"15147165319421",549.0,1],[2025,5,"15147302158589",699.0,1],[2025,5,"15151925035261",350.0,1],[2025,5,"15151925068029",350.0,1],[2025,5,"15151925100797",1098.0,2],[2025,5,"15152127410429",699.0,1],[2025,5,"15152127443197",469.0,1],[2025,5,"15154321817853",699.0,1],[2025,5,"15154766184701",1620.0,2],[2025,5,"15162326909181",1098.0,2],[2025,5,"15163064189181",99.0,1],[2025,5,"15163064221949",1029.0,1],[2025,5,"15163591229693",350.0,1],[2025,5,"15163698839805",699.0,1],[2025,5,"15165776920829",350.0,1],[2025,5,"15165776953597",350.0,1],[2025,5,"15165890822397",700.0,2],[2025,5,"15166361108733",549.0,1],[2025,5,"15167701025021",699.0,1],[2025,5,"15168745275645",99.0,1],[2025,5,"15168866910461",549.0,1],[2025,5,"15169441890557",1199.0,1],[2025,5,"15170385740029",1199.0,1],[2025,5,"15174372589821",279.0,1],[2025,5,"15174372655357",1199.0,1],[2025,5,"15174591643901",1533.0,7],[2025,5,"15175673020669",1398.0,2],[2025,5,"15177156002045",1199.0,1],[2025,5,"15179197087997",1199.0,1],[2025,5,"15179954782461",699.0,1],[2025,5,"15181050544381",699.0,1],[2025,5,"15181764722941",1029.0,1],[2025,5,"15182152171773",350.0,1],[2025,5,"15183447621885",657.0,3],[2025,5,"15184631300349",350.0,1],[2025,5,"15184677044477",3294.0,6],[2025,5,"15185222861053",549.0,1],[2025,5,"15185229709565",1199.0,1],[2025,5,"15185975345405",480.0,1],[2025,5,"15185975378173",549.0,1],[2025,5,"15185975410941",350.0,1],[2025,5,"15185975443709",469.0,1],[2025,5,"15186630803709",279.0,1],[2025,5,"15186764431613",350.0,1],[2025,5,"15186820530429",549.0,1],[2025,5,"15186919915773",2796.0,4],[2025,5,"15187471368445",1199.0,1],[2025,5,"15187471433981",99.0,1],[2025,5,"15187914981629",700.0,2],[2025,5,"15187915014397",350.0,1],[2025,5,"15188836319485",1199.0,1],[2025,5,"15189307064573",1299.0,1],[2025,5,"15189360345341",1199.0,1],[2025,5,"15189544796413",1199.0,1],[2025,5,"15189544829181",99.0,1],[2025,5,"15190524788989",549.0,1],[2025,5,"15190524821757",998.0,2],[2025,5,"15191822827773",1199.0,1],[2025,5,"15196120056061",700.0,2],[2025,5,"15196120088829",350.0,1],[2025,5,"15197903061245",1050.0,3],[2025,5,"46133188591869",6291.0,9],[2025,5,"47551834816824",5200.0,4],[2025,5,"70102",12435.0,15],[2025,5,"70116",10791.0,9],[2025,5,"70117",14388.0,12],[2025,5,"70120",1398.0,2],[2025,5,"70121",1998.0,2],[2025,5,"70129",2997.0,3],[2025,5,"70140",16077.0,23],[2025,5,"70144",4194.0,6],[2025,5,"70149",4200.0,12],[2025,5,"70150",1400.0,4],[2025,5,"70151",4200.0,12],[2025,5,"7503028029457",1799.0,1],[2025,5,"7503028029655",2796.0,4],[2025,5,"7503028029747",7188.0,12],[2025,5,"7503028029761",599.0,1],[2025,5,"7503031994308",15378.0,22],[2025,5,"7503031994315",6291.0,9],[2025,5,"7503031994872",1077.0,3],[2025,5,"7503031994919",1647.0,3],[2025,5,"7503031994995",2398.0,2],[2025,5,"7503036171001",2398.0,2],[2025,5,"7503036171278",999.0,1],[2025,5,"7503036171544",6174.0,6],[2025,5,"7503045518033",829.0,1],[2025,5,"7503045518163",1398.0,2],[2025,5,"7503045518446",2097.0,3],[2025,5,"750304551846.3",1000.0,2],[2025,6,"14169114378376",500.0,1],[2025,6,"14206073569416",1000.0,2],[2025,6,"14235809906824",500.0,1],[2025,6,"49339729674552",230.0,1],[2025,6,"70102",44766.0,54],[2025,6,"70116",46165.0,35],[2025,6,"70117",91430.0,70],[2025,6,"70120",9786.0,14],[2025,6,"70121",3996.0,4],[2025,6,"70129",8991.0,9],[2025,6,"70140",130014.0,186],[2025,6,"70144",25863.0,37],[2025,6,"70149",6300.0,18],[2025,6,"70150",3500.0,10],[2025,6,"70151",8400.0,24],[2025,6,"70208",7137.0,13],[2025,6,"70211",8388.0,12],[2025,6,"7503028029464",1799.0,1],[2025,6,"7503028029655",4893.0,7],[2025,6,"7503028029747",1198.0,2],[2025,6,"7503031994308",6990.0,10],[2025,6,"7503031994315",5592.0,8],[2025,6,"7503031994872",1436.0,4],[2025,6,"7503036171544",40131.0,39],[2025,6,"750304551846.3",1500.0,3],[2025,7,"46472499429629",9576.0,24],[2025,7,"70102",56526.0,64],[2025,7,"70116",125412.0,88],[2025,7,"70117",114319.0,81],[2025,7,"70120",3396.0,4],[2025,7,"70121",7794.0,6],[2025,7,"70129",1299.0,1],[2025,7,"70140",79590.0,110],[2025,7,"70144",53225.0,75],[2025,7,"70149",4193.0,9],[2025,7,"70150",5191.0,11],[2025,7,"70151",2845.0,6],[2025,7,"70208",15679.0,21],[2025,7,"7503028029464",1799.0,1],[2025,7,"7503028029655",1398.0,2],[2025,7,"7503031994309",28860.0,40],[2025,7,"7503031994315",6390.0,10],[2025,7,"7503031994316",7090.0,10],[2025,7,"7503031994872",1077.0,3],[2025,7,"7503036171544",18868.0,18],[2025,7,"7503036171582",6589.0,11],[2025,7,"7503045518002",32207.0,43],[2025,7,"7503045518033",7693.0,7],[2025,7,"750304551846.3",4491.0,9],[2025,7,"750304551846.4",1497.0,3],[2025,8,"46472499429629",1995.0,5],[2025,8,"47551834816824",2600.0,2],[2025,8,"70102",26376.0,24],[2025,8,"70116",77961.0,39],[2025,8,"70117",53973.0,27],[2025,8,"70120",7192.0,8],[2025,8,"70121",5196.0,4],[2025,8,"70129",10392.0,8],[2025,8,"70140",83139.0,111],[2025,8,"70144",48685.0,65],[2025,8,"70149",6487.0,13],[2025,8,"70150",1996.0,4],[2025,8,"70151",3992.0,8],[2025,8,"70208",13583.0,17],[2025,8,"70405",10374.0,26],[2025,8,"7503028029457",1799.0,1],[2025,8,"7503028029655",3495.0,5],[2025,8,"7503031994308",9086.0,14],[2025,8,"7503031994309",23970.0,30],[2025,8,"7503031994315",12331.0,19],[2025,8,"7503031994316",23171.0,29],[2025,8,"7503031994872",2745.0,5],[2025,8,"7503036171544",17988.0,12],[2025,8,"750304551846.3",20459.0,41],[2025,8,"750304551846.4",13473.0,27],[2025,9,"46629103272189",7581.0,19],[2025,9,"46635007574269",320.0,2],[2025,9,"47551834816824",1300.0,1],[2025,9,"70102",25277.0,23],[2025,9,"70116",33983.0,17],[2025,9,"70117",31584.2,16],[2025,9,"70120",3596.0,4],[2025,9,"70129",5196.0,4],[2025,9,"70140",35203.0,47],[2025,9,"70144",15729.0,21],[2025,9,"70149",4491.0,9],[2025,9,"70150",2994.0,6],[2025,9,"70151",3493.0,7],[2025,9,"70208",20774.0,26],[2025,9,"70405",5187.0,13],[2025,9,"7503028029464",1799.0,1],[2025,9,"7503028029655",2796.0,4],[2025,9,"7503031994308",1298.0,2],[2025,9,"7503031994309",21573.0,27],[2025,9,"7503031994316",15181.0,19],[2025,9,"7503036171544",2998.0,2],[2025,9,"750304551846.3",499.0,1],[2025,9,"750304551846.4",499.0,1],[2025,9,"7503053821293",2392.0,8],[2025,9,"7503053821323",299.0,1],[2025,10,"46629103272189",7182.0,18],[2025,10,"70102",14287.0,13],[2025,10,"70116",35982.0,18],[2025,10,"70117",17591.2,9],[2025,10,"70120",1798.0,2],[2025,10,"70129",6495.0,5],[2025,10,"70140",14980.0,20],[2025,10,"70144",5992.0,8],[2025,10,"70149",7485.0,15],[2025,10,"70150",3992.0,8],[2025,10,"70151",2994.0,6],[2025,10,"70208",7191.0,9],[2025,10,"70405",1995.0,5],[2025,10,"7503028029464",1799.0,1],[2025,10,"7503028029655",2097.0,3],[2025,10,"7503031994308",11682.0,18],[2025,10,"7503031994309",2397.0,3],[2025,10,"7503031994316",2397.0,3],[2025,10,"7503036171544",1499.0,1],[2025,10,"750304551846.3",1996.0,4],[2025,10,"750304551846.4",998.0,2],[2025,10,"7503053821316",299.0,1],[2025,11,"46629103272189",3990.0,10],[2025,11,"46635007574269",160.0,1],[2025,11,"47551834816824",1299.0,1],[2025,11,"49339829879096",699.0,1],[2025,11,"70102",2198.0,2],[2025,11,"70116",17791.1,9],[2025,11,"70117",5997.0,3],[2025,11,"70129",6495.0,5],[2025,11,"70140",9737.0,13],[2025,11,"70144",5243.0,7],[2025,11,"70149",998.0,2],[2025,11,"70208",7990.0,10],[2025,11,"70405",2394.0,6],[2025,11,"7503028029457",1799.0,1],[2025,11,"7503028029464",1799.0,1],[2025,11,"7503028029655",2097.0,3],[2025,11,"7503031994308",12980.0,20],[2025,11,"7503031994315",649.0,1],[2025,11,"7503031994316",6392.0,8],[2025,11,"7503031994872",549.0,1],[2025,11,"7503036171544",4497.0,3],[2025,11,"750304551846.3",12475.0,25],[2025,11,"750304551846.4",4990.0,10],[2025,11,"7503045518620",4342.6,5],[2025,11,"7503053821293",598.0,2],[2025,11,"7503053821316",299.0,1],[2025,11,"7503053821323",299.0,1],[2025,12,"46629103272189",4788.0,12],[2025,12,"49339829879096",699.0,1],[2025,12,"70102",2198.0,2],[2025,12,"70116",23988.0,12],[2025,12,"70117",5997.0,3],[2025,12,"70121",3897.0,3],[2025,12,"70129",2598.0,2],[2025,12,"70140",7490.0,10],[2025,12,"70144",4494.0,6],[2025,12,"70149",499.0,1],[2025,12,"70208",3196.0,4],[2025,12,"70405",1995.0,5],[2025,12,"7503028029464",3598.0,2],[2025,12,"7503028029655",2097.0,3],[2025,12,"7503031994308",1947.0,3],[2025,12,"7503031994309",7191.0,9],[2025,12,"7503031994315",3894.0,6],[2025,12,"7503031994316",7191.0,9],[2025,12,"7503036171544",7495.0,5],[2025,12,"750304551846.3",3493.0,7],[2025,12,"750304551846.4",2994.0,6],[2025,12,"7503045518620",868.52,1],[2025,12,"7503053821286",349.0,1],[2025,12,"7503053821330",598.0,2],[2026,1,"46629103272189",6384.0,16],[2026,1,"46635007574269",160.0,1],[2026,1,"47551834816824",5196.0,4],[2026,1,"70102",4396.0,4],[2026,1,"70116",15792.1,8],[2026,1,"70117",15992.0,8],[2026,1,"70121",2598.0,2],[2026,1,"70129",6495.0,5],[2026,1,"70140",12733.0,17],[2026,1,"70144",2996.0,4],[2026,1,"70149",1698.0,4],[2026,1,"70150",2547.0,6],[2026,1,"70151",3195.0,7],[2026,1,"70405",1995.0,5],[2026,1,"7503028029457",1799.0,1],[2026,1,"7503028029655",2097.0,3],[2026,1,"7503031994308",649.0,1],[2026,1,"7503031994309",18377.0,23],[2026,1,"7503031994315",7139.0,11],[2026,1,"7503031994316",8789.0,11],[2026,1,"7503031994872",3294.0,6],[2026,1,"7503036171544",10493.0,7],[2026,1,"7503036171582",998.0,2],[2026,1,"750304551846.3",4392.0,8],[2026,1,"750304551846.4",2196.0,4],[2026,1,"7503045518620",4342.6,5],[2026,1,"7503053821286",349.0,1],[2026,1,"7503053821323",299.0,1],[2026,1,"7503053821330",598.0,2],[2026,2,"1119",7495.0,5],[2026,2,"46629103272189",6384.0,16],[2026,2,"46635007574269",160.0,1],[2026,2,"49339829879096",1887.0,3],[2026,2,"70102",9891.0,9],[2026,2,"70116",13993.0,7],[2026,2,"70117",17791.1,9],[2026,2,"70120",899.0,1],[2026,2,"70129",2598.0,2],[2026,2,"70140",17227.0,23],[2026,2,"70144",749.0,1],[2026,2,"70149",8050.0,23],[2026,2,"70150",7000.0,20],[2026,2,"70151",5250.0,15],[2026,2,"70208",5593.0,7],[2026,2,"70405",1995.0,5],[2026,2,"7503028029457",5397.0,3],[2026,2,"7503028029464",1799.0,1],[2026,2,"7503028029655",2376.0,4],[2026,2,"7503031994308",1298.0,2],[2026,2,"7503031994309",16779.0,21],[2026,2,"7503031994315",7139.0,11],[2026,2,"7503031994872",4392.0,8],[2026,2,"7503036171544",7495.0,5],[2026,2,"7503036171582",1497.0,3],[2026,2,"750304551846.3",2796.0,4],[2026,2,"750304551846.4",1398.0,2],[2026,2,"7503045518620",4342.6,5],[2026,2,"7503053821293",598.0,2],[2026,2,"7503053821330",299.0,1],[2026,3,"1119",7495.0,5],[2026,3,"46629103272189",4788.0,12],[2026,3,"47551834816824",3897.0,3],[2026,3,"49339829879096",5346.0,9],[2026,3,"70102",10990.0,10],[2026,3,"70116",15992.0,8],[2026,3,"70117",15992.0,8],[2026,3,"70121",999.0,1],[2026,3,"70129",5196.0,4],[2026,3,"70140",16478.0,22],[2026,3,"70144",2247.0,3],[2026,3,"70149",5950.0,17],[2026,3,"70150",7350.0,21],[2026,3,"70151",6650.0,19],[2026,3,"70208",7191.0,9],[2026,3,"70405",4389.0,11],[2026,3,"7503028029457",8995.0,5],[2026,3,"7503028029464",3598.0,2],[2026,3,"7503028029655",11880.0,20],[2026,3,"7503031994309",11186.0,14],[2026,3,"7503031994315",2596.0,4],[2026,3,"7503036171544",2998.0,2],[2026,3,"750304551846.3",699.0,1],[2026,3,"7503045518620",1737.04,2],[2026,3,"7503053821293",299.0,1],[2026,4,"46629103272189",5586.0,14],[2026,4,"47551834816824",1299.0,1],[2026,4,"49339697365304",858.0,2],[2026,4,"49339729674552",230.0,1],[2026,4,"49339829879096",4752.0,8],[2026,4,"70102",9891.0,9],[2026,4,"70116",27986.0,14],[2026,4,"70117",7996.0,4],[2026,4,"70121",4995.0,5],[2026,4,"70129",2598.0,2],[2026,4,"70140",21721.0,29],[2026,4,"70144",7490.0,10],[2026,4,"70149",14350.0,41],[2026,4,"70150",5950.0,17],[2026,4,"70151",13300.0,38],[2026,4,"70208",11186.0,14],[2026,4,"70405",4788.0,12],[2026,4,"7503028029457",7196.0,4],[2026,4,"7503028029464",3598.0,2],[2026,4,"7503028029655",12474.0,21],[2026,4,"7503031994308",1797.0,3],[2026,4,"7503031994309",3495.0,5],[2026,4,"7503031994315",3095.0,5],[2026,4,"7503031994316",4893.0,7],[2026,4,"7503036171544",8994.0,6],[2026,4,"7503036171582",1497.0,3],[2026,4,"7503045518453",1797.0,3],[2026,4,"750304551846.3",599.0,1],[2026,4,"7503045518620",7719.08,9],[2026,4,"7503053821316",299.0,1],[2026,4,"7503053821323",897.0,3],[2026,4,"7503053821347",798.0,2],[2026,5,"46629103272189",4788.0,12],[2026,5,"47551834816824",12990.0,10],[2026,5,"52297231827256",2598.0,2],[2026,5,"70102",9891.0,9],[2026,5,"70116",19990.0,10],[2026,5,"70117",9795.1,5],[2026,5,"70120",2697.0,3],[2026,5,"70121",2997.0,3],[2026,5,"70129",2598.0,2],[2026,5,"70140",17976.0,24],[2026,5,"70144",5992.0,8],[2026,5,"70149",18200.0,52],[2026,5,"70150",15050.0,43],[2026,5,"70151",13300.0,38],[2026,5,"70208",14382.0,18],[2026,5,"70405",3990.0,10],[2026,5,"7503028029457",11340.0,6],[2026,5,"7503028029648",799.0,1],[2026,5,"7503028029655",7590.0,10],[2026,5,"7503031994308",5391.0,9],[2026,5,"7503031994309",24465.0,35],[2026,5,"7503031994315",599.0,1],[2026,5,"7503031994316",3495.0,5],[2026,5,"7503031994872",2096.0,4],[2026,5,"7503036171544",1499.0,1],[2026,5,"7503039685628",308.0,1],[2026,5,"7503045518453",1198.0,2],[2026,5,"750304551846.3",16772.0,28],[2026,5,"7503045518620",4245.0,5],[2026,5,"7503045518729",1398.0,2],[2026,5,"7503053821255",1596.0,4],[2026,5,"7503053821293",598.0,2],[2026,5,"7503053821323",299.0,1],[2026,5,"7503053821330",598.0,2],[2026,6,"46629103272189",4389.0,11],[2026,6,"46635007574269",160.0,1],[2026,6,"47507671744765",199.0,1],[2026,6,"47551834816824",15588.0,12],[2026,6,"52297231827256",2598.0,2],[2026,6,"70102",7693.0,7],[2026,6,"70116",9795.1,5],[2026,6,"70117",21789.1,11],[2026,6,"70120",3596.0,4],[2026,6,"70140",20223.0,27],[2026,6,"70144",7490.0,10],[2026,6,"70149",6300.0,18],[2026,6,"70150",7350.0,21],[2026,6,"70151",3500.0,10],[2026,6,"70208",22372.0,28],[2026,6,"70405",1995.0,5],[2026,6,"7503028029648",1598.0,2],[2026,6,"7503028029655",2397.0,3],[2026,6,"7503031994308",599.0,1],[2026,6,"7503031994309",17475.0,25],[2026,6,"7503031994316",14679.0,21],[2026,6,"7503031994872",449.0,1],[2026,6,"7503036171544",1499.0,1],[2026,6,"7503036171582",499.0,1],[2026,6,"750304551846.3",4193.0,7],[2026,6,"7503045518620",3396.0,4],[2026,6,"7503045518729",2097.0,3],[2026,6,"7503053821095",349.0,1],[2026,6,"7503053821293",299.0,1],[2026,7,"1119",1499.0,1],[2026,7,"46629103272189",4389.0,11],[2026,7,"46635007574269",1280.0,8],[2026,7,"47507671744765",1743.0,7],[2026,7,"47551834816824",7794.0,6],[2026,7,"52297231827256",2598.0,2],[2026,7,"70102",7394.0,6],[2026,7,"70116",7596.2,4],[2026,7,"70117",13593.2,7],[2026,7,"70129",10792.0,8],[2026,7,"70140",14980.0,20],[2026,7,"70144",5243.0,7],[2026,7,"70149",7250.0,20],[2026,7,"70150",10750.0,30],[2026,7,"70151",11375.0,32],[2026,7,"70208",36656.0,44],[2026,7,"70405",6877.0,23],[2026,7,"7503028029310",1160.0,2],[2026,7,"7503028029457",18900.0,10],[2026,7,"7503028029655",4794.0,6],[2026,7,"7503031994308",4193.0,7],[2026,7,"7503031994309",4893.0,7],[2026,7,"7503031994315",2995.0,5],[2026,7,"7503031994316",11883.0,17],[2026,7,"7503031994872",3592.0,8],[2026,7,"7503036171544",5996.0,4],[2026,7,"7503045518453",5990.0,10],[2026,7,"750304551846.3",5990.0,10],[2026,7,"7503045518606",1099.0,1],[2026,7,"7503045518620",4245.0,5],[2026,7,"7503045518729",2796.0,4],[2026,7,"7503053821095",698.0,2],[2026,7,"7503053821217",44326.0,74],[2026,7,"7503053821255",1596.0,4],[2026,7,"7503053821293",598.0,2],[2026,7,"7503053821316",299.0,1],[2026,7,"7503053821323",897.0,3],[2026,7,"7503053821330",2691.0,9],[2026,8,"101",996.0,4],[2026,8,"17503031994916",6392.0,8],[2026,8,"46629103272189",2793.0,7],[2026,8,"46635007574269",2240.0,14],[2026,8,"47507671744765",996.0,4],[2026,8,"47551834816824",6495.0,5],[2026,8,"52297231827256",1299.0,1],[2026,8,"70102",3897.0,3],[2026,8,"70116",7996.0,4],[2026,8,"70117",5697.0,3],[2026,8,"70129",8792.0,8],[2026,8,"70140",6741.0,9],[2026,8,"70144",4494.0,6],[2026,8,"70149",1500.0,4],[2026,8,"70150",750.0,2],[2026,8,"70151",1500.0,4],[2026,8,"70208",8690.0,10],[2026,8,"70405",3887.0,13],[2026,8,"7503028029457",13230.0,7],[2026,8,"7503028029648",3897.0,3],[2026,8,"7503028029655",4696.0,4],[2026,8,"7503028029761",599.0,1],[2026,8,"7503031994308",2396.0,4],[2026,8,"7503031994315",599.0,1],[2026,8,"7503031994316",2097.0,3],[2026,8,"7503031994872",2694.0,6],[2026,8,"7503031994995",11794.1,6],[2026,8,"7503036171001",11994.0,6],[2026,8,"7503036171032",2097.0,3],[2026,8,"7503036171278",5995.0,5],[2026,8,"7503036171544",6396.0,4],[2026,8,"7503036171551",7794.0,6],[2026,8,"7503036171605",3796.0,4],[2026,8,"7503039685536",4389.0,11],[2026,8,"7503045518002",11235.0,15],[2026,8,"7503045518101",798.0,2],[2026,8,"7503045518163",8789.0,11],[2026,8,"7503045518194",1596.0,4],[2026,8,"7503045518293",3192.0,8],[2026,8,"7503045518453",1797.0,3],[2026,8,"750304551846.3",5391.0,9],[2026,8,"7503045518606",2198.0,2],[2026,8,"7503045518620",19527.0,23],[2026,8,"7503045518705",8800.0,4],[2026,8,"7503045518729",4194.0,6],[2026,8,"7503053821217",1198.0,2],[2026,8,"7503053821255",1197.0,3],[2026,8,"7503053821293",598.0,2],[2026,8,"7503053821309",7176.0,24],[2026,8,"7503053821316",299.0,1],[2026,8,"7503053821323",598.0,2],[2026,8,"7503053821330",4186.0,14],[2026,8,"7503053821644",12582.0,18],[2026,8,"7503053821859",747.0,3],[2026,9,"17503031994916",14382.0,18],[2026,9,"46635007574269",640.0,4],[2026,9,"7503028029457",13230.0,7],[2026,9,"7503028029648",6794.0,6],[2026,9,"7503028029655",14887.0,13],[2026,9,"7503031994309",23766.0,34],[2026,9,"7503031994315",1398.0,2],[2026,9,"7503031994995",6597.0,3],[2026,9,"7503036171001",2199.0,1],[2026,9,"7503036171032",3495.0,5],[2026,9,"7503036171278",7350.0,7],[2026,9,"7503036171551",3897.0,3],[2026,9,"7503039685536",1995.0,5],[2026,9,"7503039685659",1100.0,2],[2026,9,"7503039685666",1650.0,3],[2026,9,"7503039685673",2200.0,4],[2026,9,"7503039685796",1150.0,1],[2026,9,"7503039685802",4600.0,4],[2026,9,"7503045518002",17227.0,23],[2026,9,"7503045518163",10387.0,13],[2026,9,"7503045518194",4485.0,11],[2026,9,"7503045518293",6081.0,15],[2026,9,"7503045518453",1198.0,2],[2026,9,"750304551846.3",2396.0,4],[2026,9,"7503045518460",1198.0,2],[2026,9,"7503045518620",14433.0,17],[2026,9,"7503045518705",3598.0,2],[2026,9,"7503053821095",349.0,1],[2026,9,"7503053821217",3594.0,6],[2026,9,"7503053821255",1596.0,4],[2026,9,"7503053821286",349.0,1],[2026,9,"7503053821309",4784.0,16],[2026,9,"7503053821323",897.0,3],[2026,9,"7503053821330",2093.0,7],[2026,9,"7503053821644",8388.0,12],[2026,9,"7503053821859",2241.0,9],[2026,10,"17503031994916",5342.0,8],[2026,10,"17503036171602",7640.0,10],[2026,10,"27503045518105",3990.0,10],[2026,10,"46635007574269",320.0,2],[2026,10,"7503028029457",7560.0,4],[2026,10,"7503028029648",799.0,1],[2026,10,"75030280296482",1299.0,1],[2026,10,"7503028029655",10789.0,11],[2026,10,"75030280296552",11691.0,9],[2026,10,"7503028029747",599.0,1],[2026,10,"7503031994309",2097.0,3],[2026,10,"7503031994315",6291.0,9],[2026,10,"7503031994919",1947.0,3],[2026,10,"7503031994995",18537.0,9],[2026,10,"7503036171001",1990.0,1],[2026,10,"7503036171032",1398.0,2],[2026,10,"7503036171278",4200.0,4],[2026,10,"7503036171544",3198.0,2],[2026,10,"7503036171551",3537.0,3],[2026,10,"7503036171582",1098.0,2],[2026,10,"7503036171605",749.0,1],[2026,10,"7503039685536",399.0,1],[2026,10,"7503039685628",607.0,2],[2026,10,"7503039685642",1650.0,3],[2026,10,"7503039685796",2300.0,2],[2026,10,"7503039685802",5750.0,5],[2026,10,"7503045518163",3595.5,5],[2026,10,"7503045518194",4349.0,11],[2026,10,"7503045518293",6463.0,17],[2026,10,"7503045518453",2995.0,5],[2026,10,"7503045518460",4193.0,7],[2026,10,"7503045518620",10188.0,12],[2026,10,"7503045518729",699.0,1],[2026,10,"7503053821214",599.0,1],[2026,10,"7503053821217",1198.0,2],[2026,10,"7503053821255",2394.0,6],[2026,10,"7503053821286",698.0,2],[2026,10,"7503053821309",3289.0,11],[2026,10,"7503053821330",2093.0,7],[2026,10,"7503053821347",798.0,2],[2026,10,"7503053821620",9587.0,13],[2026,10,"7503053821651",4497.0,3],[2026,10,"7503053821859",174.0,1],[2026,11,"27503045518105",5985.0,15],[2026,11,"7503028029129",599.0,1],[2026,11,"7503028029457",3780.0,2],[2026,11,"7503028029648",1598.0,2],[2026,11,"75030280296482",3897.0,3],[2026,11,"7503028029655",3995.0,5],[2026,11,"75030280296552",20784.0,16],[2026,11,"7503028029747",1797.0,3],[2026,11,"7503031994315",5592.0,8],[2026,11,"7503031994919",7139.0,11],[2026,11,"7503031994995",5970.0,3],[2026,11,"7503036171001",19900.0,10],[2026,11,"7503036171278",8400.0,8],[2026,11,"7503036171544",12795.76,8],[2026,11,"7503036171551",10611.0,9],[2026,11,"7503036171582",1098.0,2],[2026,11,"7503036171605",12733.0,17],[2026,11,"7503039685536",1995.0,5],[2026,11,"7503039685611",599.0,1],[2026,11,"7503039685628",299.0,1],[2026,11,"7503039685710",600.0,1],[2026,11,"7503039685772",499.0,1],[2026,11,"7503039685802",1150.0,1],[2026,11,"7503039685819",998.0,2],[2026,11,"7503045518163",4794.0,6],[2026,11,"7503045518194",3192.0,8],[2026,11,"7503045518293",3990.0,10],[2026,11,"7503045518453",1198.0,2],[2026,11,"7503045518460",2995.0,5],[2026,11,"7503045518620",3396.0,4],[2026,11,"7503045518729",2097.0,3],[2026,11,"7503053821214",1198.0,2],[2026,11,"7503053821293",299.0,1],[2026,11,"7503053821309",4186.0,14],[2026,11,"7503053821323",897.0,3],[2026,11,"7503053821330",2392.0,8],[2026,11,"7503053821347",798.0,2],[2026,11,"7503053821620",20223.0,27],[2026,11,"7503053821781",1330.0,2],[2026,11,"7503053821859",498.0,2]],"o":[[2025,1,"NUBA",1,1300.0,0.0,1,1,0],[2025,1,"WONU",13,11891.0,1664.6,20,13,0],[2025,1,"YAOCA",55,60098.8,6170.06,110,53,2],[2025,2,"NUBA",3,7070.0,1400.0,7,3,0],[2025,2,"WONU",15,11083.0,0.0,18,15,0],[2025,2,"YAOCA",54,55441.25,3703.26,89,52,2],[2025,3,"NUBA",6,7386.0,2013.3,8,6,0],[2025,3,"WONU",11,8406.0,0.0,13,11,0],[2025,3,"YAOCA",35,32435.0,3292.9,63,28,7],[2025,4,"NUBA",2,2097.0,0.0,3,2,0],[2025,4,"WONU",22,19412.3,3872.0,32,22,0],[2025,4,"YAOCA",39,46539.0,12929.75,80,35,4],[2025,5,"NUBA",7,9795.0,1709.7,9,7,0],[2025,5,"WONU",34,32033.0,3854.0,50,31,3],[2025,5,"YAOCA",108,159399.0,33880.85,238,95,13],[2025,6,"NUBA",8,6922.0,639.4,9,6,2],[2025,6,"WONU",22,18716.0,1359.9,31,18,4],[2025,6,"YAOCA",222,434867.0,113550.75,525,205,17],[2025,7,"NUBA",3,3197.0,0.0,3,1,2],[2025,7,"WONU",37,49405.0,9587.55,75,31,6],[2025,7,"YAOCA",213,544402.0,168241.2,579,197,16],[2025,8,"NUBA",8,7894.0,0.0,8,4,4],[2025,8,"WONU",80,105235.0,21479.81,165,74,6],[2025,8,"YAOCA",152,369329.0,99856.74,371,131,21],[2025,9,"NUBA",6,5895.0,0.0,6,4,2],[2025,9,"WONU",22,39050.0,9600.19,50,16,6],[2025,9,"YAOCA",78,201097.2,48924.8,225,58,20],[2025,10,"NUBA",4,3896.0,719.6,4,3,1],[2025,10,"WONU",13,19470.0,4567.73,30,11,2],[2025,10,"YAOCA",54,129762.2,27823.2,138,36,18],[2025,11,"NUBA",6,7693.0,2126.0,7,4,2],[2025,11,"WONU",30,42377.6,7511.78,70,20,10],[2025,11,"YAOCA",28,68686.1,14326.8,75,22,6],[2025,12,"NUBA",6,6394.0,0.0,6,4,2],[2025,12,"WONU",15,27927.52,7163.64,42,14,1],[2025,12,"YAOCA",27,69233.0,14800.95,67,14,13],[2026,1,"NUBA",7,9092.0,0.0,8,4,3],[2026,1,"WONU",31,49527.6,10536.67,70,20,11],[2026,1,"YAOCA",38,89369.1,19099.0,99,25,13],[2026,2,"NUBA",8,11459.0,1439.2,11,7,1],[2026,2,"WONU",26,38144.6,7519.61,53,19,7],[2026,2,"YAOCA",53,114964.1,26586.7,155,38,15],[2026,3,"NUBA",25,33716.0,594.0,39,22,3],[2026,3,"WONU",11,16218.04,3624.93,21,11,0],[2026,3,"YAOCA",49,115004.0,25032.4,153,36,13],[2026,4,"NUBA",25,30407.0,897.8,39,21,4],[2026,4,"WONU",15,24193.08,3358.31,35,9,6],[2026,4,"YAOCA",58,149524.0,35937.45,222,40,18],[2026,5,"NUBA",28,35625.0,3175.4,30,26,2],[2026,5,"WONU",36,61255.0,10094.25,95,24,12],[2026,5,"YAOCA",64,144640.1,34533.4,243,44,20],[2026,6,"NUBA",18,22181.0,259.8,19,13,5],[2026,6,"WONU",29,43237.0,6430.8,63,26,3],[2026,6,"YAOCA",58,119148.2,23018.9,162,36,22],[2026,7,"NUBA",25,35246.0,567.0,26,20,5],[2026,7,"WONU",50,94296.0,35602.2,154,37,13],[2026,7,"YAOCA",64,151898.4,31725.91,247,41,23],[2026,8,"NUBA",19,29617.0,194.85,20,12,7],[2026,8,"WONU",29,56469.0,10302.23,81,22,7],[2026,8,"YAOCA",64,169630.1,41218.5,238,37,27],[2026,9,"GUD",8,10700.0,1037.5,14,7,1],[2026,9,"NUBA",24,34911.0,194.85,26,13,11],[2026,9,"WONU",24,58665.0,12439.31,85,15,9],[2026,9,"YAOCA",42,92348.0,20438.09,145,27,15],[2026,10,"GUD",5,9700.0,690.0,10,4,1],[2026,10,"NUBA",22,32745.0,990.3,28,16,6],[2026,10,"WONU",18,32749.0,8252.39,51,10,8],[2026,10,"YAOCA",36,88392.5,18250.74,126,23,13],[2026,11,"CREANATOMY",1,1330.0,0.0,2,1,0],[2026,11,"GUD",1,1750.0,175.0,2,1,0],[2026,11,"NUBA",24,37048.0,6060.9,34,15,9],[2026,11,"WONU",12,19071.0,4208.08,29,6,6],[2026,11,"YAOCA",45,127097.76,31511.7,167,23,22]],"dow":[[2025,"NUBA",0,7,8494.0],[2025,"NUBA",1,13,14027.0],[2025,"NUBA",2,10,10980.0],[2025,"NUBA",3,8,7373.0],[2025,"NUBA",4,8,13295.0],[2025,"NUBA",5,8,11185.0],[2025,"NUBA",6,6,4185.0],[2025,"WONU",0,55,62519.56],[2025,"WONU",1,58,70148.0],[2025,"WONU",2,44,53350.0],[2025,"WONU",3,44,57729.0],[2025,"WONU",4,30,43701.56],[2025,"WONU",5,36,41595.3],[2025,"WONU",6,47,55963.0],[2025,"YAOCA",0,170,393328.75],[2025,"YAOCA",1,177,356346.85],[2025,"YAOCA",2,152,283583.7],[2025,"YAOCA",3,139,296836.2],[2025,"YAOCA",4,140,257958.3],[2025,"YAOCA",5,116,245203.7],[2025,"YAOCA",6,171,338032.05],[2026,"CREANATOMY",6,1,1330.0],[2026,"GUD",0,1,2300.0],[2026,"GUD",1,7,11300.0],[2026,"GUD",2,2,1700.0],[2026,"GUD",4,1,1150.0],[2026,"GUD",6,3,5700.0],[2026,"NUBA",0,45,55305.0],[2026,"NUBA",1,40,57485.0],[2026,"NUBA",2,34,51247.0],[2026,"NUBA",3,20,27005.0],[2026,"NUBA",4,32,43587.0],[2026,"NUBA",5,25,38413.0],[2026,"NUBA",6,29,39005.0],[2026,"WONU",0,47,80645.56],[2026,"WONU",1,39,65480.08],[2026,"WONU",2,51,90130.52],[2026,"WONU",3,46,80759.08],[2026,"WONU",4,23,47350.52],[2026,"WONU",5,45,79048.52],[2026,"WONU",6,30,50411.04],[2026,"YAOCA",0,92,245948.71],[2026,"YAOCA",1,93,222899.41],[2026,"YAOCA",2,87,187599.0],[2026,"YAOCA",3,85,198089.2],[2026,"YAOCA",4,80,191623.4],[2026,"YAOCA",5,62,138183.04],[2026,"YAOCA",6,72,177673.5]]};
+(() => {
+  const MESES=['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
+  const MESES_LARGO=['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+  const DIAS=['Lun','Mar','Mié','Jue','Vie','Sáb','Dom'];
+  const DIAS_LARGO=['Lunes','Martes','Miércoles','Jueves','Viernes','Sábado','Domingo'];
+  const MARCAS=['YAOCA','WONU','CREANATOMY','HYBRIX5','GUD','NUBA'];
+  const BCOL={
+    'YAOCA':'var(--c-yaoca)',
+    'WONU':'var(--c-wonu)',
+    'CREANATOMY':'var(--c-creanatomy)',
+    'HYBRIX5':'var(--c-hybrix5)',
+    'GUD':'var(--c-gud)',
+    'NUBA':'var(--c-nuba)'
+  };
+  const BHEX={
+    'YAOCA':'#C9A227',
+    'WONU':'#F26B21',
+    'CREANATOMY':'#D7263D',
+    'HYBRIX5':'#1E88E5',
+    'GUD':'#2E9D5B',
+    'NUBA':'#8E6BD1'
+  };
+
+  const money=new Intl.NumberFormat('es-MX',{style:'currency',currency:'MXN',maximumFractionDigits:0});
+  const cf=new Intl.NumberFormat('es-MX',{notation:'compact',maximumFractionDigits:2});
+  const nf=new Intl.NumberFormat('es-MX');
+  const compact=v=>'$'+cf.format(v);
+  const pct=v=>(v*100).toFixed(1)+'%';
+  const signedPct=v=>(v>=0?'+':'')+(v*100).toFixed(1)+'%';
+  const sum=(a,f)=>a.reduce((s,x)=>s+f(x),0);
+  const NS='http://www.w3.org/2000/svg';
+
+  // Theme toggle
+  const root=document.documentElement;
+  const btnTheme=document.getElementById('btn-theme');
+  const savedTheme=localStorage.getItem('bb_theme');
+  if(savedTheme==='light'||savedTheme==='dark')root.setAttribute('data-theme',savedTheme);
+  const syncThemeBtn=()=>{
+    const dark=root.getAttribute('data-theme')==='dark';
+    btnTheme.textContent=dark?'☀ Claro':'☾ Oscuro';
+  };
+  syncThemeBtn();
+  btnTheme.addEventListener('click',()=>{
+    const next=root.getAttribute('data-theme')==='dark'?'light':'dark';
+    root.setAttribute('data-theme',next);
+    localStorage.setItem('bb_theme',next);
+    syncThemeBtn();
+    render();
+  });
+  document.getElementById('btn-pdf').addEventListener('click',()=>window.print());
+
+  // Meta / Fecha de corte
+  const ahora=new Date();
+  const ANIO=(RAW.meta&&RAW.meta.anio_actual)?RAW.meta.anio_actual:ahora.getFullYear();
+  const MES=(RAW.meta&&RAW.meta.mes_actual)?RAW.meta.mes_actual:(ahora.getMonth()+1);
+  const FECHA_CORTE=(RAW.meta&&RAW.meta.fecha_corte)?RAW.meta.fecha_corte:ahora.toISOString().slice(0,10);
+  const ANIO_PREV=ANIO-1;
+  const rangoActual=MES===1?`Enero ${ANIO}`:`Enero – ${MESES_LARGO[MES-1]} ${ANIO}`;
+
+  // Parse RAW datasets
+  const PRODS_MAP=RAW.p||{};
+  const R_ALL=(RAW.r||[]).map(([anio,mes,sku,venta,uds])=>{
+    const info=PRODS_MAP[sku]||[sku,'OTRA',sku];
+    return {anio,mes,sku,venta,uds,producto:info[0],marca:info[1]};
+  });
+  const O_ALL=(RAW.o||[]).map(([anio,mes,marca,ped,venta,desc,uds,nuevos,recurr])=>({
+    anio,mes,marca,ped,venta,desc,uds,nuevos,recurr
+  }));
+  const DOW_ALL=(RAW.dow||[]).map(([anio,marca,dow,ped,venta])=>({
+    anio,marca,dow,ped,venta
+  }));
+
+  const O_CUR=O_ALL.filter(r=>r.anio===ANIO);
+  const O_PREV=O_ALL.filter(r=>r.anio===ANIO_PREV);
+  const R_CUR=R_ALL.filter(r=>r.anio===ANIO);
+  const R_PREV=R_ALL.filter(r=>r.anio===ANIO_PREV);
+  const DOW_CUR=DOW_ALL.filter(r=>r.anio===ANIO);
+  const GRAND_CUR=sum(O_CUR,r=>r.venta);
+
+  // Dynamic headings
+  document.title=`Reporte Ejecutivo Shopify ${ANIO} · BRANDBROS`;
+  document.getElementById('hero-title').textContent=`Ventas BRANDBROS ${ANIO}`;
+  document.getElementById('eyebrow').textContent=`Reporte Ejecutivo Shopify · ${rangoActual} · Corte al ${FECHA_CORTE}`;
+  document.getElementById('h-yoy').textContent=`Comparativo ${ANIO_PREV} vs ${ANIO} mes a mes`;
+  document.getElementById('h-marca').textContent=`Venta mensual por marca (${ANIO})`;
+  document.getElementById('h-resumen').textContent=`Resumen Ejecutivo por Marca (${ANIO} vs ${ANIO_PREV})`;
+  document.getElementById('note-resumen').textContent=`Comparativo Ene–${MESES[MES-1]} ${ANIO} vs mismo periodo ${ANIO_PREV} (corte al ${FECHA_CORTE}).`;
+  document.getElementById('th-ped-cur').textContent=`Pedidos ${ANIO}`;
+  document.getElementById('th-v-prev').textContent=`Venta ${ANIO_PREV} (Ene–${MESES[MES-1]})`;
+  document.getElementById('th-v-cur').textContent=`Venta ${ANIO}`;
+  document.getElementById('h-dow').textContent=`Ventas por Día de la Semana (${ANIO})`;
+  document.getElementById('h-mensual').textContent=`Desempeño Mensual ${ANIO}`;
+  document.getElementById('th-m-cur').textContent=`Venta ${ANIO}`;
+  document.getElementById('th-m-prev').textContent=`Venta ${ANIO_PREV}`;
+  document.getElementById('h-top26').textContent=`Top 10 Productos ${ANIO}`;
+  document.getElementById('btn-cat-cur').textContent=`Venta ${ANIO}`;
+  document.getElementById('btn-cat-prev').textContent=`Venta ${ANIO_PREV}`;
+  document.getElementById('h-prodmes').textContent=`Productos por mes ${ANIO}`;
+  document.getElementById('sec-hist').textContent=`Comparativo Histórico ${ANIO_PREV} vs ${ANIO}`;
+  document.getElementById('h-top25').textContent=`Top 10 Productos ${ANIO_PREV}`;
+
+  // Estado
+  let marca='Todas', sortK='vCur', sortDir=-1;
+
+  // Hero brands
+  const bwrap=document.getElementById('brands');
+  MARCAS.forEach(m=>{
+    const s=document.createElement('span');
+    const d=document.createElement('i');d.className='dot';d.style.background=BCOL[m];
+    s.append(d,document.createTextNode(m));
+    bwrap.append(s);
+  });
+
+  // Brand filter chips
+  const fbox=document.getElementById('filtros');
+  const chips=['Todas',...MARCAS].map(m=>{
+    const b=document.createElement('button');b.className='chip';b.type='button';b.dataset.m=m;
+    if(m!=='Todas'){const d=document.createElement('i');d.className='dot';d.style.background=BCOL[m];b.append(d);}
+    b.append(document.createTextNode(m));
+    b.addEventListener('click',()=>{marca=m;render();});
+    fbox.append(b);return b;
+  });
+
+  // Legends
+  const addLegend=(el,items)=>{
+    el.replaceChildren();
+    items.forEach(([n,c,isBar])=>{
+      const s=document.createElement('span');
+      const d=document.createElement('i');
+      d.className=isBar?'swatch':'dot';
+      d.style.background=c;
+      s.append(d,document.createTextNode(n));
+      el.append(s);
+    });
+  };
+  addLegend(document.getElementById('leg-yoy'),[[`${ANIO}`,'#3b82f6',false],[`${ANIO_PREV}`,'var(--bar-prev)',false]]);
+  addLegend(document.getElementById('leg-marca'),MARCAS.map(m=>[m,BCOL[m],false]));
+
+  // Count-up animation
+  const anims=new WeakMap();
+  function countTo(el,to,fmt,dur=900){
+    const from=anims.get(el)??0;
+    const t0=performance.now();
+    cancelAnimationFrame(el._raf);
+    const step=t=>{
+      const p=Math.min(1,(t-t0)/dur);
+      const e=1-Math.pow(1-p,3);
+      const v=from+(to-from)*e;
+      el.textContent=fmt(v);
+      if(p<1)el._raf=requestAnimationFrame(step);else anims.set(el,to);
+    };
+    el._raf=requestAnimationFrame(step);
+  }
+
+  function setBadge(id,cur,prev,label='YoY'){
+    const el=document.getElementById(id);
+    if(prev>0){
+      const v=cur/prev-1;
+      el.className='badge '+(v>=0?'up':'down');
+      el.textContent=(v>=0?'▲ ':'▼ ')+signedPct(v)+' '+label;
+    }else if(cur>0){
+      el.className='badge neu';
+      el.textContent=`Sin base ${ANIO_PREV}`;
+    }else{
+      el.className='badge neu';
+      el.textContent='—';
+    }
+  }
+
+  // SVG helpers
+  const svgEl=(tag,attrs={},parent)=>{
+    const n=document.createElementNS(NS,tag);
+    for(const k in attrs)n.setAttribute(k,attrs[k]);
+    if(parent)parent.append(n);
+    return n;
+  };
+  function niceMax(v){
+    if(v<=0)return 1;
+    const e=Math.pow(10,Math.floor(Math.log10(v)));
+    const f=v/e;
+    const n=f<=1?1:f<=2?2:f<=2.5?2.5:f<=5?5:10;
+    return n*e;
+  }
+  function frame(box,H=285){
+    box.querySelector('svg')?.remove();
+    const W=Math.max(300,box.clientWidth||580);
+    const svg=svgEl('svg',{viewBox:`0 0 ${W} ${H}`});
+    box.prepend(svg);
+    return {svg,W,H};
+  }
+  function axes(svg,W,H,maxV,ml){
+    const ticks=4;
+    for(let i=0;i<=ticks;i++){
+      const v=maxV*i/ticks;
+      const y=(H-28)-(H-42)*(i/ticks);
+      svgEl('line',{x1:ml,x2:W-6,y1:y,y2:y,stroke:'var(--grid)'},svg);
+      const t=svgEl('text',{x:ml-8,y:y+4,'text-anchor':'end','font-size':10.5,fill:'var(--muted)'},svg);
+      t.textContent=compact(v);
+    }
+  }
+  function tipFor(box){
+    let t=box.querySelector('.tip');
+    if(!t){t=document.createElement('div');t.className='tip';box.append(t);}
+    return t;
+  }
+  function showTip(box,t,x,y,head,lines){
+    t.replaceChildren();
+    const h=document.createElement('div');h.className='h';h.textContent=head;t.append(h);
+    for(const [n,c,valText] of lines){
+      const r=document.createElement('div');r.className='r';
+      if(c){const d=document.createElement('i');d.className='dot';d.style.background=c;r.append(d);}
+      r.append(document.createTextNode(n));
+      const b=document.createElement('b');b.textContent=valText;r.append(b);
+      t.append(r);
+    }
+    t.classList.add('on');
+    const bw=box.clientWidth,tw=t.offsetWidth;
+    t.style.left=Math.max(0,Math.min(bw-tw,x-tw/2))+'px';
+    t.style.top=Math.max(0,y-t.offsetHeight-14)+'px';
+  }
+  const ptr=(ev,box)=>{const r=box.getBoundingClientRect();return [ev.clientX-r.left,ev.clientY-r.top];};
+
+  // Chart 1: 2025 vs 2026 month by month
+  function drawYoY(oCur,oPrev){
+    const box=document.getElementById('ch-yoy');
+    const {svg,W,H}=frame(box,285);
+    const defs=svgEl('defs',{},svg);
+    const grad=svgEl('linearGradient',{id:'grad-yoy',x1:'0',y1:'0',x2:'0',y2:'1'},defs);
+    const accentColor=marca==='Todas'?'#3b82f6':(BHEX[marca]||'#3b82f6');
+    svgEl('stop',{offset:'0%','stop-color':accentColor,'stop-opacity':'0.95'},grad);
+    svgEl('stop',{offset:'100%','stop-color':accentColor,'stop-opacity':'0.55'},grad);
+    addLegend(document.getElementById('leg-yoy'),[[`${ANIO}`,accentColor,false],[`${ANIO_PREV}`,'var(--bar-prev)',false]]);
+
+    const grid=MESES.map((m,i)=>{
+      const vCur=sum(oCur.filter(r=>r.mes===i+1),r=>r.venta);
+      const pCur=sum(oCur.filter(r=>r.mes===i+1),r=>r.ped);
+      const vPrev=sum(oPrev.filter(r=>r.mes===i+1),r=>r.venta);
+      return {mes:m,vCur,pCur,vPrev};
+    });
+    const maxV=niceMax(Math.max(1,...grid.flatMap(g=>[g.vCur,g.vPrev])));
+    const ml=54,base=H-28,ph=H-42,step=(W-6-ml)/12;
+    axes(svg,W,H,maxV,ml);
+
+    const bwPrev=step*0.34, bwCur=step*0.38;
+    grid.forEach((g,i)=>{
+      const cx=ml+step*i+step/2;
+      const lab=svgEl('text',{x:cx,y:H-8,'text-anchor':'middle','font-size':10.5,fill:'var(--muted)'},svg);
+      lab.textContent=g.mes;
+
+      // 2025 bar
+      const hPrev=g.vPrev/maxV*ph;
+      const rPrev=svgEl('rect',{x:cx-bwPrev-1,y:base-hPrev,width:bwPrev,height:Math.max(0,hPrev),fill:'var(--bar-prev)',rx:3},svg);
+
+      // 2026 bar
+      const hCur=g.vCur/maxV*ph;
+      const rCur=svgEl('rect',{x:cx+1,y:base,width:bwCur,height:0,fill:'url(#grad-yoy)',rx:4},svg);
+      rCur.style.transition=`y .75s cubic-bezier(.2,.8,.2,1) ${i*40}ms, height .75s cubic-bezier(.2,.8,.2,1) ${i*40}ms`;
+      requestAnimationFrame(()=>requestAnimationFrame(()=>{rCur.setAttribute('y',base-hCur);rCur.setAttribute('height',Math.max(0,hCur));}));
+
+      const hit=svgEl('rect',{x:ml+step*i,y:0,width:step,height:base,fill:'transparent'},svg);
+      hit.addEventListener('mousemove',ev=>{
+        const [px,py]=ptr(ev,box);
+        const varTxt=g.vPrev>0?signedPct(g.vCur/g.vPrev-1):(g.vCur>0?'Nuevo':'—');
+        showTip(box,tipFor(box),px,py,`${MESES_LARGO[i]}`,[
+          [`${ANIO_PREV}`,'var(--bar-prev)',money.format(g.vPrev)],
+          [`${ANIO}`,accentColor,money.format(g.vCur)],
+          ['Var %',null,varTxt],
+          [`Pedidos ${ANIO}`,null,nf.format(g.pCur)]
+        ]);
+      });
+      hit.addEventListener('mouseleave',()=>tipFor(box).classList.remove('on'));
+    });
+    svgEl('line',{x1:ml,x2:W-6,y1:base,y2:base,stroke:'var(--glass-border)'},svg);
+  }
+
+  // Smooth SVG cubic path helper
+  function smoothPath(pts){
+    if(pts.length<2)return '';
+    let d=`M${pts[0][0]},${pts[0][1]}`;
+    for(let i=0;i<pts.length-1;i++){
+      const [x0,y0]=pts[i], [x1,y1]=pts[i+1];
+      const cx=(x0+x1)/2;
+      d+=` C${cx},${y0} ${cx},${y1} ${x1},${y1}`;
+    }
+    return d;
+  }
+
+  // Chart 2: Monthly sales by brand (2026)
+  function drawMarca(oCur){
+    const box=document.getElementById('ch-marca');
+    const {svg,W,H}=frame(box,285);
+    const defs=svgEl('defs',{},svg);
+    const list=marca==='Todas'?MARCAS:[marca];
+    const series=list.map(m=>({
+      m,
+      v:MESES.map((_,i)=>sum(oCur.filter(r=>r.marca===m&&r.mes===i+1),r=>r.venta))
+    }));
+    const maxV=niceMax(Math.max(1,...series.flatMap(s=>s.v)));
+    const ml=54,base=H-28,ph=H-42,x0=ml+12,x1=W-14,stepX=(x1-x0)/11;
+    const X=i=>x0+stepX*i, Y=v=>base-v/maxV*ph;
+    axes(svg,W,H,maxV,ml);
+
+    MESES.forEach((m,i)=>{
+      const t=svgEl('text',{x:X(i),y:H-8,'text-anchor':'middle','font-size':10.5,fill:'var(--muted)'},svg);
+      t.textContent=m;
+    });
+    svgEl('line',{x1:ml,x2:W-6,y1:base,y2:base,stroke:'var(--glass-border)'},svg);
+
+    series.forEach((s,si)=>{
+      const gid=`grad-m-${si}`;
+      const g=svgEl('linearGradient',{id:gid,x1:'0',y1:'0',x2:'0',y2:'1'},defs);
+      svgEl('stop',{offset:'0%','stop-color':BHEX[s.m]||'#3b82f6','stop-opacity':list.length===1?'0.32':'0.10'},g);
+      svgEl('stop',{offset:'100%','stop-color':BHEX[s.m]||'#3b82f6','stop-opacity':'0.0'},g);
+
+      const pts=s.v.map((v,i)=>[X(i),Y(v)]);
+      const lineD=smoothPath(pts);
+      const areaD=`${lineD} L${X(11)},${base} L${X(0)},${base} Z`;
+      svgEl('path',{d:areaD,fill:`url(#${gid})`},svg);
+      svgEl('path',{d:lineD,fill:'none',stroke:BCOL[s.m],'stroke-width':2.4,'stroke-linecap':'round'},svg);
+      pts.forEach(([px,py])=>svgEl('circle',{cx:px,cy:py,r:2.8,fill:BCOL[s.m]},svg));
+    });
+
+    const guide=svgEl('line',{x1:0,x2:0,y1:10,y2:base,stroke:'var(--muted)','stroke-dasharray':'3 3',opacity:0},svg);
+    MESES.forEach((m,i)=>{
+      const hit=svgEl('rect',{x:X(i)-stepX/2,y:0,width:stepX,height:base,fill:'transparent'},svg);
+      hit.addEventListener('mousemove',ev=>{
+        guide.setAttribute('x1',X(i));guide.setAttribute('x2',X(i));guide.setAttribute('opacity',.55);
+        const [px,py]=ptr(ev,box);
+        const totM=sum(series,s=>s.v[i]);
+        const lines=series.map(s=>[s.m,BCOL[s.m],money.format(s.v[i])]);
+        if(series.length>1)lines.push(['Total',null,money.format(totM)]);
+        showTip(box,tipFor(box),px,py,`${MESES_LARGO[i]} ${ANIO}`,lines);
+      });
+      hit.addEventListener('mouseleave',()=>{guide.setAttribute('opacity',0);tipFor(box).classList.remove('on');});
+    });
+  }
+
+  // Chart 3: Day of Week (2026)
+  function drawDow(dowRows){
+    const box=document.getElementById('ch-dow');
+    const {svg,W,H}=frame(box,245);
+    const agg=DIAS.map((d,i)=>{
+      const rows=dowRows.filter(r=>r.dow===i);
+      return {d,full:DIAS_LARGO[i],venta:sum(rows,r=>r.venta),ped:sum(rows,r=>r.ped)};
+    });
+    const maxV=niceMax(Math.max(1,...agg.map(a=>a.venta)));
+    const bestV=Math.max(...agg.map(a=>a.venta));
+    const ml=52,base=H-28,ph=H-46,step=(W-8-ml)/7,bw=step*0.56;
+    axes(svg,W,H,maxV,ml);
+
+    const accentColor=marca==='Todas'?'#3b82f6':(BHEX[marca]||'#3b82f6');
+    const weeksElapsed=Math.max(1,Math.round((MES*30.4)/7));
+
+    agg.forEach((a,i)=>{
+      const x=ml+step*i+(step-bw)/2;
+      const h=a.venta/maxV*ph;
+      const isBest=a.venta>0&&a.venta===bestV;
+      const fill=isBest?'#10b981':accentColor;
+      const lab=svgEl('text',{x:x+bw/2,y:H-8,'text-anchor':'middle','font-size':11,fill:isBest?'var(--fg)':'var(--muted)','font-weight':isBest?'700':'400'},svg);
+      lab.textContent=a.d;
+
+      const rect=svgEl('rect',{x,y:base,width:bw,height:0,fill,opacity:isBest?'0.95':'0.72',rx:5},svg);
+      rect.style.transition=`y .7s cubic-bezier(.2,.8,.2,1) ${i*45}ms, height .7s cubic-bezier(.2,.8,.2,1) ${i*45}ms`;
+      requestAnimationFrame(()=>requestAnimationFrame(()=>{rect.setAttribute('y',base-h);rect.setAttribute('height',Math.max(0,h));}));
+
+      const hit=svgEl('rect',{x:ml+step*i,y:0,width:step,height:base,fill:'transparent'},svg);
+      hit.addEventListener('mousemove',ev=>{
+        const [px,py]=ptr(ev,box);
+        const promPed=(a.ped/weeksElapsed).toFixed(1);
+        const aov=a.ped?a.venta/a.ped:0;
+        showTip(box,tipFor(box),px,py,`${a.full} (${ANIO})`,[
+          ['Venta total',fill,money.format(a.venta)],
+          ['Pedidos totales',null,nf.format(a.ped)],
+          ['Prom. pedidos / día',null,promPed],
+          ['Ticket promedio',null,money.format(aov)]
+        ]);
+      });
+      hit.addEventListener('mouseleave',()=>tipFor(box).classList.remove('on'));
+    });
+    svgEl('line',{x1:ml,x2:W-8,y1:base,y2:base,stroke:'var(--glass-border)'},svg);
+  }
+
+  // Table helpers
+  function cell(tr,text,cls){
+    const td=document.createElement('td');
+    if(cls)td.className=cls;
+    td.textContent=text;
+    tr.append(td);
+    return td;
+  }
+  function barCell(tr,v,max,color,label){
+    const td=document.createElement('td');td.className='bar';
+    const w=document.createElement('div');w.className='bw';
+    const trk=document.createElement('div');trk.className='tr';
+    const i=document.createElement('i');i.style.background=color;trk.append(i);
+    const s=document.createElement('span');s.textContent=label??(v?money.format(v):'—');
+    w.append(trk,s);td.append(w);tr.append(td);
+    requestAnimationFrame(()=>requestAnimationFrame(()=>i.style.width=(max?Math.max(0,v/max*100):0)+'%'));
+    return td;
+  }
+
+  // Precompute product catalog (2026 + 2025)
+  const catMap=new Map();
+  for(const r of R_CUR){
+    const o=catMap.get(r.sku)||{sku:r.sku,producto:r.producto,marca:r.marca,uds:0,vCur:0,vPrev:0,meses:Array(12).fill(0)};
+    o.uds+=r.uds;o.vCur+=r.venta;
+    if(r.mes>=1&&r.mes<=12)o.meses[r.mes-1]+=r.venta;
+    catMap.set(r.sku,o);
+  }
+  for(const r of R_PREV){
+    const o=catMap.get(r.sku)||{sku:r.sku,producto:r.producto,marca:r.marca,uds:0,vCur:0,vPrev:0,meses:Array(12).fill(0)};
+    o.vPrev+=r.venta;
+    catMap.set(r.sku,o);
+  }
+  const CATALOGO=[...catMap.values()].map(o=>({
+    ...o,
+    yoy:o.vPrev>0?(o.vCur/o.vPrev-1):(o.vCur>0?999:-999)
+  }));
+
+  // Sorting & Search
+  document.querySelectorAll('#tbl-cat th button').forEach(b=>b.addEventListener('click',()=>{
+    const k=b.dataset.k;
+    if(sortK===k)sortDir=-sortDir;
+    else{sortK=k;sortDir=['producto','marca','sku'].includes(k)?1:-1;}
+    document.querySelectorAll('#tbl-cat th').forEach(th=>th.removeAttribute('aria-sort'));
+    b.parentElement.setAttribute('aria-sort',sortDir>0?'ascending':'descending');
+    renderProductTables();
+  }));
+  const search=document.getElementById('buscar');
+  search.addEventListener('input',()=>renderProductTables());
+
+  function renderTopTable(id,rows){
+    const agg=new Map();
+    for(const r of rows){
+      const o=agg.get(r.sku)||{producto:r.producto,sku:r.sku,marca:r.marca,uds:0,venta:0};
+      o.uds+=r.uds;o.venta+=r.venta;
+      agg.set(r.sku,o);
+    }
+    const tot=sum(rows,r=>r.venta);
+    const list=[...agg.values()].sort((a,b)=>b.venta-a.venta).slice(0,10);
+    const tb=document.querySelector('#'+id+' tbody');tb.replaceChildren();
+    if(!list.length){
+      const tr=document.createElement('tr');
+      const td=cell(tr,'Sin ventas registradas en este periodo.','tl');
+      td.colSpan=7;td.style.color='var(--muted)';
+      tb.append(tr);return;
+    }
+    const mx=Math.max(1,...list.map(r=>r.venta));
+    list.forEach((r,i)=>{
+      const tr=document.createElement('tr');
+      cell(tr,String(i+1),'rank tl');
+      cell(tr,r.producto,'prod');
+      cell(tr,r.sku,'mono');
+      cell(tr,r.marca,'tl');
+      cell(tr,nf.format(Math.round(r.uds)));
+      cell(tr,money.format(r.venta),'tot');
+      barCell(tr,r.venta,mx,BCOL[r.marca]||'#3b82f6',pct(tot?r.venta/tot:0));
+      tb.append(tr);
+    });
+  }
+
+  function renderProductTables(){
+    const q=search.value.trim().toLowerCase();
+    const keep=r=>(marca==='Todas'||r.marca===marca)&&(!q||(r.producto+' '+r.sku+' '+r.marca).toLowerCase().includes(q));
+
+    // Catálogo ordenable
+    const cb=document.querySelector('#tbl-cat tbody');cb.replaceChildren();
+    const list=CATALOGO.filter(keep).sort((a,b)=>{
+      const va=a[sortK],vb=b[sortK];
+      return (typeof va==='number'?va-vb:String(va).localeCompare(String(vb),'es'))*sortDir;
+    });
+    if(!list.length){
+      const tr=document.createElement('tr');
+      const td=cell(tr,'Sin productos para los filtros actuales.','tl');td.colSpan=7;td.style.color='var(--muted)';
+      cb.append(tr);
+    }else{
+      list.forEach(r=>{
+        const tr=document.createElement('tr');
+        cell(tr,r.producto,'prod');
+        cell(tr,r.sku,'mono');
+        cell(tr,r.marca,'tl');
+        cell(tr,nf.format(Math.round(r.uds)));
+        cell(tr,r.vCur?money.format(r.vCur):'—','tot');
+        cell(tr,r.vPrev?money.format(r.vPrev):'—');
+        if(r.vPrev>0){
+          const v=r.vCur/r.vPrev-1;
+          cell(tr,signedPct(v),v>=0?'up':'down');
+        }else{
+          cell(tr,r.vCur>0?'Nuevo':'—');
+        }
+        cb.append(tr);
+      });
+    }
+
+    // Productos por mes (2026)
+    const mb=document.querySelector('#tbl-mes tbody');mb.replaceChildren();
+    const listMes=CATALOGO.filter(r=>r.vCur>0&&keep(r)).sort((a,b)=>b.vCur-a.vCur);
+    if(!listMes.length){
+      const tr=document.createElement('tr');
+      const td=cell(tr,`Sin productos vendidos en ${ANIO} para esta búsqueda.`,'tl');td.colSpan=16;td.style.color='var(--muted)';
+      mb.append(tr);
+    }else{
+      listMes.forEach(r=>{
+        const tr=document.createElement('tr');
+        cell(tr,r.producto,'prod');
+        cell(tr,r.sku,'mono');
+        cell(tr,r.marca,'tl');
+        r.meses.forEach(v=>cell(tr,v?money.format(v):'—'));
+        cell(tr,money.format(r.vCur),'tot');
+        mb.append(tr);
+      });
+    }
+  }
+
+  function renderResumenMarcas(){
+    const tb=document.querySelector('#tbl-resumen tbody');tb.replaceChildren();
+    const rows=MARCAS.map(m=>{
+      const c=O_CUR.filter(r=>r.marca===m);
+      const p=O_PREV.filter(r=>r.marca===m&&r.mes<=MES);
+      const ped=sum(c,r=>r.ped), uds=sum(c,r=>r.uds), vCur=sum(c,r=>r.venta), desc=sum(c,r=>r.desc);
+      const nuevos=sum(c,r=>r.nuevos), recurr=sum(c,r=>r.recurr);
+      const vPrev=sum(p,r=>r.venta);
+      return {
+        m,ped,uds,aov:ped?vCur/ped:0,
+        recompra:(nuevos+recurr)?recurr/(nuevos+recurr):0,
+        desc,vPrev,vCur,
+        yoy:vPrev>0?(vCur/vPrev-1):null,
+        share:GRAND_CUR?vCur/GRAND_CUR:0
+      };
+    });
+    const maxS=Math.max(0.0001,...rows.map(r=>r.share));
+    const totPed=sum(rows,r=>r.ped), totUds=sum(rows,r=>r.uds), totCur=sum(rows,r=>r.vCur),
+          totPrev=sum(rows,r=>r.vPrev), totDesc=sum(rows,r=>r.desc);
+    const totNuevos=sum(O_CUR,r=>r.nuevos), totRec=sum(O_CUR,r=>r.recurr);
+
+    rows.forEach(r=>{
+      const tr=document.createElement('tr');
+      if(marca!=='Todas'&&r.m!==marca)tr.style.opacity='.38';
+      const td=cell(tr,r.m,'tl');td.style.fontWeight=700;
+      const d=document.createElement('i');d.className='dot';d.style.background=BCOL[r.m];d.style.marginRight='8px';td.prepend(d);
+      cell(tr,nf.format(r.ped));
+      cell(tr,nf.format(r.uds));
+      cell(tr,r.ped?money.format(r.aov):'—');
+      cell(tr,r.ped?pct(r.recompra):'—');
+      cell(tr,r.desc?money.format(r.desc):'—');
+      cell(tr,r.vPrev?money.format(r.vPrev):'—');
+      cell(tr,money.format(r.vCur),'tot');
+      if(r.yoy!==null)cell(tr,signedPct(r.yoy),r.yoy>=0?'up':'down');
+      else cell(tr,r.vCur>0?'Nuevo':'—');
+      barCell(tr,r.share,maxS,BCOL[r.m],pct(r.share));
+      tb.append(tr);
+    });
+
+    const trT=document.createElement('tr');trT.className='row-total';
+    cell(trT,'Total BRANDBROS','tl');
+    cell(trT,nf.format(totPed));
+    cell(trT,nf.format(totUds));
+    cell(trT,totPed?money.format(totCur/totPed):'—');
+    cell(trT,(totNuevos+totRec)?pct(totRec/(totNuevos+totRec)):'—');
+    cell(trT,money.format(totDesc));
+    cell(trT,totPrev?money.format(totPrev):'—');
+    cell(trT,money.format(totCur),'tot');
+    if(totPrev>0){
+      const v=totCur/totPrev-1;
+      cell(trT,signedPct(v),v>=0?'up':'down');
+    }else cell(trT,'—');
+    cell(trT,'100.0%');
+    tb.append(trT);
+  }
+
+  function renderMensual(oCur,oPrev){
+    const tb=document.querySelector('#tbl-mensual tbody');tb.replaceChildren();
+    let tPed=0,tUds=0,tDesc=0,tCur=0,tPrev=0;
+    MESES.forEach((m,i)=>{
+      const c=oCur.filter(r=>r.mes===i+1);
+      const p=oPrev.filter(r=>r.mes===i+1);
+      const ped=sum(c,r=>r.ped), uds=sum(c,r=>r.uds), desc=sum(c,r=>r.desc),
+            vCur=sum(c,r=>r.venta), vPrev=sum(p,r=>r.venta);
+      tPed+=ped;tUds+=uds;tDesc+=desc;tCur+=vCur;tPrev+=vPrev;
+      const tr=document.createElement('tr');
+      if(i+1>MES&&vCur===0&&vPrev===0)tr.style.opacity='.45';
+      cell(tr,MESES_LARGO[i],'tl');
+      cell(tr,ped?nf.format(ped):'—');
+      cell(tr,uds?nf.format(uds):'—');
+      cell(tr,ped?money.format(vCur/ped):'—');
+      cell(tr,desc?money.format(desc):'—');
+      cell(tr,vCur?money.format(vCur):'—','tot');
+      cell(tr,vPrev?money.format(vPrev):'—');
+      if(vPrev>0&&vCur>0){
+        const v=vCur/vPrev-1;
+        cell(tr,signedPct(v),v>=0?'up':'down');
+      }else if(vCur>0&&vPrev===0){
+        cell(tr,'Nuevo');
+      }else{
+        cell(tr,'—');
+      }
+      tb.append(tr);
+    });
+    const trT=document.createElement('tr');trT.className='row-total';
+    cell(trT,'Total','tl');
+    cell(trT,nf.format(tPed));
+    cell(trT,nf.format(tUds));
+    cell(trT,tPed?money.format(tCur/tPed):'—');
+    cell(trT,money.format(tDesc));
+    cell(trT,money.format(tCur),'tot');
+    cell(trT,tPrev?money.format(tPrev):'—');
+    if(tPrev>0){
+      const v=tCur/tPrev-1;
+      cell(trT,signedPct(v),v>=0?'up':'down');
+    }else cell(trT,'—');
+    tb.append(trT);
+  }
+
+  function renderInsights(oCur,oPrev,dowCur){
+    const ul=document.getElementById('insights');ul.replaceChildren();
+    const add=(label,text)=>{
+      const li=document.createElement('li');
+      const b=document.createElement('b');b.textContent=label+' ';
+      li.append(b,document.createTextNode(text));
+      ul.append(li);
+    };
+    const totCur=sum(oCur,r=>r.venta);
+    if(totCur<=0){
+      add('Sin ventas:',`No se registran órdenes en ${ANIO} para la selección actual.`);
+      return;
+    }
+
+    // 1. Mejor mes 2026
+    const byMes=MESES.map((_,i)=>({
+      m:i,
+      v:sum(oCur.filter(r=>r.mes===i+1),r=>r.venta),
+      p:sum(oCur.filter(r=>r.mes===i+1),r=>r.ped)
+    })).sort((a,b)=>b.v-a.v);
+    const bestM=byMes[0];
+    add(`Mejor mes de ${ANIO}:`,
+      `${MESES_LARGO[bestM.m]} lidera con ${money.format(bestM.v)} en ${nf.format(bestM.p)} pedidos (${pct(bestM.v/totCur)} del año).`);
+
+    // 2. Marca líder
+    const byMarca=MARCAS.map(m=>{
+      const c=O_CUR.filter(r=>r.marca===m);
+      const p=O_PREV.filter(r=>r.marca===m&&r.mes<=MES);
+      const vCur=sum(c,r=>r.venta), ped=sum(c,r=>r.ped), vPrev=sum(p,r=>r.venta);
+      return {m,vCur,ped,vPrev,yoy:vPrev>0?(vCur/vPrev-1):null};
+    });
+    const topMarca=[...byMarca].sort((a,b)=>b.vCur-a.vCur)[0];
+    add('Marca líder:',
+      `${topMarca.m} concentra ${money.format(topMarca.vCur)} (${GRAND_CUR?pct(topMarca.vCur/GRAND_CUR):'0.0%'} del total), con un AOV de ${topMarca.ped?money.format(topMarca.vCur/topMarca.ped):'$0'}.`);
+
+    // 3. Mayor crecimiento YoY
+    const conBase=byMarca.filter(x=>x.yoy!==null).sort((a,b)=>b.yoy-a.yoy);
+    if(conBase.length){
+      const g=conBase[0];
+      add('Mayor crecimiento YoY:',
+        `${g.m} registra ${signedPct(g.yoy)} frente al mismo periodo de ${ANIO_PREV} (${money.format(g.vPrev)} → ${money.format(g.vCur)}).`);
+    }else{
+      const runner=[...byMarca].sort((a,b)=>b.vCur-a.vCur)[1];
+      add('Crecimiento interanual:',
+        `Sin base comparable en ${ANIO_PREV}; la segunda marca por volumen en ${ANIO} es ${runner?runner.m:'—'} con ${runner?money.format(runner.vCur):'$0'}.`);
+    }
+
+    // 4. Día más fuerte de la semana
+    const byDow=DIAS_LARGO.map((d,i)=>({
+      d,
+      v:sum(dowCur.filter(r=>r.dow===i),r=>r.venta),
+      p:sum(dowCur.filter(r=>r.dow===i),r=>r.ped)
+    })).sort((a,b)=>b.v-a.v);
+    const bestD=byDow[0];
+    add('Día más fuerte:',
+      `${bestD.d} es el día que más convierte con ${money.format(bestD.v)} (${pct(bestD.v/totCur)} semanal) y ${nf.format(bestD.p)} pedidos.`);
+
+    // 5. Recompra y descuentos
+    const nuevos=sum(oCur,r=>r.nuevos), recurr=sum(oCur,r=>r.recurr), desc=sum(oCur,r=>r.desc);
+    const tasaRec=(nuevos+recurr)?recurr/(nuevos+recurr):0;
+    add('Recompra y descuentos:',
+      `${pct(tasaRec)} de los pedidos provienen de clientes recurrentes (${nf.format(recurr)} recurrentes vs ${nf.format(nuevos)} nuevos); se otorgaron ${money.format(desc)} en descuentos (${pct(desc/totCur)} de la venta bruta).`);
+  }
+
+  function render(){
+    chips.forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.m===marca)));
+    const fM=r=>marca==='Todas'||r.marca===marca;
+
+    const oCur=O_CUR.filter(fM);
+    const oPrevAll=O_PREV.filter(fM);
+    const oPrevSame=oPrevAll.filter(r=>r.mes<=MES);
+    const dowCur=DOW_CUR.filter(fM);
+    const rCur=R_CUR.filter(fM);
+    const rPrev=R_PREV.filter(fM);
+
+    const vCur=sum(oCur,r=>r.venta), vPrev=sum(oPrevSame,r=>r.venta);
+    const pedCur=sum(oCur,r=>r.ped), pedPrev=sum(oPrevSame,r=>r.ped);
+    const udsCur=sum(oCur,r=>r.uds);
+    const aovCur=pedCur?vCur/pedCur:0, aovPrev=pedPrev?vPrev/pedPrev:0;
+    const descCur=sum(oCur,r=>r.desc);
+    const nuevosCur=sum(oCur,r=>r.nuevos), recurrCur=sum(oCur,r=>r.recurr);
+    const recRate=(nuevosCur+recurrCur)?recurrCur/(nuevosCur+recurrCur):0;
+    const nuevosPrev=sum(oPrevSame,r=>r.nuevos), recurrPrev=sum(oPrevSame,r=>r.recurr);
+    const recPrev=(nuevosPrev+recurrPrev)?recurrPrev/(nuevosPrev+recurrPrev):0;
+
+    // 4 KPI Cards
+    countTo(document.getElementById('k0'),vCur,compact);
+    setBadge('b0',vCur,vPrev);
+    document.getElementById('s0').textContent=vPrev>0
+      ?`vs ${money.format(vPrev)} en Ene–${MESES[MES-1]} ${ANIO_PREV}`
+      :(marca==='Todas'?`${rangoActual} · Corte ${FECHA_CORTE}`:`${GRAND_CUR?pct(vCur/GRAND_CUR):'0.0%'} del total BRANDBROS`);
+    document.getElementById('m0').style.width=(marca==='Todas'?(vCur?100:0):(GRAND_CUR?vCur/GRAND_CUR*100:0))+'%';
+
+    countTo(document.getElementById('k1'),pedCur,v=>nf.format(Math.round(v)));
+    setBadge('b1',pedCur,pedPrev);
+    document.getElementById('s1').textContent=`${nf.format(Math.round(pedCur/Math.max(1,MES)))} pedidos/mes promedio · ${nf.format(udsCur)} uds`;
+    document.getElementById('m1').style.width=Math.min(100,pedPrev?pedCur/pedPrev*50:(pedCur?100:0))+'%';
+
+    countTo(document.getElementById('k2'),aovCur,v=>money.format(v));
+    setBadge('b2',aovCur,aovPrev);
+    document.getElementById('s2').textContent=pedCur?`${(udsCur/pedCur).toFixed(2)} unidades por pedido`:'Sin pedidos';
+    document.getElementById('m2').style.width=Math.min(100,aovPrev?aovCur/aovPrev*50:(aovCur?100:0))+'%';
+
+    countTo(document.getElementById('k3'),recRate*100,v=>v.toFixed(1)+'%');
+    setBadge('b3',recRate,recPrev);
+    document.getElementById('s3').textContent=`Descuentos: ${money.format(descCur)} (${vCur?pct(descCur/vCur):'0.0%'})`;
+    document.getElementById('m3').style.width=Math.min(100,recRate*100)+'%';
+
+    // Hero Takeaway
+    const tk=document.getElementById('takeaway');tk.replaceChildren();
+    const addT=t=>tk.append(document.createTextNode(t));
+    const addB=t=>{const b=document.createElement('b');b.textContent=t;tk.append(b);};
+    addT(marca==='Todas'?'El portafolio BRANDBROS suma ':marca+' suma ');
+    addB(money.format(vCur));
+    addT(` en ${nf.format(pedCur)} pedidos durante ${rangoActual.toLowerCase()} (ticket promedio de `);
+    addB(money.format(aovCur));
+    addT(')');
+    if(vPrev>0){
+      addT(', un ');addB(signedPct(vCur/vPrev-1)+' YoY');addT(` frente a ${ANIO_PREV}.`);
+    }else{
+      addT('.');
+    }
+    if(marca==='Todas'&&GRAND_CUR>0){
+      const top=MARCAS.map(m=>[m,sum(O_CUR.filter(r=>r.marca===m),r=>r.venta)]).sort((a,b)=>b[1]-a[1])[0];
+      addT(' La marca líder es ');addB(top[0]);addT(' con ');addB(money.format(top[1]));addT('.');
+    }
+
+    drawYoY(oCur,oPrevAll);
+    drawMarca(oCur);
+    drawDow(dowCur);
+    renderResumenMarcas();
+    renderMensual(oCur,oPrevAll);
+    renderTopTable('tbl-top26',rCur);
+    renderTopTable('tbl-top25',rPrev);
+    renderProductTables();
+    renderInsights(oCur,oPrevSame,dowCur);
+  }
+
+  // Reveal on scroll
+  const io=new IntersectionObserver(es=>es.forEach(e=>{
+    if(e.isIntersecting){e.target.classList.add('show');io.unobserve(e.target);}
+  }),{threshold:.06});
+  document.querySelectorAll('.reveal').forEach((n,i)=>{n.style.transitionDelay=Math.min(i,4)*60+'ms';io.observe(n);});
+
+  render();
+  let rt;
+  addEventListener('resize',()=>{
+    clearTimeout(rt);
+    rt=setTimeout(()=>{
+      const fM=r=>marca==='Todas'||r.marca===marca;
+      drawYoY(O_CUR.filter(fM),O_PREV.filter(fM));
+      drawMarca(O_CUR.filter(fM));
+      drawDow(DOW_CUR.filter(fM));
+    },180);
+  });
+})();
+</script>
+</body>
+</html>

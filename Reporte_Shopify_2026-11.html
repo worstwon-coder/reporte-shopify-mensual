@@ -1,0 +1,491 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ventas BRANDBROS 2026</title>
+<style>
+:root{
+  --bg:#f6f5f1; --panel:#ffffff; --fg:#1d1d1b; --muted:#6b6a65; --line:#e6e3dc; --grid:#ecebe6;
+  --ch0:#2f6fe4; --ch1:#ff9a1f; --ch2:#16a596;
+  --c-yaoca:#C9A227; --c-wonu:#F26B21; --c-creanatomy:#D7263D; --c-hybrix5:#1E88E5; --c-gud:#2E9D5B; --c-nuba:#8E6BD1;
+  --shadow:0 1px 2px rgba(0,0,0,.04),0 8px 24px rgba(0,0,0,.05);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){ --bg:#141413; --panel:#1e1e1c; --fg:#f2f1ec; --muted:#a3a29c; --line:#33322f; --grid:#2a2a27;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.25); }
+}
+:root[data-theme="dark"]{ --bg:#141413; --panel:#1e1e1c; --fg:#f2f1ec; --muted:#a3a29c; --line:#33322f; --grid:#2a2a27; }
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:"Segoe UI",system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif;line-height:1.45;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1680px;margin:0 auto;padding:28px clamp(16px,2.5vw,40px) 64px;display:flex;flex-direction:column;gap:22px}
+.serif{font-weight:700;letter-spacing:-.02em}
+
+/* Hero */
+.hero{position:relative;overflow:hidden;border-radius:20px;padding:36px 28px;background:linear-gradient(120deg,#1d1d1b 0%,#2b2a26 100%);color:#fff;box-shadow:var(--shadow)}
+.hero::before,.hero::after{content:"";position:absolute;border-radius:50%;filter:blur(60px);opacity:.55;animation:float 14s ease-in-out infinite}
+.hero::before{width:320px;height:320px;background:var(--c-wonu);top:-120px;right:-60px}
+.hero::after{width:280px;height:280px;background:var(--c-nuba);bottom:-140px;left:20%;animation-delay:-6s}
+@keyframes float{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-30px,20px) scale(1.12)}}
+.hero>*{position:relative;z-index:1}
+.eyebrow{font-size:12px;letter-spacing:.14em;text-transform:uppercase;opacity:.7}
+.hero h1{font-weight:700;letter-spacing:-.02em;font-size:clamp(28px,5vw,46px);margin:6px 0 10px;line-height:1.1}
+.hero p{margin:0;max-width:70ch;opacity:.88}
+.hero p b{color:#ffd27a;font-weight:600}
+.hero .brands{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.hero .brands span{font-size:12px;padding:4px 10px;border-radius:999px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);opacity:0;animation:pop .5s cubic-bezier(.2,.9,.3,1.4) forwards}
+
+/* Filters */
+.filters{display:flex;flex-wrap:wrap;gap:8px;align-items:center;position:sticky;top:0;z-index:20;padding:10px 0;background:linear-gradient(var(--bg) 70%,transparent)}
+.filters .lbl{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-right:4px}
+.chip{font:inherit;font-size:13px;border:1px solid var(--line);background:var(--panel);color:var(--fg);padding:6px 14px;border-radius:999px;cursor:pointer;display:inline-flex;align-items:center;gap:7px;transition:transform .2s,border-color .2s,box-shadow .2s,background .2s}
+.chip:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+.chip[aria-pressed="true"]{border-color:var(--fg);font-weight:600;box-shadow:0 0 0 3px color-mix(in srgb,var(--fg) 12%,transparent)}
+.dot{width:9px;height:9px;border-radius:50%;display:inline-block;flex:none}
+
+/* Tiles */
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,210px),1fr));gap:14px}
+.tile{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px 20px;box-shadow:var(--shadow);position:relative;overflow:hidden;transition:transform .25s}
+.tile:hover{transform:translateY(-3px)}
+.tile .k{font-size:13px;color:var(--muted);display:flex;align-items:center;gap:7px}
+.tile .v{font-size:30px;margin-top:4px;font-variant-numeric:tabular-nums}
+.tile .s{font-size:12px;color:var(--muted);margin-top:2px;font-variant-numeric:tabular-nums}
+.tile .meter{height:4px;border-radius:4px;background:var(--grid);margin-top:12px;overflow:hidden}
+.tile .meter i{display:block;height:100%;width:0;border-radius:4px;transition:width 1.1s cubic-bezier(.2,.8,.2,1)}
+
+/* Cards */
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr));gap:14px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px;box-shadow:var(--shadow);min-width:0;display:flex;flex-direction:column;gap:10px}
+.card h2{font-size:17px;font-weight:600;margin:0}
+.note{color:var(--muted);font-size:13px;margin:0}
+.legend{display:flex;flex-wrap:wrap;gap:12px;font-size:12px;color:var(--muted)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.chart{position:relative;min-height:290px}
+.chart svg{display:block;width:100%;height:auto;overflow:visible}
+.tip{position:absolute;pointer-events:none;background:var(--panel);border:1px solid var(--line);border-radius:10px;box-shadow:0 10px 30px rgba(0,0,0,.15);padding:8px 12px;font-size:12px;white-space:nowrap;z-index:5;opacity:0;transform:translateY(4px);transition:opacity .15s,transform .15s}
+.tip.on{opacity:1;transform:none}
+.tip .h{color:var(--muted);margin-bottom:3px}
+.tip .r{display:flex;align-items:center;gap:6px;font-variant-numeric:tabular-nums}
+.tip .r b{margin-left:auto;padding-left:14px}
+
+/* Tables */
+.tablewrap{overflow:auto;max-height:560px;border-radius:10px}
+table{border-collapse:collapse;width:100%;font-size:13px;font-variant-numeric:tabular-nums}
+th,td{padding:8px 9px;border-bottom:1px solid var(--line);text-align:right;white-space:nowrap}
+th:first-child,td:first-child,.tl{text-align:left}
+th{position:sticky;top:0;background:var(--panel);color:var(--muted);font-weight:500;z-index:1}
+th button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer}
+th[aria-sort="descending"] button::after{content:" ↓"}
+th[aria-sort="ascending"] button::after{content:" ↑"}
+td.prod{white-space:normal;min-width:14rem;max-width:26rem}
+td.tot{font-weight:600}
+tbody tr{transition:background .15s}
+tbody tr:hover{background:color-mix(in srgb,var(--fg) 4%,transparent)}
+tbody tr.in{animation:rowIn .45s ease both}
+@keyframes rowIn{from{opacity:0;transform:translateX(-8px)}to{opacity:1;transform:none}}
+.bar .bw{display:flex;align-items:center;gap:10px;justify-content:flex-end}
+.bar .tr{flex:1;min-width:48px;height:6px;border-radius:3px;background:var(--grid);overflow:hidden}
+.bar .tr i{display:block;height:100%;width:0;border-radius:3px;opacity:.85;transition:width .9s cubic-bezier(.2,.8,.2,1)}
+.bar span{min-width:5.5em;text-align:right}
+#tbl-mtx td.bar{min-width:220px}
+.search{font:inherit;font-size:13px;padding:8px 12px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--fg);width:min(100%,18rem);transition:border-color .2s,box-shadow .2s}
+.search:focus{outline:none;border-color:var(--fg);box-shadow:0 0 0 3px color-mix(in srgb,var(--fg) 12%,transparent)}
+.toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
+.foot{color:var(--muted);font-size:12px;margin:0;text-align:center;line-height:1.6}
+.sec{font-size:13px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);margin:10px 0 -6px}
+.rank{color:var(--muted);font-variant-numeric:tabular-nums;width:2.2em}
+td.prod{text-align:left}
+#tbl-prod th:nth-child(2),#tbl-prod th:nth-child(3),#tbl-mes th:nth-child(2),#tbl-mes th:nth-child(3),#tbl-top th:nth-child(-n+4),#tbl-top25 th:nth-child(-n+4){text-align:left}
+td.mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12px;color:var(--muted);text-align:left}
+.up{color:#1e8449;font-weight:600}.down{color:#c0392b;font-weight:600}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .up{color:#4cc27a}:root:not([data-theme="light"]) .down{color:#ef6b5c}}
+.callout{border-left:4px solid var(--fg)}
+.callout ul{margin:4px 0 0;padding-left:20px;display:flex;flex-direction:column;gap:6px;font-size:14px}
+
+/* Reveal on scroll */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.8,.2,1)}
+.reveal.show{opacity:1;transform:none}
+@keyframes pop{from{opacity:0;transform:scale(.6)}to{opacity:1;transform:none}}
+@media (max-width:640px){.hide-sm{display:none}.hero{padding:26px 20px}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="hero reveal">
+    <div class="eyebrow">Reporte de ventas · Enero – Octubre 2026 · con comparativo 2025</div>
+    <h1 class="serif">Ventas BRANDBROS 2026</h1>
+    <p id="takeaway">&nbsp;</p>
+    <div class="brands" id="brands"></div>
+  </header>
+
+  <div class="filters" id="filtros"><span class="lbl">Marca</span></div>
+
+  <section class="tiles reveal">
+    <div class="tile"><div class="k">Venta bruta total</div><div class="v serif" id="t0">$0</div><div class="s" id="s0"></div><div class="meter"><i id="m0" style="background:var(--fg)"></i></div></div>
+    <div class="tile"><div class="k"><i class="dot" style="background:var(--ch0)"></i>Mercado Libre</div><div class="v serif" id="t1">$0</div><div class="s" id="s1"></div><div class="meter"><i id="m1" style="background:var(--ch0)"></i></div></div>
+    <div class="tile"><div class="k"><i class="dot" style="background:var(--ch1)"></i>Amazon</div><div class="v serif" id="t2">$0</div><div class="s" id="s2"></div><div class="meter"><i id="m2" style="background:var(--ch1)"></i></div></div>
+    <div class="tile"><div class="k"><i class="dot" style="background:var(--ch2)"></i>Mayoreo / Web / TikTok</div><div class="v serif" id="t3">$0</div><div class="s" id="s3"></div><div class="meter"><i id="m3" style="background:var(--ch2)"></i></div></div>
+  </section>
+
+  <div class="grid">
+    <section class="card reveal">
+      <h2>Venta por canal y mes</h2>
+      <p class="note">Venta bruta en pesos, apilada por canal.</p>
+      <div class="legend" id="leg-canal"></div>
+      <div class="chart" id="ch-canal"></div>
+    </section>
+    <section class="card reveal">
+      <h2>Venta por marca y mes</h2>
+      <p class="note">Todos los canales juntos.</p>
+      <div class="legend" id="leg-marca"></div>
+      <div class="chart" id="ch-marca"></div>
+    </section>
+  </div>
+
+  <section class="card reveal">
+    <h2>Marca por canal</h2>
+    <p class="note">Acumulado enero a octubre 2026. La barra indica el peso de cada marca en el total.</p>
+    <div class="tablewrap">
+      <table id="tbl-mtx"><thead><tr><th>Marca</th><th>Mercado Libre</th><th>Amazon</th><th>Mayoreo / Web / TikTok</th><th>Total</th><th>% del total</th></tr></thead><tbody></tbody></table>
+    </div>
+  </section>
+
+  <section class="card reveal">
+    <h2>Top 10 productos 2026</h2>
+    <p class="note">Enero a octubre, todos los canales. Respeta el filtro de marca.</p>
+    <div class="tablewrap">
+      <table id="tbl-top"><thead><tr><th>#</th><th>Producto</th><th>UPC</th><th>Marca</th><th>Unidades</th><th>Venta</th><th>% del total</th></tr></thead><tbody></tbody></table>
+    </div>
+  </section>
+
+  <section class="card reveal">
+    <div class="toolbar">
+      <div><h2>Productos por canal</h2><p class="note">Venta bruta acumulada por producto. Toca un encabezado para ordenar.</p></div>
+      <input class="search" id="buscar" type="search" placeholder="Buscar producto o UPC" aria-label="Buscar producto o UPC">
+    </div>
+    <div class="tablewrap">
+      <table id="tbl-prod"><thead><tr>
+        <th><button data-k="producto">Producto</button></th>
+        <th><button data-k="upc">UPC</button></th>
+        <th><button data-k="marca">Marca</button></th>
+        <th><button data-k="ml">Mercado Libre</button></th>
+        <th><button data-k="amz">Amazon</button></th>
+        <th><button data-k="may">Mayoreo / Web / TikTok</button></th>
+        <th aria-sort="descending"><button data-k="total">Total</button></th>
+      </tr></thead><tbody></tbody></table>
+    </div>
+  </section>
+
+  <section class="card reveal">
+    <h2>Productos por mes</h2>
+    <p class="note">Venta bruta mensual de cada producto, todos los canales. Respeta el filtro de marca y la búsqueda.</p>
+    <div class="tablewrap">
+      <table id="tbl-mes"><thead><tr><th>Producto</th><th>UPC</th><th>Marca</th><th>Ene</th><th>Feb</th><th>Mar</th><th>Abr</th><th>May</th><th>Jun</th><th>Jul</th><th>Ago</th><th>Sep</th><th>Oct</th><th>Total</th></tr></thead><tbody></tbody></table>
+    </div>
+  </section>
+
+  <div class="sec">Rendimiento 2025 y comparativo</div>
+  <section class="tiles reveal" id="tiles25"></section>
+  <div class="grid">
+    <section class="card reveal">
+      <h2>Venta mensual por marca: septiembre 2025 a octubre 2026</h2>
+      <p class="note">Todos los canales. Las marcas empezaron a vender en septiembre de 2025.</p>
+      <div class="legend" id="leg-hist"></div>
+      <div class="chart" id="ch-hist"></div>
+    </section>
+    <section class="card reveal callout">
+      <h2>Lectura de 2025</h2>
+      <ul id="ins25">
+        <li><b>Arranque en septiembre 2025.</b> En sus primeros cuatro meses las marcas vendieron $492,772; diciembre fue el mejor mes del año con $198,335.</li>
+        <li><b>4.6 veces más en 2026.</b> Septiembre–octubre 2026 sumó $792,017 contra $171,204 del mismo periodo de 2025.</li>
+        <li><b>YAOCA fue 64% de 2025,</b> impulsada por la Creatina Monohidratada (dos presentaciones, $182,554). En 2026 pesa 46% porque WONU, PURE LIFE y NUBA crecieron más rápido.</li>
+        <li><b>Mercado Libre fue 74% de la venta en 2025;</b> en 2026 baja a 62% porque Amazon ganó peso.</li>
+        <li><b>Octubre 2026:</b> $435,752, +22% contra septiembre, con PURE LIFE (+21%) y WONU (+51%) al alza.</li>
+      </ul>
+    </section>
+  </div>
+  <section class="card reveal">
+    <h2>Marcas: 2025 contra 2026</h2>
+    <p class="note">2025 = septiembre a diciembre. El comparativo justo es septiembre–octubre de cada año.</p>
+    <div class="tablewrap">
+      <table id="tbl-25"><thead><tr><th>Marca</th><th>Mercado Libre 2025</th><th>Amazon 2025</th><th>Total 2025 (sep–dic)</th><th>Sep–oct 2025</th><th>Sep–oct 2026</th><th>Var.</th></tr></thead><tbody></tbody></table>
+    </div>
+  </section>
+  <section class="card reveal">
+    <h2>Top 10 productos 2025</h2>
+    <p class="note">Septiembre a diciembre 2025, todos los canales. Respeta el filtro de marca.</p>
+    <div class="tablewrap">
+      <table id="tbl-top25"><thead><tr><th>#</th><th>Producto</th><th>UPC</th><th>Marca</th><th>Unidades</th><th>Venta</th><th>% del total</th></tr></thead><tbody></tbody></table>
+    </div>
+  </section>
+</div>
+
+<script>
+const RAW = {"p":{"7503053821330":["Glucosamina + Condroitina + MSM 30 Cáps , Dosis diaria, Soporte articular y movilidad con colágeno y vitaminas","YAOCA","7503053821330"],"7503053821309":["Citrato de Magnesio con Calcio y Colágeno Yaoca, 60 Cáps, Apoyo diario para músculos y huesos","YAOCA","7503053821309"],"7503045518293":["Electrolitos en Polvo , 30 sobres, Hidratación instantánea con vitaminas y minerales","YAOCA","7503045518293"],"27503045518105":["Electrolitos en Polvo , 30 sobres, Hidratación instantánea con vitaminas y minerales","YAOCA","27503045518105"],"7503045518194":["Electrolitos en Polvo , 30 sobres, Hidratación instantánea con vitaminas y minerales","YAOCA","7503045518194"],"7503036171278":["Proteína Mass , 6 lb, 26g de proteína con creatina y vitaminas para ganancia de masa","YAOCA","7503036171278"],"7503036171551":["Proteína Whey , 1kg, 23g de proteína de máxima pureza con creatina y magnesio","YAOCA","7503036171551"],"7503039685536":["Creatina Monohidratada , 200g, Incrementa fuerza, potencia y rendimiento muscular","YAOCA","7503039685536"],"7503053821859":["Vaso Shaker Negro, 700ml, A prueba de fugas, libre de BPA con esfera mezcladora","YAOCA","7503053821859"],"7503053821620":["Creatina Monohidratada , 1kg, Energía, recuperación y rendimiento en cada entrenamiento","YAOCA","7503053821620"],"7503036171544":["Proteína Isolate Sabor Chocolate , 1kg, 23g de proteína pura sin rellenos ni azúcar","YAOCA","7503036171544"],"7503036171001":["Proteína Isolate Performance , 3 lb , 30g de proteína con colágeno y probióticos + Creatina 1kg de regalo","YAOCA","7503036171001"],"7503031994995":["Proteína Isolate Performance , 3 lb , 30g de proteína con colágeno y probióticos + Creatina 1kg de regalo","YAOCA","7503031994995"],"7503036171605":["Proteína Isolate Bebible Sabor Chocolate, 12 pack, 30g de proteína práctica y lista para tomar","YAOCA","7503036171605"],"7503031994919":["Proteína Whey Bebible , 12 pack, 20g de proteína lista para tomar","YAOCA","7503031994919"],"7503053821293":["Men's Testo , 60 cáps, Fuerza y energía con creatina, tribulus y zinc","YAOCA","7503053821293"],"7503053821323":["Multivitamínico Multi M 60 cáps , Fórmula mujer, Belleza y energía diaria con colágeno hidrolizado","YAOCA","7503053821323"],"7503045518163":["Creatina Creapure® , 500g, Máxima pureza para potenciar el rendimiento","YAOCA","7503045518163"],"7503036171582":["Creatina Monohidratada Micronizada , 400g, Alta potencia y rápida absorción","YAOCA","7503036171582"],"7503036171032":["BCAAs , 420 g , Favorece la recuperación y el rendimiento","YAOCA","7503036171032"],"7503053821651":["Proteína Whey , 3 lb, 23g de proteína enriquecida con creatina y magnesio","YAOCA","7503053821651"],"17503036171602":["Proteína Isolate Bebible Sabor Chocolate, 12 pack, 30g de proteína práctica y lista para tomar","YAOCA","17503036171602"],"17503031994916":["Proteína Whey Bebible , 12 pack, 20g de proteína lista para tomar","YAOCA","17503031994916"],"46635007574269":["Envío Express , Servicio prioritario, Entrega rápida a domicilio","YAOCA","46635007574269"],"7503045518460":["Colágeno + Electrolitos Frutos Rojos","WONU","7503045518460"],"7503031994315":["Colágeno Hidrolizado Fresa - Arándano","WONU","7503031994315"],"7503053821214":["Creatina + Inositol Sin Sabor (30 sticks)","WONU","7503053821214"],"7503045518729":["Colágeno PRO 3 en 1 Sin Sabor","WONU","7503045518729"],"7503045518620":["Colágeno PRO 3 en 1 Sin Sabor","WONU","7503045518620"],"7503028029747":["Colágeno Hidrolizado Sin Sabor","WONU","7503028029747"],"7503053821347":["Berberina + Cúrcuma 60 Cápsulas","WONU","7503053821347"],"7503045518453":["Colágeno + Electrolitos Limón Jengibre","WONU","7503045518453"],"7503053821286":["Myo-Inositol 60 Cápsulas","WONU","7503053821286"],"7503053821255":["Berberina + Cúrcuma 60 Cápsulas","WONU","7503053821255"],"7503053821217":["Creatina + Inositol Sin Sabor","WONU","7503053821217"],"7503031994309":["Colágeno Hidrolizado Sin Sabor","WONU","7503031994309"],"7503053821644":["Colágeno Hidrolizado Fresa - Arándano","WONU","7503053821644"],"7503053821781":["Creatina Monohidratada Micronizada + L-Glicina 780 g Bolsa (60 Porciones)","CREANATOMY","7503053821781"],"7503039685710":["Proteína Vegetal en Polvo Vainilla – 450 g | 22 g, Sin Azúcar","GUD","7503039685710"],"7503039685802":["Proteína Vegetal en Polvo Vainilla – 1.36 kg (3 lb) | 22 g, Sin Azúcar","GUD","7503039685802"],"7503039685796":["Proteína Vegetal en Polvo - Chocolate 3lb","GUD","7503039685796"],"7503039685642":["Proteína Vegetal Líquida - Vainilla 330ml (12 pack)","GUD","7503039685642"],"7503039685666":["Proteína Vegetal Líquida - Chocolate 330ml (12 pack)","GUD","7503039685666"],"75030280296552":["2 x Proteína Nuba Sabor Vainilla Chai 1 kg","NUBA","75030280296552"],"7503028029129":["Proteína NUBA Chai Vainilla 500g","NUBA","7503028029129"],"75030280296482":["2 x Proteina  Nuba 1KG Sabor Chocolate","NUBA","75030280296482"],"7503028029655":["NUBA Chai Vainilla 1 kg","NUBA","7503028029655"],"7503028029648":["Proteína de Suero de Leche 1KG  Sabor Chocolate","NUBA","7503028029648"],"7503039685628":["Proteína NUBA CHOCOLATE 250 GR","NUBA","7503039685628"],"7503028029457":["Pure Life Suplemento Gym Pre Entreno, Proteína Isolate 4.5 Libras (2.04 Kg) Sabor chocolate Con Vitamina C, Vitamina B Sabor Chocolate - 54 Porciones","NUBA","7503028029457"],"7503039685772":["Nuba Proteína Bebida  12 Pack Sabor Chocolate","NUBA","7503039685772"],"7503039685819":["Nuba Proteína Bebida  12 Pack Sabor Vainilla","NUBA","7503039685819"],"7503039685611":["Proteína NUBA CHOCOLATE 500 GR","NUBA","7503039685611"]},"r":[[2026,9,0,"7503028029457",3780.0,2],[2026,9,0,"7503028029648",1299.0,1],[2026,9,0,"7503028029655",2098.0,2],[2026,9,0,"7503031994309",12582.0,18],[2026,9,0,"7503031994315",1398.0,2],[2026,9,0,"7503036171032",699.0,1],[2026,9,0,"7503039685666",1650.0,3],[2026,9,0,"7503045518163",2397.0,3],[2026,9,0,"7503045518293",798.0,2],[2026,9,0,"7503045518620",5943.0,7],[2026,9,0,"7503053821217",1198.0,2],[2026,9,0,"7503053821255",798.0,2],[2026,9,0,"7503053821286",349.0,1],[2026,9,0,"7503053821644",699.0,1],[2026,10,0,"17503031994916",4044.0,6],[2026,10,0,"17503036171602",5393.0,7],[2026,10,0,"27503045518105",3990.0,10],[2026,10,0,"46635007574269",320.0,2],[2026,10,0,"7503028029457",7560.0,4],[2026,10,0,"7503028029648",799.0,1],[2026,10,0,"75030280296482",1299.0,1],[2026,10,0,"7503028029655",10789.0,11],[2026,10,0,"75030280296552",11691.0,9],[2026,10,0,"7503028029747",599.0,1],[2026,10,0,"7503031994309",2097.0,3],[2026,10,0,"7503031994315",6291.0,9],[2026,10,0,"7503031994919",1947.0,3],[2026,10,0,"7503031994995",18537.0,9],[2026,10,0,"7503036171001",1990.0,1],[2026,10,0,"7503036171032",1398.0,2],[2026,10,0,"7503036171278",4200.0,4],[2026,10,0,"7503036171544",3198.0,2],[2026,10,0,"7503036171551",3537.0,3],[2026,10,0,"7503036171582",1098.0,2],[2026,10,0,"7503036171605",749.0,1],[2026,10,0,"7503039685536",399.0,1],[2026,10,0,"7503039685628",607.0,2],[2026,10,0,"7503039685642",1650.0,3],[2026,10,0,"7503039685796",2300.0,2],[2026,10,0,"7503039685802",5750.0,5],[2026,10,0,"7503045518163",3595.5,5],[2026,10,0,"7503045518194",4349.0,11],[2026,10,0,"7503045518293",6463.0,17],[2026,10,0,"7503045518453",2995.0,5],[2026,10,0,"7503045518460",4193.0,7],[2026,10,0,"7503045518620",9339.0,11],[2026,10,0,"7503045518729",699.0,1],[2026,10,0,"7503053821214",599.0,1],[2026,10,0,"7503053821217",1198.0,2],[2026,10,0,"7503053821255",2394.0,6],[2026,10,0,"7503053821286",698.0,2],[2026,10,0,"7503053821309",3289.0,11],[2026,10,0,"7503053821330",2093.0,7],[2026,10,0,"7503053821347",798.0,2],[2026,10,0,"7503053821620",8913.0,12],[2026,10,0,"7503053821651",4497.0,3],[2026,10,0,"7503053821859",174.0,1],[2026,10,2,"17503031994916",1298.0,2],[2026,10,2,"17503036171602",2247.0,3],[2026,10,2,"7503045518620",849.0,1],[2026,10,2,"7503053821620",674.0,1],[2026,11,0,"27503045518105",5985.0,15],[2026,11,0,"7503028029129",599.0,1],[2026,11,0,"7503028029457",3780.0,2],[2026,11,0,"7503028029648",1598.0,2],[2026,11,0,"75030280296482",3897.0,3],[2026,11,0,"7503028029655",3995.0,5],[2026,11,0,"75030280296552",20784.0,16],[2026,11,0,"7503028029747",1797.0,3],[2026,11,0,"7503031994315",5592.0,8],[2026,11,0,"7503031994919",7139.0,11],[2026,11,0,"7503031994995",5970.0,3],[2026,11,0,"7503036171001",19900.0,10],[2026,11,0,"7503036171278",8400.0,8],[2026,11,0,"7503036171544",12795.76,8],[2026,11,0,"7503036171551",10611.0,9],[2026,11,0,"7503036171582",1098.0,2],[2026,11,0,"7503036171605",11235.0,15],[2026,11,0,"7503039685536",1995.0,5],[2026,11,0,"7503039685611",599.0,1],[2026,11,0,"7503039685628",299.0,1],[2026,11,0,"7503039685710",600.0,1],[2026,11,0,"7503039685772",499.0,1],[2026,11,0,"7503039685802",1150.0,1],[2026,11,0,"7503039685819",998.0,2],[2026,11,0,"7503045518163",4794.0,6],[2026,11,0,"7503045518194",3192.0,8],[2026,11,0,"7503045518293",3990.0,10],[2026,11,0,"7503045518453",1198.0,2],[2026,11,0,"7503045518460",2995.0,5],[2026,11,0,"7503045518620",3396.0,4],[2026,11,0,"7503045518729",2097.0,3],[2026,11,0,"7503053821214",1198.0,2],[2026,11,0,"7503053821293",299.0,1],[2026,11,0,"7503053821309",4186.0,14],[2026,11,0,"7503053821323",897.0,3],[2026,11,0,"7503053821330",2392.0,8],[2026,11,0,"7503053821347",798.0,2],[2026,11,0,"7503053821620",20223.0,27],[2026,11,0,"7503053821781",1330.0,2],[2026,11,0,"7503053821859",498.0,2],[2026,11,2,"7503036171605",1498.0,2]]};
+(() => {
+  const MESES=['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct'];
+  const KEYS=['ene','feb','mar','abr','may','jun','jul','ago','sep','oct'];
+  const CANALES=['Mercado Libre','Amazon','Mayoreo / Web / TikTok'];
+  const CCOL=['var(--ch0)','var(--ch1)','var(--ch2)'];
+  const MARCAS=['YAOCA','WONU','CREANATOMY','HYBRIX5','GUD','NUBA'];
+  const BCOL={'YAOCA':'var(--c-yaoca)','WONU':'var(--c-wonu)','CREANATOMY':'var(--c-creanatomy)','HYBRIX5':'var(--c-hybrix5)','GUD':'var(--c-gud)','NUBA':'var(--c-nuba)'};
+  const money=new Intl.NumberFormat('es-MX',{style:'currency',currency:'MXN',maximumFractionDigits:0});
+  const cf=new Intl.NumberFormat('es-MX',{notation:'compact',maximumFractionDigits:2});
+  const compact=v=>'$'+cf.format(v);
+  const pct=v=>(v*100).toFixed(1)+'%';
+  const NS='http://www.w3.org/2000/svg';
+  const sum=(a,f)=>a.reduce((s,x)=>s+f(x),0);
+
+  // Datos
+  const ALL=RAW.r.map(([anio,mes,c,sku,v,u])=>({anio,mes,canal:CANALES[c],sku,venta:v,uds:u,marca:RAW.p[sku][1],producto:RAW.p[sku][0],upc:RAW.p[sku][2]}));
+  const DATA=ALL.filter(r=>r.anio===2026), D25=ALL.filter(r=>r.anio===2025);
+  const GRAND=sum(DATA,r=>r.venta);
+
+  // Estado
+  let marca='Todas', sortK='total', sortDir=-1, firstPaint=true;
+
+  // Marcas en el hero
+  const bwrap=document.getElementById('brands');
+  MARCAS.forEach((m,i)=>{const s=document.createElement('span');s.textContent=m;s.style.animationDelay=(0.4+i*0.1)+'s';bwrap.append(s);});
+
+  // Chips
+  const fbox=document.getElementById('filtros');
+  const chips=['Todas',...MARCAS].map(m=>{
+    const b=document.createElement('button');b.className='chip';b.type='button';b.dataset.m=m;
+    if(m!=='Todas'){const d=document.createElement('i');d.className='dot';d.style.background=BCOL[m];b.append(d);}
+    b.append(document.createTextNode(m));
+    b.addEventListener('click',()=>{marca=m;render();});
+    fbox.append(b);return b;
+  });
+
+  // Leyendas
+  const legend=(el,items)=>items.forEach(([n,c])=>{const s=document.createElement('span');const d=document.createElement('i');d.className='dot';d.style.background=c;s.append(d,document.createTextNode(n));el.append(s);});
+  legend(document.getElementById('leg-canal'),CANALES.map((c,i)=>[c,CCOL[i]]));
+  legend(document.getElementById('leg-marca'),MARCAS.map(m=>[m,BCOL[m]]));
+
+  // Count-up
+  const anims=new WeakMap();
+  function countTo(el,to,fmt,dur=1100){
+    const from=anims.get(el)??0; const t0=performance.now();
+    cancelAnimationFrame(el._raf);
+    const step=t=>{const p=Math.min(1,(t-t0)/dur);const e=1-Math.pow(1-p,3);const v=from+(to-from)*e;el.textContent=fmt(v);if(p<1)el._raf=requestAnimationFrame(step);else anims.set(el,to);};
+    el._raf=requestAnimationFrame(step);
+  }
+
+  // SVG helpers
+  const el=(tag,attrs={},parent)=>{const n=document.createElementNS(NS,tag);for(const k in attrs)n.setAttribute(k,attrs[k]);if(parent)parent.append(n);return n;};
+  function niceMax(v){if(v<=0)return 1;const e=Math.pow(10,Math.floor(Math.log10(v)));const f=v/e;const n=f<=1?1:f<=2?2:f<=2.5?2.5:f<=5?5:10;return n*e;}
+  function frame(box){
+    box.querySelector('svg')?.remove();
+    const W=Math.max(300,box.clientWidth||600),H=290;
+    const svg=el('svg',{viewBox:`0 0 ${W} ${H}`});box.prepend(svg);
+    return {svg,W,H};
+  }
+  function axes(svg,W,H,maxV,ml){
+    const ticks=4;
+    for(let i=0;i<=ticks;i++){
+      const v=maxV*i/ticks;const y=(H-28)-(H-36)*(i/ticks);
+      el('line',{x1:ml,x2:W-4,y1:y,y2:y,stroke:'var(--grid)'},svg);
+      const t=el('text',{x:ml-8,y:y+4,'text-anchor':'end','font-size':11,fill:'var(--muted)'},svg);t.textContent=compact(v);
+    }
+  }
+  function tipFor(box){let t=box.querySelector('.tip');if(!t){t=document.createElement('div');t.className='tip';box.append(t);}return t;}
+  function showTip(box,t,x,y,head,lines){
+    t.replaceChildren();const h=document.createElement('div');h.className='h';h.textContent=head;t.append(h);
+    for(const [n,c,v] of lines){const r=document.createElement('div');r.className='r';if(c){const d=document.createElement('i');d.className='dot';d.style.background=c;r.append(d);}r.append(document.createTextNode(n));const b=document.createElement('b');b.textContent=money.format(v);r.append(b);t.append(r);}
+    t.classList.add('on');
+    const bw=box.clientWidth,tw=t.offsetWidth;
+    t.style.left=Math.max(0,Math.min(bw-tw,x-tw/2))+'px';t.style.top=Math.max(0,y-t.offsetHeight-12)+'px';
+  }
+  const ptr=(ev,box)=>{const r=box.getBoundingClientRect();return [ev.clientX-r.left,ev.clientY-r.top];};
+
+  function drawCanal(rs){
+    const box=document.getElementById('ch-canal');const {svg,W,H}=frame(box);
+    const grid=MESES.map((m,i)=>{const o={mes:m};CANALES.forEach(c=>o[c]=sum(rs.filter(r=>r.mes===i+1&&r.canal===c),r=>r.venta));o.tot=sum(CANALES,c=>o[c]);return o;});
+    const maxV=niceMax(Math.max(...grid.map(o=>o.tot)));
+    const ml=54;axes(svg,W,H,maxV,ml);
+    const base=H-28,ph=H-36,step=(W-4-ml)/MESES.length,bw=step*0.62;
+    const sx=W/ (box.clientWidth||W);
+    grid.forEach((o,i)=>{
+      const x=ml+step*i+(step-bw)/2;let acc=0;
+      const lab=el('text',{x:x+bw/2,y:H-8,'text-anchor':'middle','font-size':11,fill:'var(--muted)'},svg);lab.textContent=o.mes;
+      CANALES.forEach((c,ci)=>{
+        const h=o[c]/maxV*ph;const y=base-acc-h;acc+=h;
+        const r=el('rect',{x,y:base,width:bw,height:0,fill:CCOL[ci],rx:ci===2?3:0},svg);
+        r.style.transition=`y .8s cubic-bezier(.2,.8,.2,1) ${i*60+ci*90}ms, height .8s cubic-bezier(.2,.8,.2,1) ${i*60+ci*90}ms`;
+        requestAnimationFrame(()=>requestAnimationFrame(()=>{r.setAttribute('y',y);r.setAttribute('height',Math.max(0,h));}));
+      });
+      const hit=el('rect',{x:ml+step*i,y:0,width:step,height:base,fill:'transparent'},svg);
+      hit.addEventListener('mousemove',ev=>{const [px,py]=ptr(ev,box);showTip(box,tipFor(box),px,py,o.mes+' 2026',[...CANALES.map((c,ci)=>[c,CCOL[ci],o[c]]),['Total',null,o.tot]]);});
+      hit.addEventListener('mouseleave',()=>tipFor(box).classList.remove('on'));
+    });
+    el('line',{x1:ml,x2:W-4,y1:base,y2:base,stroke:'var(--line)'},svg);
+  }
+
+  function drawMarca(rs){
+    const box=document.getElementById('ch-marca');const {svg,W,H}=frame(box);
+    const list=marca==='Todas'?MARCAS:[marca];
+    const series=list.map(m=>({m,v:MESES.map((_,i)=>sum(rs.filter(r=>r.marca===m&&r.mes===i+1),r=>r.venta))}));
+    const maxV=niceMax(Math.max(1,...series.flatMap(s=>s.v)));
+    const ml=54;axes(svg,W,H,maxV,ml);
+    const base=H-28,ph=H-36,x0=ml+12,x1=W-14,stepX=(x1-x0)/(MESES.length-1);
+    const X=i=>x0+stepX*i,Y=v=>base-v/maxV*ph;
+    MESES.forEach((m,i)=>{const t=el('text',{x:X(i),y:H-8,'text-anchor':'middle','font-size':11,fill:'var(--muted)'},svg);t.textContent=m;});
+    el('line',{x1:ml,x2:W-4,y1:base,y2:base,stroke:'var(--line)'},svg);
+    series.forEach((s,si)=>{
+      // área suave
+      if(list.length===1){
+        const a=el('path',{d:`M${X(0)},${base} `+s.v.map((v,i)=>`L${X(i)},${Y(v)}`).join(' ')+` L${X(MESES.length-1)},${base} Z`,fill:BCOL[s.m],opacity:0},svg);
+        a.style.transition='opacity 1s ease .5s';requestAnimationFrame(()=>requestAnimationFrame(()=>a.setAttribute('opacity',.12)));
+      }
+      const p=el('path',{d:s.v.map((v,i)=>(i?'L':'M')+X(i)+','+Y(v)).join(' '),fill:'none',stroke:BCOL[s.m],'stroke-width':2.5,'stroke-linecap':'round','stroke-linejoin':'round'},svg);
+      const len=p.getTotalLength();p.style.strokeDasharray=len;p.style.strokeDashoffset=len;
+      p.style.transition=`stroke-dashoffset 1.4s cubic-bezier(.4,0,.2,1) ${si*120}ms`;
+      requestAnimationFrame(()=>requestAnimationFrame(()=>p.style.strokeDashoffset=0));
+      s.v.forEach((v,i)=>{const c=el('circle',{cx:X(i),cy:Y(v),r:0,fill:BCOL[s.m]},svg);c.style.transition=`r .3s ease ${si*120+i*140+300}ms`;requestAnimationFrame(()=>requestAnimationFrame(()=>c.setAttribute('r',3)));});
+    });
+    const guide=el('line',{x1:0,x2:0,y1:8,y2:base,stroke:'var(--muted)','stroke-dasharray':'3 3',opacity:0},svg);
+    MESES.forEach((m,i)=>{
+      const hit=el('rect',{x:X(i)-stepX/2,y:0,width:stepX,height:base,fill:'transparent'},svg);
+      hit.addEventListener('mousemove',ev=>{guide.setAttribute('x1',X(i));guide.setAttribute('x2',X(i));guide.setAttribute('opacity',.6);const [px,py]=ptr(ev,box);showTip(box,tipFor(box),px,py,m+' 2026',series.map(s=>[s.m,BCOL[s.m],s.v[i]]));});
+      hit.addEventListener('mouseleave',()=>{guide.setAttribute('opacity',0);tipFor(box).classList.remove('on');});
+    });
+  }
+
+  // Tablas
+  function cell(tr,text,cls){const td=document.createElement('td');if(cls)td.className=cls;td.textContent=text;tr.append(td);return td;}
+  function barCell(tr,v,max,color,label){
+    const td=document.createElement('td');td.className='bar';
+    const w=document.createElement('div');w.className='bw';const trk=document.createElement('div');trk.className='tr';
+    const i=document.createElement('i');i.style.background=color;trk.append(i);
+    const s=document.createElement('span');s.textContent=label??(v?money.format(v):'—');
+    w.append(trk,s);td.append(w);tr.append(td);
+    requestAnimationFrame(()=>requestAnimationFrame(()=>i.style.width=(max?Math.max(0,v/max*100):0)+'%'));
+    return td;
+  }
+  const stagger=(tr,i)=>{tr.classList.add('in');tr.style.animationDelay=Math.min(i,25)*25+'ms';};
+
+  // Agregados por producto
+  const byProd=new Map();
+  for(const r of DATA){
+    const o=byProd.get(r.sku)||Object.assign({sku:r.sku,upc:r.upc,producto:r.producto,marca:r.marca,ml:0,amz:0,may:0,total:0,uds:0},Object.fromEntries(KEYS.map(k=>[k,0])));
+    o.uds+=(r.uds||0);
+    if(r.canal===CANALES[0])o.ml+=r.venta;else if(r.canal===CANALES[1])o.amz+=r.venta;else o.may+=r.venta;
+    o.total+=r.venta;o[KEYS[r.mes-1]]+=r.venta;byProd.set(r.sku,o);
+  }
+  const PROD=[...byProd.values()];
+
+  document.querySelectorAll('#tbl-prod th button').forEach(b=>b.addEventListener('click',()=>{
+    const k=b.dataset.k;if(sortK===k)sortDir=-sortDir;else{sortK=k;sortDir=['producto','marca','upc'].includes(k)?1:-1;}
+    document.querySelectorAll('#tbl-prod th').forEach(th=>th.removeAttribute('aria-sort'));
+    b.parentElement.setAttribute('aria-sort',sortDir>0?'ascending':'descending');renderTables();
+  }));
+  const search=document.getElementById('buscar');search.addEventListener('input',()=>renderTables());
+
+  function renderTables(){
+    const q=search.value.trim().toLowerCase();
+    const keep=r=>(marca==='Todas'||r.marca===marca)&&(!q||(r.producto+' '+r.upc+' '+r.sku).toLowerCase().includes(q));
+    const pb=document.querySelector('#tbl-prod tbody');pb.replaceChildren();
+    const list=PROD.filter(keep).sort((a,b)=>{const va=a[sortK],vb=b[sortK];return(typeof va==='number'?va-vb:String(va).localeCompare(String(vb),'es'))*sortDir;});
+    const mx=Math.max(1,...list.map(r=>Math.max(r.ml,r.amz,r.may)));
+    list.forEach((r,i)=>{const tr=document.createElement('tr');cell(tr,r.producto,'prod');cell(tr,r.upc,'mono');cell(tr,r.marca,'tl');
+      barCell(tr,r.ml,mx,CCOL[0]);barCell(tr,r.amz,mx,CCOL[1]);barCell(tr,r.may,mx,CCOL[2]);cell(tr,money.format(r.total),'tot');stagger(tr,i);pb.append(tr);});
+    const mb=document.querySelector('#tbl-mes tbody');mb.replaceChildren();
+    PROD.filter(keep).sort((a,b)=>b.total-a.total).forEach((r,i)=>{const tr=document.createElement('tr');cell(tr,r.producto,'prod');cell(tr,r.upc,'mono');cell(tr,r.marca,'tl');KEYS.forEach(k=>cell(tr,r[k]?money.format(r[k]):'—'));cell(tr,money.format(r.total),'tot');stagger(tr,i);mb.append(tr);});
+  }
+
+  const nf=new Intl.NumberFormat('es-MX');
+  function topTable(id,rows){
+    const agg=new Map();
+    for(const r of rows){if(r.sku==='YAOCA-WEB-SIN-DETALLE')continue;const o=agg.get(r.sku)||{producto:r.producto,upc:r.upc,marca:r.marca,uds:0,venta:0};o.uds+=(r.uds||0);o.venta+=r.venta;agg.set(r.sku,o);}
+    const tot=sum(rows,r=>r.venta);const list=[...agg.values()].sort((a,b)=>b.venta-a.venta).slice(0,10);
+    const tb=document.querySelector('#'+id+' tbody');tb.replaceChildren();
+    const mx=Math.max(1,...list.map(r=>r.venta));
+    list.forEach((r,i)=>{const tr=document.createElement('tr');cell(tr,String(i+1),'rank tl');cell(tr,r.producto,'prod');cell(tr,r.upc,'mono');cell(tr,r.marca,'tl');cell(tr,nf.format(Math.round(r.uds)));cell(tr,money.format(r.venta),'tot');barCell(tr,r.venta,mx,BCOL[r.marca]||'var(--fg)',pct(tot?r.venta/tot:0));stagger(tr,i);tb.append(tr);});
+  }
+  const HM=[[2025,9],[2025,10],[2025,11],[2025,12],...MESES.map((_,i)=>[2026,i+1])];
+  const HL=HM.map(([a,m])=>['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'][m-1]+' '+String(a).slice(2));
+  function drawHist(){
+    const box=document.getElementById('ch-hist');const {svg,W,H}=frame(box);
+    const list=marca==='Todas'?MARCAS:[marca];
+    const series=list.map(m=>({m,v:HM.map(([a,mm])=>sum(ALL.filter(r=>r.marca===m&&r.anio===a&&r.mes===mm),r=>r.venta))}));
+    const maxV=niceMax(Math.max(1,...series.flatMap(s=>s.v)));const ml=54;axes(svg,W,H,maxV,ml);
+    const base=H-28,ph=H-36,x0=ml+12,x1=W-14,stepX=(x1-x0)/(HM.length-1);const X=i=>x0+stepX*i,Y=v=>base-v/maxV*ph;
+    HL.forEach((l,i)=>{if(W<700&&i%2)return;const t=el('text',{x:X(i),y:H-8,'text-anchor':'middle','font-size':10,fill:'var(--muted)'},svg);t.textContent=l;});
+    const sx=X(3.5);el('line',{x1:sx,x2:sx,y1:6,y2:base,stroke:'var(--muted)','stroke-dasharray':'4 4',opacity:.5},svg);
+    const t26=el('text',{x:sx+6,y:14,'font-size':11,fill:'var(--muted)'},svg);t26.textContent='2026 →';
+    el('line',{x1:ml,x2:W-4,y1:base,y2:base,stroke:'var(--line)'},svg);
+    series.forEach(s=>{el('path',{d:s.v.map((v,i)=>(i?'L':'M')+X(i)+','+Y(v)).join(' '),fill:'none',stroke:BCOL[s.m],'stroke-width':2.5,'stroke-linecap':'round','stroke-linejoin':'round'},svg);
+      s.v.forEach((v,i)=>el('circle',{cx:X(i),cy:Y(v),r:3,fill:BCOL[s.m]},svg));});
+    HM.forEach((_,i)=>{const hit=el('rect',{x:X(i)-stepX/2,y:0,width:stepX,height:base,fill:'transparent'},svg);
+      hit.addEventListener('mousemove',ev=>{const [px,py]=ptr(ev,box);showTip(box,tipFor(box),px,py,HL[i],[...series.map(s=>[s.m,BCOL[s.m],s.v[i]]),['Total',null,sum(series,s=>s.v[i])]]);});
+      hit.addEventListener('mouseleave',()=>tipFor(box).classList.remove('on'));});
+  }
+  const legH=document.getElementById('leg-hist');legend(legH,MARCAS.map(m=>[m,BCOL[m]]));
+  function render25(){
+    const f=r=>marca==='Todas'||r.marca===marca;
+    const a=D25.filter(f), b=DATA.filter(f);
+    const t25=sum(a,r=>r.venta), so25=sum(a.filter(r=>r.mes<=10),r=>r.venta), so26=sum(b.filter(r=>r.mes>=9),r=>r.venta);
+    const tb=document.getElementById('tiles25');tb.replaceChildren();
+    const tile=(k,v,s,cls)=>{const d=document.createElement('div');d.className='tile';const kk=document.createElement('div');kk.className='k';kk.textContent=k;const vv=document.createElement('div');vv.className='v serif';vv.textContent=v;const ss=document.createElement('div');ss.className='s'+(cls?' '+cls:'');ss.textContent=s;d.append(kk,vv,ss);tb.append(d);};
+    tile('Venta 2025 (sep–dic)',compact(t25),money.format(t25/4)+' al mes promedio');
+    tile('Sep–oct 2025',compact(so25),'primeros dos meses de venta');
+    tile('Sep–oct 2026',compact(so26),so25?((so26/so25-1)>=0?'+':'')+pct(so26/so25-1)+' contra sep–oct 2025':'',so26>=so25?'up':'down');
+    tile('Ene–oct 2026',compact(sum(b,r=>r.venta)),t25?(sum(b,r=>r.venta)/t25).toFixed(1)+'x lo vendido en sep–dic 2025':'');
+    const tbody=document.querySelector('#tbl-25 tbody');tbody.replaceChildren();
+    const rowsB=MARCAS.map(m=>{const x=D25.filter(r=>r.marca===m),y=DATA.filter(r=>r.marca===m);return{m,ml:sum(x.filter(r=>r.canal===CANALES[0]),r=>r.venta),amz:sum(x.filter(r=>r.canal===CANALES[1]),r=>r.venta),t:sum(x,r=>r.venta),a:sum(x.filter(r=>r.mes<=10),r=>r.venta),b:sum(y.filter(r=>r.mes>=9),r=>r.venta)};});
+    const T={m:'Total',ml:sum(rowsB,r=>r.ml),amz:sum(rowsB,r=>r.amz),t:sum(rowsB,r=>r.t),a:sum(rowsB,r=>r.a),b:sum(rowsB,r=>r.b)};
+    [...rowsB,T].forEach((r,i)=>{const tr=document.createElement('tr');if(marca!=='Todas'&&r.m!==marca&&r.m!=='Total')tr.style.opacity='.4';
+      const td=cell(tr,r.m);td.style.fontWeight=600;if(BCOL[r.m]){const d=document.createElement('i');d.className='dot';d.style.background=BCOL[r.m];d.style.marginRight='7px';td.prepend(d);}
+      cell(tr,money.format(r.ml));cell(tr,money.format(r.amz));cell(tr,money.format(r.t),'tot');cell(tr,money.format(r.a));cell(tr,money.format(r.b),'tot');
+      const v=r.a?r.b/r.a-1:null;const c=cell(tr,v===null?(r.b?'nuevo':'—'):(v>=0?'+':'')+pct(v));if(v!==null)c.className=v>=0?'up':'down';stagger(tr,i);tbody.append(tr);});
+    topTable('tbl-top25',a);
+    drawHist();
+  }
+  function render(){
+    chips.forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.m===marca)));
+    const rs=DATA.filter(r=>marca==='Todas'||r.marca===marca);
+    const tot=sum(rs,r=>r.venta);
+    const ch=CANALES.map(c=>sum(rs.filter(r=>r.canal===c),r=>r.venta));
+
+    // Tiles
+    countTo(document.getElementById('t0'),tot,compact);
+    document.getElementById('s0').textContent=marca==='Todas'?'Enero a octubre 2026':pct(tot/GRAND)+' del total BRANDBROS';
+    document.getElementById('m0').style.width=(marca==='Todas'?100:tot/GRAND*100)+'%';
+    ch.forEach((v,i)=>{countTo(document.getElementById('t'+(i+1)),v,compact);document.getElementById('s'+(i+1)).textContent=tot?pct(v/tot)+' del total':'';document.getElementById('m'+(i+1)).style.width=(tot?v/tot*100:0)+'%';});
+
+    // Takeaway
+    const tk=document.getElementById('takeaway');tk.replaceChildren();
+    const add=t=>tk.append(document.createTextNode(t));const mk=t=>{const b=document.createElement('b');b.textContent=t;tk.append(b);};
+    const ti=ch.indexOf(Math.max(...ch));
+    add(marca==='Todas'?'Las marcas BRANDBROS suman ':marca+' suma ');mk(money.format(tot));
+    add(' de venta bruta de enero a octubre 2026. '+CANALES[ti]+' es el canal más fuerte con ');mk(money.format(ch[ti]));add(' ('+pct(tot?ch[ti]/tot:0)+').');
+    if(marca==='Todas'){const bt=MARCAS.map(m=>[m,sum(DATA.filter(r=>r.marca===m),r=>r.venta)]).sort((a,b)=>b[1]-a[1])[0];add(' La marca que más vende es '+bt[0]+', con ');mk(money.format(bt[1]));add('.');}
+
+    drawCanal(rs);drawMarca(rs);
+
+    // Matriz
+    const mb=document.querySelector('#tbl-mtx tbody');mb.replaceChildren();
+    const mrows=MARCAS.map(m=>{const f=c=>sum(DATA.filter(r=>r.marca===m&&(!c||r.canal===c)),r=>r.venta);const t=f();return{m,ml:f(CANALES[0]),amz:f(CANALES[1]),may:f(CANALES[2]),total:t,share:t/GRAND};});
+    const maxS=Math.max(...mrows.map(r=>r.share));
+    mrows.forEach((r,i)=>{const tr=document.createElement('tr');if(marca!=='Todas'&&r.m!==marca)tr.style.opacity='.4';
+      const td=cell(tr,r.m);const d=document.createElement('i');d.className='dot';d.style.background=BCOL[r.m];d.style.marginRight='7px';td.prepend(d);td.style.fontWeight=600;
+      cell(tr,money.format(r.ml));cell(tr,money.format(r.amz));cell(tr,money.format(r.may));cell(tr,money.format(r.total),'tot');barCell(tr,r.share,maxS,BCOL[r.m],pct(r.share));stagger(tr,i);mb.append(tr);});
+
+    renderTables();
+    topTable('tbl-top',rs);
+    render25();
+  }
+
+  // Reveal al hacer scroll
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('show');io.unobserve(e.target);}}),{threshold:.08});
+  document.querySelectorAll('.reveal').forEach((n,i)=>{n.style.transitionDelay=Math.min(i,3)*80+'ms';io.observe(n);});
+
+  render();
+  let rt;addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(()=>{const rs=DATA.filter(r=>marca==='Todas'||r.marca===marca);drawCanal(rs);drawMarca(rs);drawHist();},200);});
+})();
+</script>
+</body>
+</html>
