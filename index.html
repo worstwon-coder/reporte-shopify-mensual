@@ -1220,7 +1220,7 @@ const RAW = {"meta":{"fecha_corte":"2026-11-24","mes_actual":11,"anio_actual":20
       const nuevos=sum(c,r=>r.nuevos), recurr=sum(c,r=>r.recurr);
       const vPrev=sum(p,r=>r.venta);
       return {
-        m,ped,uds,aov:ped?vCur/ped:0,
+        m,ped,uds,aov:ped?(vCur-desc)/ped:0,
         recompra:(nuevos+recurr)?recurr/(nuevos+recurr):0,
         desc,vPrev,vCur,
         yoy:vPrev>0?(vCur/vPrev-1):null,
@@ -1254,7 +1254,7 @@ const RAW = {"meta":{"fecha_corte":"2026-11-24","mes_actual":11,"anio_actual":20
     cell(trT,'Total BRANDBROS','tl');
     cell(trT,nf.format(totPed));
     cell(trT,nf.format(totUds));
-    cell(trT,totPed?money.format(totCur/totPed):'—');
+    cell(trT,totPed?money.format((totCur-totDesc)/totPed):'—');
     cell(trT,(totNuevos+totRec)?pct(totRec/(totNuevos+totRec)):'—');
     cell(trT,money.format(totDesc));
     cell(trT,totPrev?money.format(totPrev):'—');
@@ -1281,7 +1281,7 @@ const RAW = {"meta":{"fecha_corte":"2026-11-24","mes_actual":11,"anio_actual":20
       cell(tr,MESES_LARGO[i],'tl');
       cell(tr,ped?nf.format(ped):'—');
       cell(tr,uds?nf.format(uds):'—');
-      cell(tr,ped?money.format(vCur/ped):'—');
+      cell(tr,ped?money.format((vCur-desc)/ped):'—');
       cell(tr,desc?money.format(desc):'—');
       cell(tr,vCur?money.format(vCur):'—','tot');
       cell(tr,vPrev?money.format(vPrev):'—');
@@ -1299,7 +1299,7 @@ const RAW = {"meta":{"fecha_corte":"2026-11-24","mes_actual":11,"anio_actual":20
     cell(trT,'Total','tl');
     cell(trT,nf.format(tPed));
     cell(trT,nf.format(tUds));
-    cell(trT,tPed?money.format(tCur/tPed):'—');
+    cell(trT,tPed?money.format((tCur-tDesc)/tPed):'—');
     cell(trT,money.format(tDesc));
     cell(trT,money.format(tCur),'tot');
     cell(trT,tPrev?money.format(tPrev):'—');
@@ -1338,12 +1338,12 @@ const RAW = {"meta":{"fecha_corte":"2026-11-24","mes_actual":11,"anio_actual":20
     const byMarca=MARCAS.map(m=>{
       const c=O_CUR.filter(r=>r.marca===m);
       const p=O_PREV.filter(r=>r.marca===m&&r.mes<=MES);
-      const vCur=sum(c,r=>r.venta), ped=sum(c,r=>r.ped), vPrev=sum(p,r=>r.venta);
-      return {m,vCur,ped,vPrev,yoy:vPrev>0?(vCur/vPrev-1):null};
+      const vCur=sum(c,r=>r.venta), desc=sum(c,r=>r.desc), ped=sum(c,r=>r.ped), vPrev=sum(p,r=>r.venta);
+      return {m,vCur,desc,ped,vPrev,yoy:vPrev>0?(vCur/vPrev-1):null};
     });
     const topMarca=[...byMarca].sort((a,b)=>b.vCur-a.vCur)[0];
     add('Marca líder:',
-      `${topMarca.m} concentra ${money.format(topMarca.vCur)} (${GRAND_CUR?pct(topMarca.vCur/GRAND_CUR):'0.0%'} del total), con un AOV de ${topMarca.ped?money.format(topMarca.vCur/topMarca.ped):'$0'}.`);
+      `${topMarca.m} concentra ${money.format(topMarca.vCur)} (${GRAND_CUR?pct(topMarca.vCur/GRAND_CUR):'0.0%'} del total), con un AOV de ${topMarca.ped?money.format((topMarca.vCur-topMarca.desc)/topMarca.ped):'$0'}.`);
 
     // 3. Mayor crecimiento YoY
     const conBase=byMarca.filter(x=>x.yoy!==null).sort((a,b)=>b.yoy-a.yoy);
@@ -1388,8 +1388,8 @@ const RAW = {"meta":{"fecha_corte":"2026-11-24","mes_actual":11,"anio_actual":20
     const vCur=sum(oCur,r=>r.venta), vPrev=sum(oPrevSame,r=>r.venta);
     const pedCur=sum(oCur,r=>r.ped), pedPrev=sum(oPrevSame,r=>r.ped);
     const udsCur=sum(oCur,r=>r.uds);
-    const aovCur=pedCur?vCur/pedCur:0, aovPrev=pedPrev?vPrev/pedPrev:0;
-    const descCur=sum(oCur,r=>r.desc);
+    const descCur=sum(oCur,r=>r.desc), descPrev=sum(oPrevSame,r=>r.desc);
+    const aovCur=pedCur?(vCur-descCur)/pedCur:0, aovPrev=pedPrev?(vPrev-descPrev)/pedPrev:0;
     const nuevosCur=sum(oCur,r=>r.nuevos), recurrCur=sum(oCur,r=>r.recurr);
     const recRate=(nuevosCur+recurrCur)?recurrCur/(nuevosCur+recurrCur):0;
     const nuevosPrev=sum(oPrevSame,r=>r.nuevos), recurrPrev=sum(oPrevSame,r=>r.recurr);
